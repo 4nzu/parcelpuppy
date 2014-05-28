@@ -1,0 +1,15 @@
+AddDefaultCharset UTF-8
+DirectoryIndex index.php
+AddType application/x-httpd-php .php
+Header set Access-Control-Allow-Origin "*"
+
+php_value mail.force_extra_parameters "-f info@zappylab.com"
+
+RewriteEngine on
+RewriteBase /
+
+RewriteRule ^api/(\w+)/(\w+)?/?$ index.php?object=API&action=$2&version=$1 [L,QSA]
+RewriteRule ^profile/(\w+(-\w+)*)?/?$ index.php?object=profileDisplay&action=profile&pid=$1 [L,QSA]
+RewriteRule ^trek/(\w+(-\w+)*)?/?$ index.php?object=trekDisplay&action=view&tid=$1 [L,QSA]
+RewriteRule ^(\w+)/(\w+)?/?$ index.php?object=$1Display&action=$2 [L,QSA]
+RewriteRule ^(\w+)?/?$ index.php?object=Display&action=$1 [L,QSA]

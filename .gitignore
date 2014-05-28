@@ -1,0 +1,16 @@
+.DS_Store
+.sass-cache
+.apk
+sites/zappylab/docroot/BenchTools.apk
+sites/zappylab/docroot/Passageo.apk
+Frameworks/
+.mp4
+.webm
+.ogv
+sites/pubchase/docroot/js/tinymce/
+.gz
+.pyc
+.txt
+/pdf.js-master/
+compass_app_log.txt
+sites/spectrascopic/docroot/js/tinymce
