@@ -14,6 +14,7 @@
 }
 .signin-window .popover-content, .login-page-form .popover-content{
     padding: 20px 35px;
+    background-color: #fff;
 }
 .signin-window h5, .login-page-form h5 {
     font-size: 30px;
