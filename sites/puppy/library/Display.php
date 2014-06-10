@@ -6,6 +6,11 @@ class Display extends Template {
 		parent::__construct();
 		import('Zappy.Util');
 		$this->db = DB::instance();
+
+		import('Zappy.Cache');
+		$_c = new Cache();
+        $localization = $_c->get('localization_'.$_SESSION['user']->site_lang);
+        $this->assign('localization', $localization);
 	}
 
     public function display_home() {

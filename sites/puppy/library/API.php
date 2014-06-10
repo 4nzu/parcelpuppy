@@ -1,6 +1,7 @@
 <?php
 
 import('Zappy.Cache');
+import('Zappy.Paypal');
 
 class API extends Template {
 
@@ -77,4 +78,28 @@ class API extends Template {
 			$this->json_out(array('request' => 'ERROR: Not authorized'));
 		}
 	}
+
+    //do not rename this function
+    public static function updatePaymentDetails($response) {
+        //TODO save correlation id and other details into db
+        //var_dump($response);
+        //exit;
+    }
+
+    public function pay() {
+
+        $_p = new Paypal();
+        $_p->StartPayment("parcelpuppy-developer@gmail.com", 10);
+    }
+
+    public function cancel_payment() {
+        echo "Payment cancelled";
+    }
+
+    public function success_payment() {
+//        $_p = new Paypal();
+
+        //$_p->StartPayment("parcelpuppy-developer@gmail.com", 10);
+    }
+
 }
