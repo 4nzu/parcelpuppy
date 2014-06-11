@@ -210,7 +210,7 @@ class Display extends Template {
 				$user = new User();
 				$user->verifyEmail(array('token' => $_REQUEST['t'], 'verification_token' => $_REQUEST['v']));
 		}
-		$this->set_template('login_confirm-email');
+		$this->set_template('signin_confirm-email');
 	}
 
 	public function logout() {

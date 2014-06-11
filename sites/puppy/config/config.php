@@ -44,10 +44,21 @@ define('DEFAULT_EMAIL_PASS', '');
 
 define('SIMPLE_ENCRYPTION_KEY', 'm4uS');
 
-define('AWS_KEY','');
-define('AWS_SECRET_KEY', '');
-define('AWS_ACCOUNT_ID','');
-define('AMAZON_S3_BUCKET', '');
+define('AVATAR_FILE_TYPE_ID', 1);
+define('IMAGE_FILE_TYPE_ID', 2);
+define('VIDEO_FILE_TYPE_ID', 3);
+
+define('AVATAR_CDN_ROOT', '.s3.amazonaws.com');
+define('IMAGE_CDN_ROOT', '.s3.amazonaws.com');
+define('VIDEO_CDN_ROOT', '.s3.amazonaws.com');
+
+define('AVATAR_S3_BUCKET', '');
+define('IMAGE_S3_BUCKET', '');
+define('VIDEO_S3_BUCKET', '');
+
+define('AVATAR_BASE_URL', 'https://s3.amazonaws.com');
+define('IMAGE_BASE_URL', 'https://s3.amazonaws.com');
+define('VIDEO_BASE_URL', 'https://s3.amazonaws.com');
 
 define('LOG_FILE', '/tmp/'.HOST_NAME);
 

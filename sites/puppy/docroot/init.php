@@ -10,6 +10,13 @@ import('Zappy.Template');
 
 session_start();
 
+// get config values from the database
+$db = DB::instance();
+$cfg = $db->query("SELECT c_key, c_value from config", null, 3600);
+foreach($cfg as $cf) {
+	define($cf['c_key'], $cf['c_value']);
+}
+
 $_SESSION['logged_in'] = false;
 
 $user = new User();
