@@ -32,6 +32,30 @@ if ($_SERVER["HTTP_HOST"] == 'dev.parcelpuppy.com') { // Alexei's iMac
     // define('PP_CONFIG_PATH', '/directory/that/contains/sdk_config.ini');
     error_reporting(E_ALL ^ E_NOTICE);
 }
+// Hayden's Mac
+elseif ($_SERVER["DOCUMENT_ROOT"] == "/Users/haydengomes/Work/repos/parcelpuppy/sites/puppy/docroot") {
+    $host_id = HOST_NAME;
+    $host_role = HOST_DEV;
+
+    define('SITE_PATH', '/Users/haydengomes/Work/repos/parcelpuppy/sites/puppy/');
+    define('TEMPLATES_PATH', '/Users/haydengomes/Work/repos/parcelpuppy/sites/puppy/templates/');
+    define('MODULES_PATH', '/Users/haydengomes/Work/repos/parcelpuppy/sites/puppy/templates/modules/');
+
+    define('SITE_URL', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
+    define('PRODUCT_NAME', 'parcelpuppy');
+
+    define('DB_HOST', '127.0.0.1');
+    define('DB_NAME', 'puppy');
+    define('DB_PORT', '3306');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+
+    define('MEMCACHE_SERVER', 'localhost');
+    define('MEMCACHE_PORT', 11211);
+
+    // define('PP_CONFIG_PATH', '/directory/that/contains/sdk_config.ini');
+    error_reporting(E_ALL ^ E_NOTICE);
+}
 
 define('LOGIN_COOKIE_NAME','puppy-token');
 define('HOST_ID', $host_id);
