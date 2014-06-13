@@ -18,3 +18,8 @@ sites/spectrascopic/docroot/js/tinymce
 # ItelliJ files
 .idea/
 parcelpuppy.iml
+
+# Grunt and sass tools
+Gruntfile.js
+node_modules/
+package.json

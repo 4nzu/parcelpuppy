@@ -1,0 +1,139 @@
+.content-body {
+  background-color: #FFF;
+  margin-top: 3px;
+  padding: 5px 75px 30px 75px;
+  color: #808080;
+  border-bottom: 2px solid darkgray; }
+
+.signup-step {
+  width: 175px;
+  font-size: 14px;
+  height: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.signup-step img {
+  width: 75px;
+  height: 75px;
+  margin: 0px auto 15px auto;
+  display: block; }
+
+.signup-step b {
+  display: block; }
+
+#masthead {
+  position: relative; }
+
+#masthead img {
+  width: 100%; }
+
+#masthead .overlay {
+  position: absolute;
+  top: 50%;
+  left: 105px;
+  width: 100%;
+  color: #FFF;
+  font-size: 23px; }
+
+.call-to-action {
+  font-size: 20px;
+  padding-top: 20px; }
+
+.call-to-action input {
+  width: 275px;
+  height: 35px;
+  color: darkgray;
+  margin-right: 10px; }
+
+.call-to-action button {
+  width: 200px;
+  height: 40px; }
+
+body {
+  background-color: #EEE;
+  padding-top: 15px;
+  padding-bottom: 20px; }
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.header {
+  position: relative; }
+
+.header-links {
+  position: absolute;
+  bottom: 0px;
+  right: 50px; }
+
+.header-links span {
+  font-size: 15px;
+  padding-left: 15px; }
+
+.logo-link {
+  padding: 15px 15px 0px 50px; }
+
+#logo {
+  height: 40px;
+  margin: 0px 10px 0px 0px; }
+
+#company-name {
+  color: #4E2C1F;
+  font-size: 22px;
+  vertical-align: bottom; }
+
+.content {
+  margin-top: 5px; }
+
+button {
+  color: white;
+  background-color: darkorange;
+  border: 1px solid #808080;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold; }
+
+button:hover {
+  background-color: orangered; }
+
+.down-arrow {
+  width: 20px;
+  height: auto;
+  margin-bottom: 5px; }
+
+.footer-links {
+  margin: 10px 20px; }
+
+.footer-links span {
+  margin: 0px 30px; }
+
+.recommendation-header {
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  padding-bottom: 10px; }
+
+.rec-filter {
+  padding-left: 30px; }
+
+.rec-item-img {
+  border: 1px solid lightgray;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 175px;
+  height: 175px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.rec-see-more {
+  margin-top: 30px;
+  text-align: center;
+  color: black;
+  font-size: 13px; }
+
+.rec-see-more button {
+  width: 200px;
+  margin-bottom: 10px; }

@@ -1,0 +1,33 @@
+.recommendation-header {
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  padding-bottom: 10px;
+}
+
+.rec-filter {
+  padding-left: 30px;
+}
+
+.rec-item-img {
+  border: 1px solid lightgray;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 175px;
+  height: 175px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rec-see-more {
+  margin-top: 30px;
+  text-align: center;
+  color: black;
+  font-size: 13px;
+}
+
+.rec-see-more button {
+  width: 200px;
+  margin-bottom: 10px;
+}
