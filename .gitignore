@@ -14,3 +14,7 @@ sites/pubchase/docroot/js/tinymce/
 /pdf.js-master/
 compass_app_log.txt
 sites/spectrascopic/docroot/js/tinymce
+
+# ItelliJ files
+.idea/
+parcelpuppy.iml
