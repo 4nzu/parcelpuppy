@@ -10,7 +10,7 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+<div class="page">
     <div class="header">
         <a class='logo-link' href='/'><img id="logo" src="img/parcelpuppy.png"><span
                 id="company-name">Parcel Puppy</span></a>
@@ -24,7 +24,7 @@
             </span>
             <span>
                 <? if (!$_SESSION['logged_in']) { ?>
-                    <a>Login</a> or <a>Sign up</a>
+                    <a href="/login_form">Login</a> or <a>Sign up</a>
                 <? } else { ?>
                     <a href="/logout">Logout</a>
                 <? } ?>

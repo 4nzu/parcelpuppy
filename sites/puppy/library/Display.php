@@ -18,6 +18,7 @@ class Display extends Template {
     }
 
     public function login() {
+        // @TODO Determine what does this do?
 		if (HOST_ROLE == HOST_PROD && !isset($_SERVER['HTTPS'])) {
 			header("Location: https://www.spectrascopic.com/login");
 			exit;
@@ -34,22 +35,26 @@ class Display extends Template {
 					exit;
 				}
 				else {
-					header("Location: /");
+                    print 'test1';
+					header("Location: /login_form");
 					exit;
 				}
 			}
 			else {
 				$this->wipe_session();
+                print 'test_4';
 				header('Location: '.SITE_URL.'?badlogin=1');
 				exit;
 			}
 		}
 		if ($_SESSION['logged_in']) {
-			header("Location: /");
+            print 'test_2';
+			header("Location: /login_form");
 			exit;
 		}
 		else {
-			header('Location: /');
+            print 'test_3';
+			header('Location: /login_form');
 			exit;
 		}
 	}
@@ -212,6 +217,11 @@ class Display extends Template {
 		}
 		$this->set_template('signin_confirm-email');
 	}
+
+
+    public function login_form() {
+        $this->set_template('signin_login-form');
+    }
 
 	public function logout() {
 		setcookie(LOGIN_COOKIE_NAME, '', time() - 60*60*24*7*365);

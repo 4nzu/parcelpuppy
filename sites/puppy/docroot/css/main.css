@@ -1,64 +1,27 @@
-.content-body {
-  background-color: #FFF;
-  margin-top: 3px;
-  padding: 5px 75px 30px 75px;
-  color: #808080;
-  border-bottom: 2px solid darkgray; }
+.section-header {
+  font-size: 20px;
+  margin-bottom: 10px; }
+
+.how-it-works {
+  color: #909090; }
 
 .signup-step {
-  width: 175px;
+  max-width: 175px;
   font-size: 14px;
-  height: 200px;
   display: block;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  margin-bottom: 20px;
+  text-align: center; }
 
 .signup-step img {
-  width: 75px;
-  height: 75px;
+  max-width: 75px;
+  max-height: 75px;
   margin: 0px auto 15px auto;
   display: block; }
 
 .signup-step b {
   display: block; }
-
-#masthead {
-  position: relative; }
-
-#masthead img {
-  width: 100%; }
-
-#masthead .overlay {
-  position: absolute;
-  top: 50%;
-  left: 105px;
-  width: 100%;
-  color: #FFF;
-  font-size: 23px; }
-
-.call-to-action {
-  font-size: 20px;
-  padding-top: 20px; }
-
-.call-to-action input {
-  width: 275px;
-  height: 35px;
-  color: darkgray;
-  margin-right: 10px; }
-
-.call-to-action button {
-  width: 200px;
-  height: 40px; }
-
-body {
-  background-color: #EEE;
-  padding-top: 15px;
-  padding-bottom: 20px; }
-
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto; }
 
 .header {
   position: relative; }
@@ -73,35 +36,17 @@ body {
   padding-left: 15px; }
 
 .logo-link {
+  margin-top: 20px;
   padding: 15px 15px 0px 50px; }
 
 #logo {
   height: 40px;
-  margin: 0px 10px 0px 0px; }
+  margin: 0px 20px 0px 0px; }
 
 #company-name {
   color: #4E2C1F;
   font-size: 22px;
   vertical-align: bottom; }
-
-.content {
-  margin-top: 5px; }
-
-button {
-  color: white;
-  background-color: darkorange;
-  border: 1px solid #808080;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold; }
-
-button:hover {
-  background-color: orangered; }
-
-.down-arrow {
-  width: 20px;
-  height: auto;
-  margin-bottom: 5px; }
 
 .footer-links {
   margin: 10px 20px; }
@@ -109,14 +54,92 @@ button:hover {
 .footer-links span {
   margin: 0px 30px; }
 
+#masthead {
+  background-color: black;
+  background-image: url("../img/masthead.jpg");
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #FFF;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  padding: 165px 0px 70px 0px;
+  height: 350px; }
+
+.masthead-main-line {
+  font-size: 22px; }
+
+.masthead-call-to-action {
+  font-size: 18px;
+  margin-top: 40px; }
+
+.masthead-call-to-action input {
+  width: 35%; }
+
+.masthead-call-to-action button {
+  width: 20%; }
+
+body {
+  background-color: #EEE;
+  padding-bottom: 20px;
+  color: #505050; }
+
+a:hover {
+  text-decoration: none; }
+
+.page {
+  min-width: 900px; }
+
+.content-body {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #FFF;
+  padding: 25px 75px 50px 75px; }
+
+.content {
+  background-color: #FFF;
+  box-shadow: 0 8px 6px -6px #505050; }
+
+button {
+  color: #FFF;
+  background-color: #FF5A1E;
+  background: linear-gradient(#ff7a2e, #ff5a1e);
+  border: 0px solid #808080;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: bold;
+  height: 35px; }
+
+button:hover {
+  background-color: #AA4A0E;
+  background: linear-gradient(#ff5a1e, #cc4a0e); }
+
+button:focus {
+  outline: 0; }
+
+.gray-button {
+  background-color: #7E7E7E;
+  background: linear-gradient(#7e7e7e, #5e5e5e); }
+
+.gray-button:hover {
+  background-color: #8E8E8E;
+  background: linear-gradient(#8e8e8e, #7e7e7e); }
+
+.down-arrow {
+  width: 20px;
+  height: auto;
+  margin-bottom: 5px; }
+
 .recommendation-header {
   font-size: 15px;
   font-weight: bold;
-  color: black;
   padding-bottom: 10px; }
 
 .rec-filter {
   padding-left: 30px; }
+
+.rec-items {
+  text-align: center; }
 
 .rec-item-img {
   border: 1px solid lightgray;
@@ -128,12 +151,41 @@ button:hover {
   margin-left: auto;
   margin-right: auto; }
 
+.rec-item-name {
+  padding-top: 5px;
+  color: #909090; }
+
+.rec-item-origin {
+  padding-top: 10px; }
+
 .rec-see-more {
-  margin-top: 30px;
+  margin-top: 50px;
   text-align: center;
-  color: black;
   font-size: 13px; }
 
 .rec-see-more button {
   width: 200px;
   margin-bottom: 10px; }
+
+.login-form {
+  margin: 50px 0px 50px 0px; }
+
+.facebook-login {
+  width: 100%;
+  background-color: #18529E;
+  background: linear-gradient(#2971b6, #18529e); }
+
+.facebook-login:hover {
+  background-color: #08428E;
+  background: linear-gradient(#1961a6, #08428e); }
+
+.login-form-alternative-action {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px; }
+
+.login-form-option-divider {
+  text-align: center;
+  font-size: 15px;
+  width: 100%;
+  padding: 20px 0px; }
