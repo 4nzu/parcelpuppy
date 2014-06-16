@@ -1,23 +1,25 @@
-.content-body {
-  background-color: #FFF;
-  margin-top: 3px;
-  padding: 5px 75px 30px 75px;
-  color: #808080;
-  border-bottom: 2px solid darkgray;
+.section-header {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.how-it-works {
+  color: #909090;
 }
 
 .signup-step {
-  width: 175px;
+  max-width: 175px;
   font-size: 14px;
-  height: 200px;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .signup-step img {
-  width: 75px;
-  height: 75px;
+  max-width: 75px;
+  max-height: 75px;
   margin: 0px auto 15px auto;
   display: block;
 }

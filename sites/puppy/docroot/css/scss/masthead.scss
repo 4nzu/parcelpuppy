@@ -1,34 +1,28 @@
 #masthead {
-  position: relative;
-}
-
-#masthead img {
-  width: 100%;
-}
-
-#masthead .overlay {
-  position: absolute;
-  top: 50%;
-  left: 105px;
-  width: 100%;
+  background-image: url('../img/masthead.jpg');
+  background-size: cover;
   color: #FFF;
-  font-size: 23px;
+  text-shadow: black 0.1em 0.1em 0.2em;
+
+  padding: 165px 0px 70px 0px;
+  background-repeat: no-repeat;
+//  background-position: center;
 }
 
-.call-to-action {
-  font-size: 20px;
-  padding-top: 20px;
+.masthead-main-line {
+  font-size: 22px;
 }
 
-.call-to-action input {
-  width: 275px;
-  height: 35px;
-  color: darkgray;
-  margin-right: 10px;
+.masthead-call-to-action {
+  font-size: 18px;
+  margin-top: 40px;
 }
 
-.call-to-action button {
-  width: 200px;
-  height: 40px;
+.masthead-call-to-action input {
+  width: 35%;
+}
+
+.masthead-call-to-action button {
+  width: 20%;
 }
 

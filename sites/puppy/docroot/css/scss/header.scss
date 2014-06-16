@@ -1,0 +1,29 @@
+.header {
+  position: relative;
+}
+
+.header-links {
+  position: absolute;
+  bottom: 0px;
+  right: 50px;
+}
+
+.header-links span {
+  font-size: 15px;
+  padding-left: 15px;
+}
+
+.logo-link {
+  padding: 15px 15px 0px 50px;
+}
+
+#logo {
+  height: 40px;
+  margin: 0px 10px 0px 0px;
+}
+
+#company-name {
+  color: #4E2C1F;
+  font-size: 22px;
+  vertical-align: bottom;
+}

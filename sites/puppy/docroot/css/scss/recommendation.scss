@@ -1,12 +1,15 @@
 .recommendation-header {
   font-size: 15px;
   font-weight: bold;
-  color: black;
   padding-bottom: 10px;
 }
 
 .rec-filter {
   padding-left: 30px;
+}
+
+.rec-items {
+  text-align: center;
 }
 
 .rec-item-img {
@@ -20,10 +23,18 @@
   margin-right: auto;
 }
 
+.rec-item-name {
+  padding-top: 5px;
+  color: #909090;
+}
+
+.rec-item-origin {
+  padding-top: 10px;
+}
+
 .rec-see-more {
-  margin-top: 30px;
+  margin-top: 50px;
   text-align: center;
-  color: black;
   font-size: 13px;
 }
 
