@@ -18,6 +18,7 @@ if ($_SERVER["HTTP_HOST"] == 'dev.parcelpuppy.com') { // Alexei's iMac
     define('MODULES_PATH', '/zappy/puppy/sites/puppy/templates/modules/');
 
     define('SITE_URL', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
+    define('SECURE_SITE_URL', 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
     define('PRODUCT_NAME', 'parcelpuppy');
 
     define('DB_HOST', '127.0.0.1');
@@ -42,6 +43,7 @@ elseif ($_SERVER["DOCUMENT_ROOT"] == "/Users/haydengomes/Work/repos/parcelpuppy/
     define('MODULES_PATH', '/Users/haydengomes/Work/repos/parcelpuppy/sites/puppy/templates/modules/');
 
     define('SITE_URL', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
+    define('SECURE_SITE_URL', 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
     define('PRODUCT_NAME', 'parcelpuppy');
 
     define('DB_HOST', '127.0.0.1');

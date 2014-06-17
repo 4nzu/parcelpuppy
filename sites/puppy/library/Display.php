@@ -18,16 +18,18 @@ class Display extends Template {
     }
 
     public function login() {
-        // @TODO Determine what does this do?
+        // make sure we only hit login on https (SSL-protected) connection when on live server
 		if (HOST_ROLE == HOST_PROD && !isset($_SERVER['HTTPS'])) {
-			header("Location: https://www.spectrascopic.com/login");
+			header('Location: '.SECURE_SITE_URL.'/login');
 			exit;
 		}
 		if (!empty($_POST['email']) && !empty($_POST['pass'])) {
-			$user = new User();
-			if ($user->getByEmailPassword($_POST['email'], $_POST['pass'])) {
+
+			$_u = new User();
+			if ($_u->getByEmailPassword($_POST['email'], $_POST['pass'])) {
+				
 				$_SESSION['logged_in'] = true;
-				setcookie(LOGIN_COOKIE_NAME, $user->token, time() + 60*60*24*7*365);
+				setcookie(LOGIN_COOKIE_NAME, $_u->token, time() + 60*60*24*7*365);
 				session_write_close();
 
 				if (isset($_SESSION['POST_LOGIN'])) {
