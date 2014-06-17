@@ -37,9 +37,7 @@ class Display extends Template {
 					exit;
 				}
 				else {
-                    print 'test1';
-					header("Location: /login_form");
-					exit;
+					$this->set_template('home');
 				}
 			}
 			else {
@@ -50,9 +48,7 @@ class Display extends Template {
 			}
 		}
 		if ($_SESSION['logged_in']) {
-            print 'test_2';
-			header("Location: /login_form");
-			exit;
+            $this->set_template('home');
 		}
 		else {
 			$this->set_template('signin_login-form');
