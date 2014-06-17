@@ -18,8 +18,8 @@ class Display extends Template {
     }
 
     public function login() {
-        // @TODO Determine what does this do?
 		if (HOST_ROLE == HOST_PROD && !isset($_SERVER['HTTPS'])) {
+            // @todo update to reflect parcelpuppy domain
 			header("Location: https://www.spectrascopic.com/login");
 			exit;
 		}
@@ -35,25 +35,21 @@ class Display extends Template {
 					exit;
 				}
 				else {
-                    print 'test1';
 					header("Location: /login_form");
 					exit;
 				}
 			}
 			else {
 				$this->wipe_session();
-                print 'test_4';
 				header('Location: '.SITE_URL.'?badlogin=1');
 				exit;
 			}
 		}
 		if ($_SESSION['logged_in']) {
-            print 'test_2';
 			header("Location: /login_form");
 			exit;
 		}
 		else {
-            print 'test_3';
 			header('Location: /login_form');
 			exit;
 		}
