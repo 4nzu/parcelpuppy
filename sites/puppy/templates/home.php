@@ -1,5 +1,5 @@
 <div id="masthead">
-        <div class="row">
+        <div class="row-fluid">
             <div class="col-xs-10 col-xs-offset-1">
                 <span class="masthead-main-line">Request items from around the world, no matter where you live.</span>
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class='call-to-action'>
-            <div class="row">
+            <div class="row-fluid">
                 <div class="col-xs-2 col-xs-offset-1"></div>
             </div>
 

@@ -51,4 +51,4 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="page">
-    <div class="content">
+        <div class="content">

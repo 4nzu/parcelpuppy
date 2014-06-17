@@ -50,11 +50,9 @@ ul.nav a:hover {
   font-size: 22px;
   vertical-align: bottom; }
 
-.footer-links {
-  margin: 10px 20px; }
-
-.footer-links span {
-  margin: 0px 30px; }
+.footer {
+  padding: 10px 0px;
+  text-align: center; }
 
 #masthead {
   background-color: black;
