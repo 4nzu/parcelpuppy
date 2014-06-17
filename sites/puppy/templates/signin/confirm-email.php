@@ -1,2 +1,7 @@
-<div class="alert-center">Thank you for activating your Account!</div>
-<div class="alert-center">To proceed, please <a class="signin">sign in</a></div>
+<div class="content-body">
+    <div style="text-align: center">
+        <h3>Thank you for activating your Account!</h3>
+        <h4>To proceed, please login</h4>
+    </div>
+    <? include_once(MODULES_PATH."signin-window.php"); ?>
+</div>

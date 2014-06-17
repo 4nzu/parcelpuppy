@@ -1,12 +1,16 @@
 #masthead {
+  background-color: black;
   background-image: url('../img/masthead.jpg');
-  background-size: cover;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #FFF;
   text-shadow: black 0.1em 0.1em 0.2em;
 
   padding: 165px 0px 70px 0px;
-  background-repeat: no-repeat;
-//  background-position: center;
+
+
+  height: 350px;
 }
 
 .masthead-main-line {
@@ -25,4 +29,5 @@
 .masthead-call-to-action button {
   width: 20%;
 }
+
 

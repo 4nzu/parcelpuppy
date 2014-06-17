@@ -1,5 +1,5 @@
 <div id="masthead">
-        <div class="row">
+        <div class="row-fluid">
             <div class="col-xs-10 col-xs-offset-1">
                 <span class="masthead-main-line">Request items from around the world, no matter where you live.</span>
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class='call-to-action'>
-            <div class="row">
+            <div class="row-fluid">
                 <div class="col-xs-2 col-xs-offset-1"></div>
             </div>
 
@@ -51,38 +51,5 @@
         </div>
     </div>
 
-    <div class="recommendation-row">
-        <div class="recommendation-header">
-            People from <a>The United States</a> have requested: <a class="rec-filter">Change Location<img
-                    src="img/down-arrow.png" class="down-arrow"></a>
-        </div>
-
-        <div class="rec-items row">
-            <div class="col-xs-3">
-                <div class="rec-item-img" style="background-image: url('/img/item-img.png')"> </div>
-                <div class="rec-item-name">Gifrer Liniment Oléo-Calcaire</div>
-                <div class="rec-item-origin"><a>France</a></div>
-            </div>
-            <div class="col-xs-3">
-                <div class="rec-item-img" style="background-image: url('/img/item-img.png')"> </div>
-                <div class="rec-item-name">Gifrer Liniment Oléo-Calcaire</div>
-                <div class="rec-item-origin"><a>France</a></div>
-            </div>
-            <div class="col-xs-3">
-                <div class="rec-item-img" style="background-image: url('/img/item-img.png')"> </div>
-                <div class="rec-item-name">Gifrer Liniment Oléo-Calcaire</div>
-                <div class="rec-item-origin"><a>France</a></div>
-            </div>
-            <div class="col-xs-3">
-                <div class="rec-item-img" style="background-image: url('/img/item-img.png')"> </div>
-                <div class="rec-item-name">Gifrer Liniment Oléo-Calcaire</div>
-                <div class="rec-item-origin"><a>France</a></div>
-            </div>
-        </div>
-
-        <div class="rec-see-more">
-            <button type="button">See More</button>
-            <br>Discover Locally-sourced goods<br>from around the world.
-        </div>
-    </div>
+    <? include_once(MODULES_PATH."recommendation-row.php"); ?>
 </div>

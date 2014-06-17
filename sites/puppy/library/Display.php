@@ -226,6 +226,11 @@ class Display extends Template {
 		$this->set_template('login_confirm-email');
 	}
 
+
+    public function login_form() {
+        $this->set_template('signin_login-form');
+    }
+
 	public function logout() {
 		setcookie(LOGIN_COOKIE_NAME, '', time() - 60*60*24*7*365);
 		session_start();

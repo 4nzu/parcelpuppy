@@ -1,26 +1,34 @@
-</div>
+        </div>
 
-<div class="footer">
-    <div class="footer-links">
-            <span>
+        <div class="footer row-fluid">
+            <div class="col-xs-2">
                 <a>About Us</a>
-            </span>
-            <span>
-                <a>Press</a>
-            </span>
-            <span>
+            </div>
+            <div class="col-xs-2">
+                <a>Help & FAQ</a>
+            </div>
+            <div class="col-xs-2">
+                <a>Privacy</a>
+            </div>
+            <div class="col-xs-2">
+                <a>Terms of Use</a>
+            </div>
+            <div class="col-xs-2">
+                <a>Trust & Safety</a>
+            </div>
+            <div class="col-xs-2">
                 <a>Contact Us</a>
-            </span>
-            <span>
-                <a>Blog</a>
-            </span>
+            </div>
+        </div>
     </div>
-</div>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
+<!--Include concatenated js -->
+<script src="js/main.js"></script>
+
 </body>
 </html>

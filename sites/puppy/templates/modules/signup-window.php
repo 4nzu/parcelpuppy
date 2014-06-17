@@ -1,18 +1,11 @@
 <div class="login-form row">
     <div class="col-xs-6 col-xs-offset-3">
-        <?
-        if ((isset($_GET['badlogin']) && $_GET['badlogin'] == 1)) {
-            $error_display = 'inline';
-        } else {
-            $error_display = 'none';
-        }
-        ?>
-        <div class="alert alert-dismissable alert-danger" style="display: <?= $error_display ?>;" id="login-error">
+        <div class="alert alert-dismissable alert-danger" style="display: none;" id="login-error">
             Invalid Email Address or Password
         </div>
 
 
-        <button class='facebook-login'>Log in with Facebook</button>
+        <button class='facebook-signup'>Sign up with Facebook</button>
 
         <div class="login-form-option-divider">OR</div>
 

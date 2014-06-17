@@ -1,6 +1,5 @@
 body {
   background-color: #EEE;
-  padding-top: 15px;
   padding-bottom: 20px;
   color: #505050;
 }
@@ -9,22 +8,22 @@ a:hover {
   text-decoration: none;
 }
 
-.container {
-  width: 1000px;
-  padding: 0px;
-  margin-left: auto;
-  margin-right: auto;
+.page {
+  min-width: 900px;
 }
 
 .content-body {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #FFF;
   padding: 25px 75px 50px 75px;
-  box-shadow: 0 8px 6px -6px #505050;
 }
 
 
 .content {
-  margin-top: 5px;
+  background-color: #FFF;
+  box-shadow: 0 8px 6px -6px #505050;
 }
 
 button {
@@ -58,7 +57,7 @@ button:focus {
 }
 
 .down-arrow {
-  width: 20px;
-  height: auto;
-  margin-bottom: 5px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid;
 }

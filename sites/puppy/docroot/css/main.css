@@ -23,43 +23,47 @@
 .signup-step b {
   display: block; }
 
-.header {
-  position: relative; }
+.nav {
+  background-color: #F1F1F1; }
 
-.header-links {
-  position: absolute;
-  bottom: 0px;
-  right: 50px; }
+ul.nav a:hover {
+  background-color: #E9E9E9 !important; }
 
-.header-links span {
-  font-size: 15px;
-  padding-left: 15px; }
+.navbar-default .navbar-nav > li > a:hover,
+.dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+  color: #1D5AAB; }
 
-.logo-link {
-  padding: 15px 15px 0px 50px; }
+.header-nav-bar {
+  margin-bottom: 0px;
+  min-width: 900px;
+  background-color: #F1F1F1; }
+
+.logo-block {
+  margin-top: 5px; }
 
 #logo {
-  height: 40px;
-  margin: 0px 10px 0px 0px; }
+  height: 40px; }
 
 #company-name {
   color: #4E2C1F;
   font-size: 22px;
   vertical-align: bottom; }
 
-.footer-links {
-  margin: 10px 20px; }
-
-.footer-links span {
-  margin: 0px 30px; }
+.footer {
+  padding: 10px 0px;
+  text-align: center; }
 
 #masthead {
+  background-color: black;
   background-image: url("../img/masthead.jpg");
-  background-size: cover;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #FFF;
   text-shadow: black 0.1em 0.1em 0.2em;
   padding: 165px 0px 70px 0px;
-  background-repeat: no-repeat; }
+  height: 350px; }
 
 .masthead-main-line {
   font-size: 22px; }
@@ -76,26 +80,25 @@
 
 body {
   background-color: #EEE;
-  padding-top: 15px;
   padding-bottom: 20px;
   color: #505050; }
 
 a:hover {
   text-decoration: none; }
 
-.container {
-  width: 1000px;
-  padding: 0px;
-  margin-left: auto;
-  margin-right: auto; }
+.page {
+  min-width: 900px; }
 
 .content-body {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #FFF;
-  padding: 25px 75px 50px 75px;
-  box-shadow: 0 8px 6px -6px #505050; }
+  padding: 25px 75px 50px 75px; }
 
 .content {
-  margin-top: 5px; }
+  background-color: #FFF;
+  box-shadow: 0 8px 6px -6px #505050; }
 
 button {
   color: #FFF;
@@ -123,9 +126,9 @@ button:focus {
   background: linear-gradient(#8e8e8e, #7e7e7e); }
 
 .down-arrow {
-  width: 20px;
-  height: auto;
-  margin-bottom: 5px; }
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid; }
 
 .recommendation-header {
   font-size: 15px;

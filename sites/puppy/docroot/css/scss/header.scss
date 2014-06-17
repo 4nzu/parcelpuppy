@@ -1,25 +1,31 @@
-.header {
-  position: relative;
+.nav {
+  background-color: #F1F1F1;
 }
 
-.header-links {
-  position: absolute;
-  bottom: 0px;
-  right: 50px;
+// Make navbar item background turn darker gray on mouse over
+ul.nav a:hover {
+  background-color: #E9E9E9 !important;
 }
 
-.header-links span {
-  font-size: 15px;
-  padding-left: 15px;
+// Make NavBar item text turn blue on mouse-over
+.navbar-default .navbar-nav>li>a:hover,
+.dropdown-menu>li>a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+  color: #1D5AAB;
 }
 
-.logo-link {
-  padding: 15px 15px 0px 50px;
+.header-nav-bar {
+  margin-bottom: 0px;
+  min-width: 900px;
+  background-color: #F1F1F1;
+}
+
+.logo-block {
+  margin-top: 5px;
 }
 
 #logo {
   height: 40px;
-  margin: 0px 10px 0px 0px;
 }
 
 #company-name {
