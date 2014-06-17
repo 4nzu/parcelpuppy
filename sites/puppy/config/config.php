@@ -90,3 +90,11 @@ define('LOG_FILE', '/tmp/'.HOST_NAME);
 
 define('TEMPORARY_SECURITY_TOKEN', '');
 define('EMAIL_SPAM_WAIT_PERIOD', 300);
+
+// Social logins TODO: create parcelpuppy social network apps and put real keys below
+define('FACEBOOK_APPID', '');
+define('FACEBOOK_APPSECRET', '');
+
+define('GOOGLE_CLIENTID', '');
+define('GOOGLE_CLIENTSECRET', '');
+define('GOOGLE_SERVER_KEY', '');

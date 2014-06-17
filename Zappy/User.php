@@ -27,6 +27,8 @@ class User {
     public $mendeley_token = null;
     public $affiliation_url = null;
     public $bio = null;
+    public $city = null;
+    public $country = null;
 
     function __construct($id = null) {
 		$this->db = DB::instance();
@@ -35,7 +37,7 @@ class User {
         if (!defined('TOKEN_SALT_1')) define('TOKEN_SALT_1', ';r$0');
         if (!defined('TOKEN_SALT_2')) define('TOKEN_SALT_2', 'yR-1');
 		
-        if (!empty($id)) {
+        if (is_numeric($id)) {
             $this->getByUserID((int)$id);
         }
         else {
@@ -126,7 +128,8 @@ class User {
                 $_SESSION['first_login'] = false;
 
 			// user successfully logged in
-			$this->db->execute('update users set last_login = now(), ip_address=? where user_id = ?', array($_SERVER['REMOTE_ADDR'], $this->id));
+			$this->db->execute('UPDATE users SET last_login = now(), ip_address = ?
+                                WHERE user_id = ?', array($_SERVER['REMOTE_ADDR'], $this->id));
 
             return true;
         }
@@ -360,8 +363,10 @@ class User {
             $new_id = $this->db->insert($query, array($data['email'], $data['first_name'], $data['last_name'], $data['full_name'], $data['id'],
                                                      $data['token'], $data['gender'], 1, $_SERVER["REMOTE_ADDR"],
                                                      empty($data['profile_image']) ? $this->generate_profile_image() : $data['profile_image'], SITE_ID, $verification_token));
+
             $this->getByUserID($new_id);
             $this->preset_email_settings($new_id);
+            $this->setup_user_profile_url($new_id);
 
             return array('id' => $new_id,
                          'token' => md5(TOKEN_SALT_1.$new_id.TOKEN_SALT_2),
@@ -383,15 +388,14 @@ class User {
                                                               $verification_token,
                                                               isset($data['verified'])?$data['verified']:0,
                                                               SITE_ID));
+                        
                     $this->preset_email_settings($new_id);
-                    if ($new_id) {
-                        return array('id' => $new_id,
-									 'token' => md5(TOKEN_SALT_1.$new_id.TOKEN_SALT_2),
-									 'verification_token' => $verification_token,
-                                     'email' => $data['email']);
-                    }
-                    else
-                        return false;
+                    $this->setup_user_profile_url($new_id);
+
+                    return array('id' => $new_id,
+								 'token' => md5(TOKEN_SALT_1.$new_id.TOKEN_SALT_2),
+								 'verification_token' => $verification_token,
+                                 'email' => $data['email']);
                 }
             }
             else {
@@ -449,11 +453,11 @@ class User {
 
     public function _setInfo($source, $data) {
         if ($source == 'facebook') {
-            $query = 'update users set first_name=?, last_name=?, full_name=?, facebook_id=?, gender=?, verified=1 where user_id=?';
+            $query = 'UPDATE users SET first_name=?, last_name=?, full_name=?, facebook_id=?, gender=?, verified=1 WHERE user_id=?';
             $this->db->execute($query, array($data['first_name'], $data['last_name'], $data['name'], $data['id'], $data['gender'], $this->id));
         }
         elseif($source == 'google') {
-            $query = 'update users set first_name=?, last_name=?, full_name=?, google_id=?, gender=?, verified=1 where user_id=?';
+            $query = 'UPDATE users SET first_name=?, last_name=?, full_name=?, google_id=?, gender=?, verified=1 WHERE user_id=?';
             $this->db->execute($query, array($data['givenName'], $data['familyName'], $data['displayName'], $data['id'], $data['gender'], $this->id));
         }
     }
@@ -601,24 +605,29 @@ class User {
     }
 
     public function verifyEmail($data) {
+
         $verified_id = $this->checkTokens($data);
+        
         if (is_null($verified_id)) {
             return false;
         }
         else {
-            $this->db->execute('update users set verified=1, verification_token=NULL where user_id=?', array($verified_id));
-            return true;
+            
+            $sql = 'UPDATE users SET verified=1, verification_token = NULL WHERE user_id = ?';
+            $this->db->execute($sql, array($verified_id));
+
+            return $verified_id;
         }
     }
 
-    // returns user_id if tokens check out or null if they don check out
+    // returns user_id if tokens check out or null if they don't check out
     public function checkTokens($data) {
         $verified_id = null;
         if (isset($data['token']) && isset($data['verification_token'])) {
-            $res = $this->db->query('select user_id from users
-                                 where md5(concat(concat(\''.TOKEN_SALT_1.'\',user_id),\''.TOKEN_SALT_2.'\')) = ?
-                                 and verification_token = ?',
-                                 array($data['token'], $data['verification_token']), false);
+            $res = $this->db->query('SELECT user_id FROM users
+                                     WHERE md5(concat(concat(\''.TOKEN_SALT_1.'\',user_id),\''.TOKEN_SALT_2.'\')) = ?
+                                     and verification_token = ?',
+                                     array($data['token'], $data['verification_token']), false);
             $verified_id = $res[0]['user_id'];
             $this->token = $data['token'];
             $this->verification_token = $data['verification_token'];
@@ -629,7 +638,7 @@ class User {
     public function forgotPassword($email) {
         if ($this->validateEmail($email)) {
             // get user id
-            $query = 'select user_id from users where email = ?';
+            $query = 'SELECT user_id FROM users WHERE email = ?';
             $res = $this->db->query($query, array($email));
 
             if (count($res) > 0) {
@@ -638,7 +647,7 @@ class User {
                 $verification_token = md5($email.microtime());
 
                 // record verification token in users table
-                $query = 'update users set verification_token=? where user_id=?';
+                $query = 'UPDATE users SET verification_token=? WHERE user_id=?';
                 $this->db->execute($query, array($verification_token, $res[0]['user_id']));
 
                 return array('id' => $res[0]['user_id'],
@@ -655,7 +664,7 @@ class User {
 
     public function checkPassword($oldpass) {
         if (isset($oldpass)) {
-            $res = $this->db->query("SELECT user_id from users where password = ? AND user_id = ?",
+            $res = $this->db->query("SELECT user_id FROM users WHERE password = ? AND user_id = ?",
                    array($this->secureEncrypt($oldpass), $this->id));
             return (count($res) > 0) ? true : false;
         }
@@ -765,6 +774,30 @@ class User {
             return false;
     }
 
+    public function update_city($city=null) {
+        if ($this->id) {
+            return $this->update_single_field('city', $city);
+        }
+        else
+            return false;
+    }
+
+    public function update_country($country=null) {
+        if ($this->id) {
+            return $this->update_single_field('country', $country);
+        }
+        else
+            return false;
+    }
+
+    public function update_site_lang($site_lang=null) {
+        if (!empty($site_lang) && $this->id) {
+            return $this->update_single_field('site_lang', $site_lang);
+        }
+        else
+            return false;
+    }
+
     public function update_password($password=null) {
         if ($this->id) {
             return $this->updatePassword($password);
@@ -772,6 +805,8 @@ class User {
         else
             return false;
     }
+
+    
 
     private function update_single_field($field_name, $field_value) {
         if (isset($field_name) && !empty($field_name) && isset($field_value) && $this->id) {
@@ -784,6 +819,28 @@ class User {
                 $sql = 'UPDATE users SET '.$field_name.'= ? WHERE user_id = ?';
                 $this->db->execute($sql, array($field_value, $this->id));
                 $this->getByUserID($this->id);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    public function load_single_field($field_name) {
+        if (isset($field_name) && !empty($field_name) && $this->id) {
+            $res = $this->db->query('DESCRIBE users', null, 600);
+            $fields = array();
+            foreach($res as $r) {
+                $fields[$r['Field']] = $r;
+            }
+            if (isset($fields[$field_name])) {
+                $sql = 'SELECT '.$field_name.' FROM users WHERE user_id = ?';
+                $res = $this->db->query($sql, array($this->id));
+                if (isset($res[0][$field_name])) {
+                    $this->$field_name = $res[0][$field_name];
+                    $_SESSION['user']->$field_name = $res[0][$field_name];
+                }
                 return true;
             }
             else {
@@ -817,8 +874,7 @@ class User {
             $this->getByUserID($this->id);
             return true;
         }
-        else
-        {
+        else {
             return false;
         }
     }
@@ -830,18 +886,40 @@ class User {
             $this->getByUserID($this->id);
             return true;
         }
-        else
-        {
+        else {
+            return false;
+        }
+    }
+
+    public function setup_user_profile_url($user_id = null) {
+        if (is_numeric($user_id)) {
+            
+            import('Zappy.UserNetwork');
+            $_un = new UserNetwork();
+            
+            $sql = 'UPDATE users SET profile_url = ? WHERE user_id = ?';
+            $this->db->execute($sql, array($_un->get_profile_id((int)$user_id), (int)$user_id));
+
+            return true;
+        }
+        else {
             return false;
         }
     }
 
     public function update_profile_url($profile_url) {
         if ($this->id) {
+
             $sql = 'UPDATE users SET profile_url = ? WHERE user_id = ?';
-            return $this->db->execute($sql, array($profile_url, (int)$this->id));
+            $this->db->execute($sql, array($profile_url, (int)$this->id));
+            
+            return true;
+        }
+        else {
+            return false;
         }
     }
+
 
     public function social_only($email, $new = 1) {
         if (isset($email) && !empty($email)) {

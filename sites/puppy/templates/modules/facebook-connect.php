@@ -9,26 +9,26 @@
       s.parentNode.insertBefore(po, s);
     })();
 
-    function pc_fb_login() {
+    function finalize_fb_connect() {
         FB.api('/me', function(response) {
             $.post('/api/v1/fb_login', response, function(r) {
                 if (r.request == 'OK') {
                     <? if (!$_SESSION['logged_in']) { ?>
-                    window.location = '/explore/life-science';
+                    window.location = '/';
                     <? } ?>
                 }
                 else {
-                    console.log(r);
+                    // console.log(r);
                 }
             });
         });
     }
     
-    function signInCallback(authResult) {
+    function finalize_google_connect(authResult) {
         if (authResult['code']) {
             $.post('/api/v1/g_login', {"code":authResult['code']}, function(result) {
                     if (result.request == 'OK') {
-                        window.location = '/explore/recommended';
+                        window.location = '/';
                     }
                     console.log(result);
                 });
@@ -39,7 +39,7 @@
 
     $(document).ready(function(e) {
         FB.init({
-            appId      : '<?= PUBCHASE_FB_APPID ?>',
+            appId      : '<?= FACEBOOK_APPID ?>',
             channelUrl : '<?= SITE_URL ?>/channel.html',
             status     : true,
             cookie     : true,
@@ -49,15 +49,15 @@
         $('.fb_connect_btn').click(function(e) {
             FB.login(function(response) {
                 if (response.status === 'connected') {
-                    pc_fb_login();
+                    finalize_fb_connect();
                 }
             }, {scope: 'email'});
         });
 
         $('#google-signin').click(function(e) {
             var additionalParams = {
-                'clientid'     : '<?= PUBCHASE_GOOGLE_CLIENTID ?>',
-                'callback'     : signInCallback,
+                'clientid'     : '<?= GOOGLE_CLIENTID ?>',
+                'callback'     : finalize_google_connect,
                 'cookiepolicy' : 'single_host_origin',
                 'scope'        : 'https://www.googleapis.com/auth/userinfo.email'
             };
