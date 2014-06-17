@@ -55,9 +55,7 @@ class Display extends Template {
 			exit;
 		}
 		else {
-            print 'test_3';
-			header('Location: /login_form');
-			exit;
+			$this->set_template('signin_login-form');
 		}
 	}
 
@@ -219,11 +217,6 @@ class Display extends Template {
 		}
 		$this->set_template('signin_confirm-email');
 	}
-
-
-    public function login_form() {
-        $this->set_template('signin_login-form');
-    }
 
 	public function logout() {
 		setcookie(LOGIN_COOKIE_NAME, '', time() - 60*60*24*7*365);

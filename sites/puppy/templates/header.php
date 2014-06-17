@@ -24,7 +24,7 @@
             </span>
             <span>
                 <? if (!$_SESSION['logged_in']) { ?>
-                    <a href="/login_form">Login</a> or <a>Sign up</a>
+                    <a href="/login">Login</a> or <a>Sign up</a>
                 <? } else { ?>
                     <a href="/logout">Logout</a>
                 <? } ?>
