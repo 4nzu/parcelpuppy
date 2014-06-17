@@ -32,15 +32,19 @@
                     <li><a href="#">Discover</a></li>
                     <li><a href="#">Make a Request</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <? if (!$_SESSION['logged_in']) { ?>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <? if ($_SESSION['logged_in']) { ?>
+                            <?= $_SESSION['user']->first_name ?> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        <? } else { ?>
+                            Account <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
                                 <li><a href="/login_form">Sign In</a></li>
                                 <li><a href="#">Sign Up</a></li>
-                            <? } else { ?>
-                                <li><a href="/logout">Logout</a></li>
-                            <? } ?>
-                        </ul>
+                            </ul>
+                        <? } ?>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
