@@ -206,12 +206,24 @@ class Display extends Template {
 	}
 
 	public function confirm() {
-		if (isset($_REQUEST['v']) && !empty($_REQUEST['v']) &&
+		if (!$_SESSION['logged_in'] &&
+			isset($_REQUEST['v']) && !empty($_REQUEST['v']) &&
 			isset($_REQUEST['t']) && !empty($_REQUEST['t'])) {
-				$user = new User();
-				$user->verifyEmail(array('token' => $_REQUEST['t'], 'verification_token' => $_REQUEST['v']));
+
+			$_u = new User();
+			$user_id = $_u->verifyEmail(array('token' => $_REQUEST['t'], 'verification_token' => $_REQUEST['v']));
+
+			if (!$_u->getByUserID($user_id)) {
+				header("Location: /");
+				exit;
+			}
+			else {
+				$_SESSION['logged_in'] = true;
+				setcookie(LOGIN_COOKIE_NAME, $_u->token, time() + 60*60*24*7*365);
+				session_write_close();
+			}
 		}
-		$this->set_template('signin_confirm-email');
+		$this->set_template('login_confirm-email');
 	}
 
 	public function logout() {
