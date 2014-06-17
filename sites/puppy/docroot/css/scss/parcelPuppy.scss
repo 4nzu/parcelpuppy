@@ -57,7 +57,8 @@ button:focus {
 }
 
 .down-arrow {
-  width: 20px;
-  height: auto;
-  margin-bottom: 5px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid;
 }
+

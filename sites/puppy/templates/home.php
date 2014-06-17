@@ -53,8 +53,7 @@
 
     <div class="recommendation-row">
         <div class="recommendation-header">
-            People from <a>The United States</a> have requested: <a class="rec-filter">Change Location<img
-                    src="img/down-arrow.png" class="down-arrow"></a>
+            People from <a>The United States</a> have requested: <a class="rec-filter">Change Location <span class="down-arrow caret"></span></a>
         </div>
 
         <div class="rec-items row">

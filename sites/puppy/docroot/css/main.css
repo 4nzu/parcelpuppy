@@ -23,25 +23,27 @@
 .signup-step b {
   display: block; }
 
-.header {
-  position: relative; }
+.nav {
+  background-color: #F1F1F1; }
 
-.header-links {
-  position: absolute;
-  bottom: 0px;
-  right: 50px; }
+ul.nav a:hover {
+  background-color: #E9E9E9 !important; }
 
-.header-links span {
-  font-size: 15px;
-  padding-left: 15px; }
+.navbar-default .navbar-nav > li > a:hover,
+.dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+  color: #1D5AAB; }
 
-.logo-link {
-  margin-top: 20px;
-  padding: 15px 15px 0px 50px; }
+.header-nav-bar {
+  margin-bottom: 0px;
+  min-width: 900px;
+  background-color: #F1F1F1; }
+
+.logo-block {
+  margin-top: 5px; }
 
 #logo {
-  height: 40px;
-  margin: 0px 20px 0px 0px; }
+  height: 40px; }
 
 #company-name {
   color: #4E2C1F;
@@ -126,9 +128,9 @@ button:focus {
   background: linear-gradient(#8e8e8e, #7e7e7e); }
 
 .down-arrow {
-  width: 20px;
-  height: auto;
-  margin-bottom: 5px; }
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid; }
 
 .recommendation-header {
   font-size: 15px;

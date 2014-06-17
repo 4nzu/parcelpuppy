@@ -10,26 +10,41 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-<div class="page">
-    <div class="header">
-        <a class='logo-link' href='/'><img id="logo" src="img/parcelpuppy.png"><span
-                id="company-name">Parcel Puppy</span></a>
-
-        <div class="header-links">
-            <span>
-                <a>How it works</a>
-            </span>
-            <span>
-                <a>Become a Parcel Puppy</a>
-            </span>
-            <span>
-                <? if (!$_SESSION['logged_in']) { ?>
-                    <a href="/login_form">Login</a> or <a>Sign up</a>
-                <? } else { ?>
-                    <a href="/logout">Logout</a>
-                <? } ?>
-            </span>
-        </div>
-    </div>
-
+    <nav class="header-nav-bar navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#parcel-puppy-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="logo-block">
+                    <a href='/'><img id="logo" src="img/parcelpuppy.png">
+                        <span id="company-name">Parcel Puppy</span></a>
+                </div>
+            </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="parcel-puppy-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-bar-link"><a href="#" class="nav-bar-link">Browse Requests</a></li>
+                    <li><a href="#">Discover</a></li>
+                    <li><a href="#">Make a Request</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <? if (!$_SESSION['logged_in']) { ?>
+                                <li><a href="/login_form">Sign In</a></li>
+                                <li><a href="#">Sign Up</a></li>
+                            <? } else { ?>
+                                <li><a href="/logout">Logout</a></li>
+                            <? } ?>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="page">
     <div class="content">
