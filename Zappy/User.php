@@ -793,6 +793,30 @@ class User {
             return false;
     }
 
+    public function update_address_1($address_1=null) {
+        if ($this->id) {
+            return $this->update_single_field('address_1', $address_1);
+        }
+        else
+            return false;
+    }
+
+    public function update_address_2($address_2=null) {
+        if ($this->id) {
+            return $this->update_single_field('address_2', $address_2);
+        }
+        else
+            return false;
+    }
+
+    public function update_zip_code($zip_code=null) {
+        if ($this->id) {
+            return $this->update_single_field('zip_code', $zip_code);
+        }
+        else
+            return false;
+    }
+
     public function update_site_lang($site_lang=null) {
         if (!empty($site_lang) && $this->id) {
             return $this->update_single_field('site_lang', $site_lang);
@@ -809,9 +833,7 @@ class User {
             return false;
     }
 
-    
-
-    private function update_single_field($field_name, $field_value) {
+    public function update_single_field($field_name, $field_value) {
         if (isset($field_name) && !empty($field_name) && isset($field_value) && $this->id) {
             $res = $this->db->query('DESCRIBE users', null, 600);
             $fields = array();

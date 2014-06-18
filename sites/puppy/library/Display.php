@@ -255,7 +255,7 @@ class Display extends Template {
 	}
 
 	public function hack() {
-		$sql = 'SELECT region_name AS country_name, country_code FROM regions';
+		$sql = 'SELECT region_name AS region_id, country_name, country_code FROM regions';
 		$this->assign('countries', $this->db->query($sql));
 		$this->set_template('signin_extras');
 	}
