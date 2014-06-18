@@ -1,28 +1,26 @@
-<div class="login-form row">
+<div class="form-wrapper row">
     <div class="col-xs-6 col-xs-offset-3">
-        <div class="alert alert-dismissable alert-danger" style="display: none;" id="login-error">
-            Invalid Email Address or Password
-        </div>
+        <button class='facebook-button'>Sign up with Facebook</button>
 
+        <div class="form-option-divider">OR</div>
 
-        <button class='facebook-signup'>Sign up with Facebook</button>
-
-        <div class="login-form-option-divider">OR</div>
-
-        <form role="form" action="/login" method="POST" id="login-form">
-            <div class="form-group">
-                <input type="email" placeholder="Email" class="form-control" name="email" id="email"
+        <form role="form" action="/extras" method="POST" id="signup-form">
+            <div class="form-group" id="signup-email-form-group">
+                <input type="email" placeholder="Email" class="form-control" name="email" id="signup-email"
                        pattern="[^ @]*@[^ @]*">
+                <span class="help-block" id="signup-email-help-block" style="display: none;">Invalid email address</span>
             </div>
-            <div class="form-group">
-                <input type="password" placeholder="Password" class="form-control" name="pass" id="pass">
+            <div class="form-group" id="signup-pass-form-group">
+                <input type="password" placeholder="Password" class="form-control" name="pass" id="signup-pass">
+                <span class="help-block" id="signup-pass-help-block" style="display: none;">Cannot be blank</span>
             </div>
-            <button id='login-button' class='gray-button' style="width: 100%">Log in with email</button>
-            <div class="login-form-alternative-action">
-                <a href="/reset">Forgot your password?</a>
+            <div class="form-group" id="signup-pass-conf-form-group">
+                <input type="password" placeholder="Password Confirmation" class="form-control" name="pass-conf" id="signup-pass-conf">
+                <span class="help-block" id="signup-pass-conf-help-block" style="display: none;">Must match password</span>
             </div>
-            <div class="login-form-alternative-action">
-                New User? <a href="/signup">Sign Up</a>
+            <button id='signup-button' class='gray-button' style="width: 100%">Sign up with email</button>
+            <div class="form-alternative-action">
+                Have an account? <a href="/signin">Log In</a>
             </div>
 
         </form>

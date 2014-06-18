@@ -1,83 +1,3 @@
-.section-header {
-  font-size: 20px;
-  margin-bottom: 10px; }
-
-.how-it-works {
-  color: #909090; }
-
-.signup-step {
-  max-width: 175px;
-  font-size: 14px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-  text-align: center; }
-
-.signup-step img {
-  max-width: 75px;
-  max-height: 75px;
-  margin: 0px auto 15px auto;
-  display: block; }
-
-.signup-step b {
-  display: block; }
-
-.nav {
-  background-color: #F1F1F1; }
-
-ul.nav a:hover {
-  background-color: #E9E9E9 !important; }
-
-.navbar-default .navbar-nav > li > a:hover,
-.dropdown-menu > li > a:hover,
-.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
-  color: #1D5AAB; }
-
-.header-nav-bar {
-  margin-bottom: 0px;
-  min-width: 900px;
-  background-color: #F1F1F1; }
-
-.logo-block {
-  margin-top: 5px; }
-
-#logo {
-  height: 40px; }
-
-#company-name {
-  color: #4E2C1F;
-  font-size: 22px;
-  vertical-align: bottom; }
-
-.footer {
-  padding: 10px 0px;
-  text-align: center; }
-
-#masthead {
-  background-color: black;
-  background-image: url("../img/masthead.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #FFF;
-  text-shadow: black 0.1em 0.1em 0.2em;
-  padding: 165px 0px 70px 0px;
-  height: 500px; }
-
-.masthead-main-line {
-  font-size: 22px; }
-
-.masthead-call-to-action {
-  font-size: 18px;
-  margin-top: 40px; }
-
-.masthead-call-to-action input {
-  width: 35%; }
-
-.masthead-call-to-action button {
-  width: 20%; }
-
 body {
   background-color: #EEE;
   padding-bottom: 20px;
@@ -130,6 +50,84 @@ button:focus {
   border-right: 8px solid transparent;
   border-top: 8px solid; }
 
+.nav {
+  background-color: #F1F1F1; }
+
+ul.nav a:hover {
+  background-color: #E9E9E9 !important; }
+
+.navbar-default .navbar-nav > li > a:hover,
+.dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+  color: #1D5AAB; }
+
+.header-nav-bar {
+  margin-bottom: 0px;
+  min-width: 900px;
+  background-color: #F1F1F1; }
+
+.logo-block {
+  margin-top: 5px; }
+
+#logo {
+  height: 40px; }
+
+#company-name {
+  color: #4E2C1F;
+  font-size: 22px;
+  vertical-align: bottom; }
+
+.footer {
+  padding: 10px 0px;
+  text-align: center; }
+
+.form-wrapper {
+  margin: 50px 0px 50px 0px; }
+
+.facebook-button {
+  width: 100%;
+  background-color: #18529E;
+  background: linear-gradient(#2971b6, #18529e); }
+
+.facebook-button:hover {
+  background-color: #08428E;
+  background: linear-gradient(#1961a6, #08428e); }
+
+.form-alternative-action {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px; }
+
+.form-option-divider {
+  text-align: center;
+  font-size: 15px;
+  width: 100%;
+  padding: 20px 0px; }
+
+#masthead {
+  background-color: black;
+  background-image: url("../img/masthead.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #FFF;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  padding: 165px 0px 70px 0px;
+  height: 500px; }
+
+.masthead-main-line {
+  font-size: 22px; }
+
+.masthead-call-to-action {
+  font-size: 18px;
+  margin-top: 40px; }
+
+.masthead-call-to-action input {
+  width: 35%; }
+
+.masthead-call-to-action button {
+  width: 20%; }
+
 .recommendation-header {
   font-size: 15px;
   font-weight: bold;
@@ -167,25 +165,27 @@ button:focus {
   width: 200px;
   margin-bottom: 10px; }
 
-.login-form {
-  margin: 50px 0px 50px 0px; }
+.section-header {
+  font-size: 20px;
+  margin-bottom: 10px; }
 
-.facebook-login {
-  width: 100%;
-  background-color: #18529E;
-  background: linear-gradient(#2971b6, #18529e); }
+.how-it-works {
+  color: #909090; }
 
-.facebook-login:hover {
-  background-color: #08428E;
-  background: linear-gradient(#1961a6, #08428e); }
+.signup-step {
+  max-width: 175px;
+  font-size: 14px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  text-align: center; }
 
-.login-form-alternative-action {
-  width: 100%;
-  text-align: center;
-  margin-top: 5px; }
+.signup-step img {
+  max-width: 75px;
+  max-height: 75px;
+  margin: 0px auto 15px auto;
+  display: block; }
 
-.login-form-option-divider {
-  text-align: center;
-  font-size: 15px;
-  width: 100%;
-  padding: 20px 0px; }
+.signup-step b {
+  display: block; }

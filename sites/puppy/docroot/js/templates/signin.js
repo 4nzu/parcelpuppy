@@ -1,39 +1,38 @@
-ParcelPuppy.Signin = {};
+'use strict';
+ParcelPuppy.Signup = {};
 
 jQuery(function () {
-    ParcelPuppy.Signin.validateLoginFields = function () {
+    ParcelPuppy.Signup.validateLoginFields = function () {
         return ParcelPuppy.Validators.validateEmailAddress($('#email')) && $('#pass').val().length > 0;
     };
 
-    ParcelPuppy.Signin.handleSigninClick = function (e) {
+    ParcelPuppy.Signup.handleSigninClick = function (e) {
         e.preventDefault();
-        // var l = Ladda.create( document.querySelector( '.sign-btn' ) );
-        // l.start();
 
-        if (ParcelPuppy.Signin.validateLoginFields()) {
+        if (ParcelPuppy.Signup.validateLoginFields()) {
             $('#login-form').attr('action', '/thankyou');
             $.post('/api/v1/verify_login', {'email' : $('#email').val(), 'pass' : $('#pass').val()}, function(r) {
-                if (r.request != 'OK') {
-                    ParcelPuppy.Signin.showLoginError();
+                if (r.request !== 'OK') {
+                    ParcelPuppy.Signup.showLoginError();
                 }
                 else {
                     $('#login-form').submit();
                 }
             });
         } else {
-            ParcelPuppy.Signin.showLoginError();
+            ParcelPuppy.Signup.showLoginError();
         }
     };
 
-    ParcelPuppy.Signin.showLoginError = function () {
+    ParcelPuppy.Signup.showLoginError = function () {
         $('#login-error').show();
     };
 
-    ParcelPuppy.Signin.setSigninClickHandler = function () {
-        $('#login-button').click(ParcelPuppy.Signin.handleSigninClick);
+    ParcelPuppy.Signup.setSigninClickHandler = function () {
+        $('#login-button').click(ParcelPuppy.Signup.handleSigninClick);
     };
 
 
     // Execute setup functions
-    ParcelPuppy.Signin.setSigninClickHandler();
+    ParcelPuppy.Signup.setSigninClickHandler();
 });

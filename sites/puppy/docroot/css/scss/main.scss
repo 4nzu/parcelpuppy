@@ -1,7 +1,13 @@
-@import 'home';
+@import 'parcelPuppy';
 @import 'header';
 @import 'footer';
+@import 'forms';
+
+// Modules
 @import 'masthead';
-@import 'parcelPuppy';
 @import 'recommendation';
 @import 'signin';
+
+
+// Pages
+@import 'home';
