@@ -24,19 +24,24 @@ class API extends Template {
 	}
 
 	public function update_extras() {
-		$_params = array('first_name', 'last_name', 'address_1', 'address_2', 'city', 'country', 'zip_code');
-		foreach($_params as $_p) {
-			if (!isset($_POST[$_p])) {
-				$this->json_out(array('request' => "ERROR: $_p is missing."));
-			}
-			else {
-				$_u = new User();
-				if (!$_u->update_single_field($_p, $_POST[$_p])) {
-					$this->json_out(array('request' => "ERROR: failed to update $_p."));
+		if ($_SESSION['logged_in']) {
+			$_params = array('first_name', 'last_name', 'address_1', 'address_2', 'city', 'country', 'state', 'zip_code');
+			foreach($_params as $_p) {
+				if (!isset($_POST[$_p])) {
+					$this->json_out(array('request' => "ERROR: $_p is missing"));
+				}
+				else {
+					$_u = new User();
+					if (!$_u->update_single_field($_p, $_POST[$_p])) {
+						$this->json_out(array('request' => "ERROR: failed to update $_p"));
+					}
 				}
 			}
+			$this->json_out(array('request' => 'OK'));
 		}
-		$this->json_out(array('request' => 'OK'));
+		else {
+			$this->json_out(array('request' => 'ERROR: Not authorized'));	
+		}
 	}
 
 	public function verify_login() {
