@@ -7,20 +7,19 @@ ParcelPuppy.Signup = {};
 
 jQuery(function () {
     ParcelPuppy.Signup.validateLoginFields = function () {
-        return ParcelPuppy.Validators.validateEmailAddress($('#email')) && $('#pass').val().length > 0;
+        return ParcelPuppy.Validators.validateEmailAddress($('#signin-email')) && $('#signin-pass').val().length > 0;
     };
 
     ParcelPuppy.Signup.handleSigninClick = function (e) {
         e.preventDefault();
 
         if (ParcelPuppy.Signup.validateLoginFields()) {
-            $('#login-form').attr('action', '/thankyou');
-            $.post('/api/v1/verify_login', {'email' : $('#email').val(), 'pass' : $('#pass').val()}, function(r) {
+            $.post('/api/v1/verify_login', {'email' : $('#signin-email').val(), 'pass' : $('#signin-pass').val()}, function(r) {
                 if (r.request !== 'OK') {
                     ParcelPuppy.Signup.showLoginError();
                 }
                 else {
-                    $('#login-form').submit();
+                    $('#signin-form').submit();
                 }
             });
         } else {
@@ -29,11 +28,11 @@ jQuery(function () {
     };
 
     ParcelPuppy.Signup.showLoginError = function () {
-        $('#login-error').show();
+        $('#signin-error').show();
     };
 
     ParcelPuppy.Signup.setSigninClickHandler = function () {
-        $('#login-button').click(ParcelPuppy.Signup.handleSigninClick);
+        $('#signin-button').click(ParcelPuppy.Signup.handleSigninClick);
     };
 
 
