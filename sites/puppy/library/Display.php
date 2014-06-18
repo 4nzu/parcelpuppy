@@ -17,10 +17,10 @@ class Display extends Template {
         $this->set_template('home');
     }
 
-    public function login() {
+    public function signin() {
         // make sure we only hit login on https (SSL-protected) connection when on live server
 		if (HOST_ROLE == HOST_PROD && !isset($_SERVER['HTTPS'])) {
-			header('Location: '.SECURE_SITE_URL.'/login');
+			header('Location: '.SECURE_SITE_URL.'/signin');
 			exit;
 		}
 		if (!empty($_POST['email']) && !empty($_POST['pass'])) {
@@ -53,6 +53,10 @@ class Display extends Template {
 		else {
 			$this->set_template('signin_login-form');
 		}
+	}
+
+	public function extras() {
+		$this->set_template('signin_extras');
 	}
 
 	public function reset() {
@@ -225,11 +229,6 @@ class Display extends Template {
 		}
 		$this->set_template('login_confirm-email');
 	}
-
-
-    public function login_form() {
-        $this->set_template('signin_login-form');
-    }
 
 	public function logout() {
 		setcookie(LOGIN_COOKIE_NAME, '', time() - 60*60*24*7*365);
