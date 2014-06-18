@@ -136,7 +136,7 @@ class Display extends Template {
 							$amazonAPI->sesEmail($res);
 						}
 
-						$sql = 'SELECT region_name AS country_name, country_code FROM regions';
+						$sql = 'SELECT region_name AS country_name, country_code, region_id FROM regions';
 						$this->assign('countries', $this->db->query($sql));
 						$this->set_template('signin_extras');
 
