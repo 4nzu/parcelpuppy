@@ -36,13 +36,13 @@
                         <? if ($_SESSION['logged_in']) { ?>
                             <?= $_SESSION['user']->first_name ?> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/logout">Logout</a></li>
+                                <li><a href="/signout">Logout</a></li>
                             </ul>
                         <? } else { ?>
                             Account <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/login_form">Sign In</a></li>
-                                <li><a href="#">Sign Up</a></li>
+                                <li><a href="/signin">Sign In</a></li>
+                                <li><a href="/signup">Sign Up</a></li>
                             </ul>
                         <? } ?>
                     </li>

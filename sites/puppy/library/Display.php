@@ -55,8 +55,8 @@ class Display extends Template {
 		}
 	}
 
-	public function extras() {
-		$this->set_template('signin_extras');
+	public function signup() {
+		$this->set_template('signin_signup-form');
 	}
 
 	public function reset() {
@@ -114,7 +114,7 @@ class Display extends Template {
         }
     }
 
-	public function thankyou() {
+	public function extras() {
 		if (!$_SESSION['logged_in']) {
 			if (isset($_POST['email']) && !empty($_POST['email']) &&
 				isset($_POST['pass']) && !empty($_POST['pass'])) {
@@ -122,8 +122,7 @@ class Display extends Template {
 				$this->wipe_session();
 
 				$u = new User();
-				$data = array('full_name' => $_POST['full_name'],
-							  'email'      => $_POST['email'],
+				$data = array('email'      => $_POST['email'],
 							  'password'   => $_POST['pass']);
 
 				if ($u->validateEmail($_POST['email'])) {
@@ -136,7 +135,8 @@ class Display extends Template {
 							$amazonAPI = new amazonAPI();
 							$amazonAPI->sesEmail($res);
 						}
-						$this->set_template('signin_thankyou');
+
+						$this->set_template('signin_extras');
 					}
 					else {
 						if ($u->getByEmailPassword($_POST['email'], $_POST['pass'])) {
@@ -149,7 +149,7 @@ class Display extends Template {
 								exit;
 							}
 							else {
-								header("Location: /");
+								header("Location: /account");
 								exit;
 							}
 						}
@@ -161,7 +161,8 @@ class Display extends Template {
 					}
 				}
 				else {
-					$this->set_template('signin_thankyou');
+					header("Location: /");
+					exit;
 				}
 			}
 			else {
@@ -173,6 +174,10 @@ class Display extends Template {
 		else {
 			header("Location: /");
 		}
+	}
+
+	public function account() {
+		$this->set_template('account_account');
 	}
 
 	public function create() {
@@ -230,7 +235,7 @@ class Display extends Template {
 		$this->set_template('login_confirm-email');
 	}
 
-	public function logout() {
+	public function signout() {
 		setcookie(LOGIN_COOKIE_NAME, '', time() - 60*60*24*7*365);
 		session_start();
 		session_destroy();
