@@ -136,7 +136,10 @@ class Display extends Template {
 							$amazonAPI->sesEmail($res);
 						}
 
+						$sql = 'SELECT region_name AS country_name, country_code FROM regions';
+						$this->assign('countries', $this->db->query($sql));
 						$this->set_template('signin_extras');
+
 					}
 					else {
 						if ($u->getByEmailPassword($_POST['email'], $_POST['pass'])) {
@@ -249,6 +252,12 @@ class Display extends Template {
 		setcookie(LOGIN_COOKIE_NAME, '', time() - 60*60*24*7*365);
 		session_start();
 		session_destroy();
+	}
+
+	public function hack() {
+		$sql = 'SELECT region_name AS country_name, country_code FROM regions';
+		$this->assign('countries', $this->db->query($sql));
+		$this->set_template('signin_extras');
 	}
 
 }

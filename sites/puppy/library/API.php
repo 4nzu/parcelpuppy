@@ -23,6 +23,10 @@ class API extends Template {
 		$this->db = DB::instance();
 	}
 
+	public function update_extras() {
+		$this->json_out(array('request' => 'OK'));
+	}
+
 	public function verify_login() {
     	$social = 'badlogin';
 

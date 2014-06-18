@@ -29,6 +29,7 @@ class User {
     public $bio = null;
     public $city = null;
     public $country = null;
+    public $verified = null;
 
     function __construct($id = null) {
 		$this->db = DB::instance();
@@ -70,6 +71,7 @@ class User {
                 $this->mendeley_token      = $_SESSION['user']->mendeley_token;
                 $this->affiliation_url     = $_SESSION['user']->affiliation_url;
                 $this->bio                 = $_SESSION['user']->bio;
+                $this->verified            = $_SESSION['user']->verified;
             }
         }
     }
@@ -114,6 +116,7 @@ class User {
             $this->mendeley_token      = $res[0]['mendeley_token'];
             $this->affiliation_url     = $res[0]['affiliation_url'];
             $this->bio                 = $res[0]['bio'];
+            $this->verified            = $res[0]['verified'];
             if (isset($res[0]['device_type_id']))
                 $this->device_type_id = $res[0]['device_type_id'];
             
@@ -160,7 +163,7 @@ class User {
 										days_back, last_login,
 										show_splash,
 										people_cluster_id,
-										optin,
+										optin, verified,
 										last_papers_upload,
                                         invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
 										FROM users WHERE verified = 1 AND
@@ -182,7 +185,7 @@ class User {
                                         days_back, last_login,
                                         show_splash,
                                         people_cluster_id,
-                                        optin,
+                                        optin, verified,
                                         last_papers_upload,
                                         invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
                                         FROM users WHERE verified = 1
@@ -204,7 +207,7 @@ class User {
 										days_back, last_login,
                                         show_splash,
 										people_cluster_id,
-										optin,
+										optin, verified,
 										last_papers_upload,
                                         invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
 										FROM users WHERE verified = 1 AND user_id = ?', array($id), false));
@@ -220,7 +223,7 @@ class User {
 	// Attempts to get User from the database by their device id
     public function getByDeviceID($id, $type_id = null) {
         if (!empty($id)) {
-            $sql = 'SELECT u.username, u.user_id, u.email, u.created, u.verification_token, u.gender, u.affiliation_url, u.bio,
+            $sql = 'SELECT u.username, u.user_id, u.email, u.created, u.verification_token, u.gender, u.affiliation_url, u.bio, u.verified,
                                          u.full_name, u.first_name, u.last_name, u.site_lang, u.profile_image, u.days_back, u.show_splash, u.people_cluster_id,
                                          u.optin, u.last_papers_upload, u.invisible, d.device_type_id, u.affiliation, u.initials, u.mendeley_token, u.profile_url
                                          FROM users u, devices d
@@ -264,7 +267,7 @@ class User {
     									days_back,
                                         show_splash,
     									people_cluster_id,
-    									optin,
+    									optin, verified,
     									last_papers_upload,
                                         invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
     									FROM users WHERE verified = 1 AND facebook_id = ?', array($id), false));
@@ -283,7 +286,7 @@ class User {
                                         days_back,
                                         show_splash,
                                         people_cluster_id,
-                                        optin,
+                                        optin, verified,
                                         last_papers_upload,
                                         invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
                                         FROM users WHERE '.$oauth_provider.'_id = ? and auth_token = ?', array($id, $token)));
@@ -298,7 +301,7 @@ class User {
     public function getEmailByTokenAndID($token, $id, $oauth_provider) {
         if (!empty($id) && !empty($token)) {
 
-            $res = $this->db->query('SELECT email FROM users WHERE '.$oauth_provider.'_id = ? and auth_token = ?', array($id, $token));
+            $res = $this->db->query('SELECT email FROM users WHERE '.$oauth_provider.'_id = ? AND auth_token = ?', array($id, $token));
             if (isset($res[0]['email'])) {
                 return $res[0]['email'];
             }
@@ -313,7 +316,7 @@ class User {
                                         days_back,
                                         show_splash,
                                         people_cluster_id,
-                                        optin,
+                                        optin, verified,
                                         last_papers_upload,
                                         invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
 										FROM users WHERE verified = 1 AND email = ?', array($email), false));
@@ -334,7 +337,7 @@ class User {
 									days_back, last_login,
                                     show_splash,
                                     people_cluster_id,
-                                    optin,
+                                    optin, verified,
                                     last_papers_upload,
                                     invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
                                     FROM users WHERE verified = 1 AND email = ? AND password = ?',

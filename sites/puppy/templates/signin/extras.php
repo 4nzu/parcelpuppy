@@ -1,1 +1,1 @@
-EXTRAS
+<? var_dump($countries); ?>
