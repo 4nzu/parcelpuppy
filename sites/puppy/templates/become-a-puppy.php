@@ -1,16 +1,19 @@
-<div id='masthead' class="home-masthead" style="background-image: url('../img/masthead-home.jpg');">
-        <div class="row-fluid">
-            <div class="col-xs-10 col-xs-offset-1">
-                <span class="masthead-main-line">Request items from around the world, no matter where you live.</span>
+<div id="masthead" class="puppy-masthead" style="background-image: url('../img/masthead-puppy.jpg');">
+    <div class="row-fluid">
+        <div class="col-xs-10 col-xs-offset-1">
+            <span class="masthead-main-line">
+                Earn money on your shopping trips.<br>
+                Share your finds with people around the world.
+            </span>
 
-                <div class="masthead-call-to-action">
-                    I'm looking for:
-                    <div>
-                        <input type="textfield" id="request-item-name"/>
+            <div class="masthead-call-to-action">
+                I'm looking for:
+                <div>
+                    <input type="email" placeholder="yourname@email.com" name="email" id="masthead-email" pattern="[^ @]*@[^ @]*">
 
-                        <button type="button">Make a Request</button>
-                    </div>
+                    <button type="button">Sign Up</button>
                 </div>
+            </div>
         </div>
 
         <div class='call-to-action'>

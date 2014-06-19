@@ -17,6 +17,10 @@ class Display extends Template {
         $this->set_template('home');
     }
 
+    public function become_a_puppy() {
+        $this->set_template('become-a-puppy');
+    }
+
     public function signin() {
         // make sure we only hit login on https (SSL-protected) connection when on live server
 		if (HOST_ROLE == HOST_PROD && !isset($_SERVER['HTTPS'])) {
@@ -27,7 +31,7 @@ class Display extends Template {
 
 			$_u = new User();
 			if ($_u->getByEmailPassword($_POST['email'], $_POST['pass'])) {
-				
+
 				$_SESSION['logged_in'] = true;
 				setcookie(LOGIN_COOKIE_NAME, $_u->token, time() + 60*60*24*7*365);
 				session_write_close();
@@ -130,7 +134,7 @@ class Display extends Template {
 	        		if ($verified_email[0] == 0 && $verified_email[1] == 0) {
 	        			$res = $u->createUser('site', $data);
 						if (isset($res['email']) && isset($res['verification_token'])) {
-							
+
 							import('library.amazonAPI');
 							$amazonAPI = new amazonAPI();
 							$amazonAPI->sesEmail($res);
@@ -205,7 +209,7 @@ class Display extends Template {
 
 	public function myrequests() {
 		if ($_SESSION['logged_in']) {
-			
+
 			import('library.Requests');
 			$_req = new Requests();
 			$this->assign('requests', $_req->get_requests($_SESSION['user']->id));
