@@ -28,12 +28,12 @@ class API extends Template {
 			$_params = array('first_name', 'last_name', 'address_1', 'address_2', 'city', 'country', 'state', 'zip_code');
 			foreach($_params as $_p) {
 				if (!isset($_POST[$_p])) {
-					$this->json_out(array('request' => "ERROR: $_p is missing"));
+					$this->json_out(array('request' => 'ERROR: missing parameter', 'var' => $_p));
 				}
 				else {
 					$_u = new User();
 					if (!$_u->update_single_field($_p, $_POST[$_p])) {
-						$this->json_out(array('request' => "ERROR: failed to update $_p"));
+						$this->json_out(array('request' => 'ERROR: failed to update', 'var' => $_p));
 					}
 				}
 			}
