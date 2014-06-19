@@ -22,39 +22,15 @@ jQuery(function () {
     };
 
     ParcelPuppy.Signup.validateEmailAddress = function () {
-        if (ParcelPuppy.Validators.validateEmailAddress($('#signup-email'))) {
-            $('#signup-email-form-group').attr('class', 'form-group');
-            $('#signup-email-help-block').hide();
-            return true;
-        } else {
-            $('#signup-email-form-group').attr('class', 'form-group has-error');
-            $('#signup-email-help-block').show();
-            return false;
-        }
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-email'));
     };
 
     ParcelPuppy.Signup.validatePassword = function () {
-        if ($('#signup-pass').val() && $('#signup-pass').val().length > 0) {
-            $('#signup-pass-form-group').attr('class', 'form-group');
-            $('#signup-pass-help-block').hide();
-            return true;
-        } else {
-            $('#signup-pass-form-group').attr('class', 'form-group has-error');
-            $('#signup-pass-help-block').show();
-            return false;
-        }
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-pass'));
     };
 
     ParcelPuppy.Signup.confirmPassword = function () {
-        if ($('#signup-pass').val() === $('#signup-pass-conf').val()) {
-            $('#signup-pass-conf-form-group').attr('class', 'form-group has-success');
-            $('#signup-pass-conf-help-block').hide();
-            return true;
-        } else {
-            $('#signup-pass-conf-form-group').attr('class', 'form-group has-error');
-            $('#signup-pass-conf-help-block').show();
-            return false;
-        }
+        return ParcelPuppy.Validators.validateFormFieldsMatch($('#signup-pass'), $('#signup-pass-conf'));
     };
 
     ParcelPuppy.Signup.setEmailChangeHandler = function () {

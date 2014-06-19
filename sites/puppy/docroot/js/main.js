@@ -2,12 +2,152 @@
 // Source: sites/puppy/docroot/js/init.js
 var ParcelPuppy = {};
 
-// Source: sites/puppy/docroot/js/templates/signin.js
+
+// Source: sites/puppy/docroot/js/support/utils.js
+ParcelPuppy.Utils = {};
+
+jQuery(function() {
+    ParcelPuppy.Utils.isFilledOut = function (formField) {
+        return formField.val() && formField.val().length > 0;
+    };
+
+    ParcelPuppy.Utils.displayErrorForField = function (formField) {
+        var fieldGroup = formField.closest('.form-group'),
+            helpBlock = fieldGroup.find('.help-block');
+
+        if (formField && fieldGroup && helpBlock) {
+            fieldGroup.attr('class', 'form-group has-error');
+            helpBlock.show();
+        }
+    };
+
+    ParcelPuppy.Utils.removeErrorForField = function (formField) {
+        var fieldGroup = formField.closest('.form-group'),
+            helpBlock = fieldGroup.find('.help-block');
+
+        if (formField && fieldGroup && helpBlock) {
+            fieldGroup.attr('class', 'form-group');
+            helpBlock.hide();
+        }
+    };
+
+    ParcelPuppy.Utils.setErrorForField = function (isValid, formField) {
+        if (isValid) {
+            ParcelPuppy.Utils.removeErrorForField(formField);
+        } else {
+            ParcelPuppy.Utils.displayErrorForField(formField);
+        }
+    };
+
+
+    ParcelPuppy.Utils.generatePostParamsForForm = function (form) {
+        var formFields = form.serializeArray();
+        var postParams = {};
+
+        $.each(formFields, function (index, formField) {
+            postParams[formField.name] = formField.value;
+        });
+
+        return postParams;
+    };
+});
+
+
+// Source: sites/puppy/docroot/js/support/validators.js
+ParcelPuppy.Validators = {};
+
+jQuery(function () {
+    ParcelPuppy.Validators.validateEmailAddress = function (email) {
+        var reg = /^([A-Za-z0-9_\-\.+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        return reg.test($(email).val());
+    };
+
+    ParcelPuppy.Validators.validateFormFieldIsFilledOut = function (formField) {
+        var isValid = ParcelPuppy.Utils.isFilledOut(formField);
+        ParcelPuppy.Utils.setErrorForField(isValid, formField);
+        return isValid;
+    };
+
+    // It is assumed that all formFields are part of the same group
+    ParcelPuppy.Validators.validateFormFieldsAreFilledOut = function (formFields) {
+        var isValid = true;
+        $.each(formFields, function (index, formField) {
+            isValid = ParcelPuppy.Utils.isFilledOut(formField) && isValid;
+        });
+
+        ParcelPuppy.Utils.setErrorForField(isValid, formFields[0]);
+        return isValid;
+    };
+
+    // It is assumed that both fields are part of the same group for showing errors
+    ParcelPuppy.Validators.validateFormFieldsMatch = function (fieldOne, fieldTwo) {
+        var isValid = fieldOne.val() === fieldTwo.val();
+        ParcelPuppy.Utils.setErrorForField(isValid, fieldOne);
+        return isValid;
+    };
+});
+
+// Source: sites/puppy/docroot/js/templates/extras.js
+ParcelPuppy.Extras = {};
+
+jQuery(function () {
+    ParcelPuppy.Extras.setExtrasButtonHandler = function () {
+        $('#extras-button').click(ParcelPuppy.Extras.handleExtrasButtonClick);
+    };
+
+    ParcelPuppy.Extras.handleExtrasButtonClick = function (e) {
+        if (ParcelPuppy.Address.validateAddressFields()) {
+            var postParams = ParcelPuppy.Utils.generatePostParamsForForm($('#extras-form'));
+            $.post('/api/v1/update_extras', postParams, function (r) {
+                if (r.request === 'OK') {
+                    window.location = '/account';
+                } else {
+                    $('#extras-error').show();
+                }
+            });
+        }
+    };
+
+    // Execute setup functions
+    ParcelPuppy.Extras.setExtrasButtonHandler();
+});
+
+// Source: sites/puppy/docroot/js/modules/address-window.js
+ParcelPuppy.Address = {};
+
+jQuery(function () {
+    ParcelPuppy.Address.validateAddressFields = function () {
+        var isValid = ParcelPuppy.Address.validateNameFields();
+        isValid = ParcelPuppy.Address.validateStreetAddressFields() && isValid;
+        isValid = ParcelPuppy.Address.validateStateField() && isValid;
+        isValid = ParcelPuppy.Address.validateCityZipFields() && isValid;
+        return isValid;
+    };
+
+    ParcelPuppy.Address.validateNameFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-first-name'), $('#address-last-name')]);
+    };
+
+    ParcelPuppy.Address.validateStreetAddressFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-street-1'));
+    };
+
+    ParcelPuppy.Address.validateStateField = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-state'));
+    };
+
+    ParcelPuppy.Address.validateCityZipFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-city'), $('#address-zip-code')]);
+    };
+});
+
+
+// Source: sites/puppy/docroot/js/modules/signin-window.js
 ParcelPuppy.Signup = {};
 
 jQuery(function () {
     ParcelPuppy.Signup.validateLoginFields = function () {
-        return ParcelPuppy.Validators.validateEmailAddress($('#signin-email')) && $('#signin-pass').val().length > 0;
+        return ParcelPuppy.Validators.validateEmailAddress($('#signin-email')) && ParcelPuppy.Utils.isFilledOut($('#signin-pass'));
     };
 
     ParcelPuppy.Signup.handleSigninClick = function (e) {
@@ -40,7 +180,7 @@ jQuery(function () {
     ParcelPuppy.Signup.setSigninClickHandler();
 });
 
-// Source: sites/puppy/docroot/js/templates/signup.js
+// Source: sites/puppy/docroot/js/modules/signup-window.js
 ParcelPuppy.Signup = {};
 
 jQuery(function () {
@@ -64,39 +204,15 @@ jQuery(function () {
     };
 
     ParcelPuppy.Signup.validateEmailAddress = function () {
-        if (ParcelPuppy.Validators.validateEmailAddress($('#signup-email'))) {
-            $('#signup-email-form-group').attr('class', 'form-group');
-            $('#signup-email-help-block').hide();
-            return true;
-        } else {
-            $('#signup-email-form-group').attr('class', 'form-group has-error');
-            $('#signup-email-help-block').show();
-            return false;
-        }
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-email'));
     };
 
     ParcelPuppy.Signup.validatePassword = function () {
-        if ($('#signup-pass').val() && $('#signup-pass').val().length > 0) {
-            $('#signup-pass-form-group').attr('class', 'form-group');
-            $('#signup-pass-help-block').hide();
-            return true;
-        } else {
-            $('#signup-pass-form-group').attr('class', 'form-group has-error');
-            $('#signup-pass-help-block').show();
-            return false;
-        }
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-pass'));
     };
 
     ParcelPuppy.Signup.confirmPassword = function () {
-        if ($('#signup-pass').val() === $('#signup-pass-conf').val()) {
-            $('#signup-pass-conf-form-group').attr('class', 'form-group has-success');
-            $('#signup-pass-conf-help-block').hide();
-            return true;
-        } else {
-            $('#signup-pass-conf-form-group').attr('class', 'form-group has-error');
-            $('#signup-pass-conf-help-block').show();
-            return false;
-        }
+        return ParcelPuppy.Validators.validateFormFieldsMatch($('#signup-pass'), $('#signup-pass-conf'));
     };
 
     ParcelPuppy.Signup.setEmailChangeHandler = function () {
@@ -125,14 +241,4 @@ jQuery(function () {
     ParcelPuppy.Signup.setPasswordChangeHandler();
     ParcelPuppy.Signup.setPasswordConfirmationCheck();
 
-});
-
-// Source: sites/puppy/docroot/js/templates/validators.js
-ParcelPuppy.Validators = {};
-
-jQuery(function () {
-    ParcelPuppy.Validators.validateEmailAddress = function (email) {
-        var reg = /^([A-Za-z0-9_\-\.+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        return reg.test($(email).val());
-    };
 });

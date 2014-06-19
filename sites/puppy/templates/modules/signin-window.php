@@ -5,7 +5,7 @@ if ((isset($_GET['badlogin']) && $_GET['badlogin'] == 1)) {
     $error_display = 'none';
 }
 ?>
-<div class="alert alert-dismissable alert-danger" style="display: <?= $error_display ?>;" id="signin-error">
+<div class="alert alert-danger" style="display: <?= $error_display ?>;" id="signin-error">
     Invalid Email Address or Password
 </div>
 

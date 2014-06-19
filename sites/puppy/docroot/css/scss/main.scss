@@ -4,11 +4,10 @@
 @import 'forms';
 
 // Modules
-@import 'masthead';
-@import 'recommendation';
-@import 'signin';
-@import 'address-window';
-
+@import 'modules/masthead';
+@import 'modules/recommendation';
+@import 'modules/signin';
+@import 'modules/address-window';
 
 // Pages
-@import 'home';
+@import 'templates/home';

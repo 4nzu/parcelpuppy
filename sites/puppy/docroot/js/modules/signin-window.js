@@ -3,7 +3,7 @@ ParcelPuppy.Signup = {};
 
 jQuery(function () {
     ParcelPuppy.Signup.validateLoginFields = function () {
-        return ParcelPuppy.Validators.validateEmailAddress($('#signin-email')) && $('#signin-pass').val().length > 0;
+        return ParcelPuppy.Validators.validateEmailAddress($('#signin-email')) && ParcelPuppy.Utils.isFilledOut($('#signin-pass'));
     };
 
     ParcelPuppy.Signup.handleSigninClick = function (e) {
