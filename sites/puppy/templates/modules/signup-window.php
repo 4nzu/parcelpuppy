@@ -5,7 +5,7 @@
 <form role="form" action="/extras" method="POST" id="signup-form">
     <div class="form-group" id="signup-email-form-group">
         <input type="email" placeholder="Email" class="form-control" name="email" id="signup-email"
-               pattern="[^ @]*@[^ @]*">
+               pattern="[^ @]*@[^ @]*" value="<?= $email ?>">
         <span class="help-block" id="signup-email-help-block" style="display: none;">Invalid email address</span>
     </div>
     <div class="form-group" id="signup-pass-form-group">

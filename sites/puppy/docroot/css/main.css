@@ -13,7 +13,6 @@ a:hover {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #FFF;
   padding: 25px 75px 50px 75px; }
 
 .content {
@@ -132,6 +131,7 @@ ul.nav a:hover {
   margin-top: 40px; }
 
 .masthead-call-to-action input {
+  color: #505050;
   width: 35%; }
 
 .masthead-call-to-action button {
@@ -184,6 +184,19 @@ ul.nav a:hover {
   color: #1D5AAB;
   font-size: 13px;
   margin-bottom: 15px; }
+
+.featured-puppies-frame {
+  background-color: #F0F5FD; }
+
+.featured-puppy {
+  padding: 10px; }
+
+.featured-puppy-avatar {
+  width: 100%;
+  height: auto; }
+
+.featured-puppy-quote {
+  padding-top: 10px; }
 
 .section-header {
   font-size: 20px;

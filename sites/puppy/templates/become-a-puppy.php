@@ -8,11 +8,12 @@
 
             <div class="masthead-call-to-action">
                 I'm looking for:
-                <div>
-                    <input type="email" placeholder="yourname@email.com" name="email" id="masthead-email" pattern="[^ @]*@[^ @]*">
+                <form role="form" action="/signup" method="POST">
+                    <input type="email" placeholder="yourname@email.com" name="email" id="masthead-email"
+                           pattern="[^ @]*@[^ @]*">
 
-                    <button type="button">Sign Up</button>
-                </div>
+                    <button type="submit">Sign Up</button>
+                </form>
             </div>
         </div>
 
@@ -25,34 +26,38 @@
     </div>
 </div>
 
-<div class="content-body">
+<div class="content-body" style="padding-bottom: 10px;">
     <div class="how-it-works">
-        <div class="section-header">Here's how it works:</div>
+        <div class="section-header">Steps to signing up:</div>
 
         <div class="row">
             <div class="col-xs-4">
                 <div class="signup-step">
                     <img src="/img/step-icon.png">
-                    <b>Describe The Item.</b>
-                    Can't find something in your local stores? Tell us what to look for.
+                    <b>Create an account.</b>
+                    Fill out a profile and tell us a little about yourself.
                 </div>
             </div>
             <div class="col-xs-4">
                 <div class="signup-step">
                     <img src="/img/step-icon.png">
-                    <b>Get a Parcel Puppy.</b>
-                    You choose a Parcel Puppy who will ship it to you.
+                    <b>Bid on requests.</b>
+                    Once your application is accepted, bid on requests for items from your country.
                 </div>
             </div>
             <div class="col-xs-4">
                 <div class="signup-step">
                     <img src="/img/step-icon.png">
-                    <b>Pay when your item ships.</b>
-                    You are only charged when your item ships. We'll keep you updated with tracking information.
+                    <b>Get paid when you ship.</b>
+                    Enter the tracking information of your package and get paid when the item ships.
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <? include_once(MODULES_PATH."recommendation-row.php"); ?>
+<? include_once(MODULES_PATH . "featured-puppies-window.php"); ?>
+
+<div class="content-body">
+    <? include_once(MODULES_PATH . "recommendation-row.php"); ?>
 </div>

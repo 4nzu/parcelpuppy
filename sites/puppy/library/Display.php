@@ -60,6 +60,9 @@ class Display extends Template {
 	}
 
 	public function signup() {
+        if (isset($_POST['email']) && !empty($_POST['email'])) {
+            $this->assign('email', $_POST['email']);
+        }
 		$this->set_template('signin_signup-form');
 	}
 
