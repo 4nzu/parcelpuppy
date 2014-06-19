@@ -100,17 +100,20 @@ class API extends Template {
 		}
 	}
 
-    //do not rename this function
-    public static function updatePaymentDetails($response) {
-        //TODO save correlation id and other details into db
-        //var_dump($response);
-        //exit;
+    public function paypal_ipn(){
+        $_p = new Paypal();
+        $_p->IPNHandler($_POST);
     }
 
     public function pay() {
 
         $_p = new Paypal();
         $_p->StartPayment("parcelpuppy-developer@gmail.com", 10);
+    }
+
+    public function pay_commit() {
+        $_p = new Paypal();
+        $_p->CompletePayment($_GET['paykey']);
     }
 
     public function cancel_payment() {

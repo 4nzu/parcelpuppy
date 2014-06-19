@@ -57,6 +57,70 @@ elseif ($_SERVER["DOCUMENT_ROOT"] == "/Users/haydengomes/Work/repos/parcelpuppy/
 
     // define('PP_CONFIG_PATH', '/directory/that/contains/sdk_config.ini');
     error_reporting(E_ALL ^ E_NOTICE);
+}elseif ($_SERVER["DOCUMENT_ROOT"] == "C:/wamp/www/pubchase/sites/puppy/docroot") { // Alex win laptop
+
+    // SITE
+    $host_id = HOST_NAME;
+    $host_role = HOST_DEV;
+    define('SITE_PATH', 'C:/wamp/www/pubchase/sites/puppy/');
+
+    define('SITE_URL', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
+    define('PRODUCT_NAME', 'parcelpuppy');
+    define('MODULES_PATH', SITE_PATH.'templates/modules/');
+    define('DB_HOST', '127.0.0.1');
+    define('DB_NAME', 'parcelpuppy');
+    define('DB_PORT', '3306');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+
+    define('MEMCACHE_SERVER', 'localhost');
+    define('MEMCACHE_PORT', 11211);
+
+    //PAYPAL
+    define('PP_MODE', 'sandbox');
+    define('PP_USERNAME', 'shlangster_api1.gmail.com');
+    define('PP_PASSWORD', '1401215286');
+    define('PP_SIGNATURE', 'AFcWxV21C7fd0v3bYYYRCpSSRl31AcX9XbBprixPpQMHMmrwSWdZ7k7e');
+    define('PP_SECRET', 'EAjUiRCplSkoVWF8CE1ogrPbGWaglBUiUUVhZXuQUxrVYuYKjO2tKuS63hQz');
+    define('PP_CLIENTID', 'ATahFRD6akvyRS6U6jXSTf3tb_U2y5HABQoyiLiku5hb9DB5CwijEy15q2JG');
+    define('PP_APPID', 'APP-80W284485P519543T');
+    DEFINE('PP_CANCEL_URL', SITE_URL.'/api/v1/cancel_payment');
+    DEFINE('PP_RETURN_URL', SITE_URL.'/api/v1/success_payment');
+    DEFINE('PP_RECEIVER_ACC', 'shlangster@gmail.com');
+
+    error_reporting(E_ALL ^ E_NOTICE);
+}elseif ($_SERVER["DOCUMENT_ROOT"] == "G:/xampp/htdocs/projects/parcelpuppy/sites/puppy/docroot") { // Alex desktop
+
+    // SITE
+    $host_id = HOST_NAME;
+    $host_role = HOST_DEV;
+    define('SITE_PATH', 'G:/xampp/htdocs/projects/parcelpuppy/sites/puppy/');
+
+    define('SITE_URL', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
+    define('PRODUCT_NAME', 'parcelpuppy');
+    define('MODULES_PATH', SITE_PATH.'templates/modules/');
+    define('DB_HOST', '127.0.0.1');
+    define('DB_NAME', 'parcelpuppy');
+    define('DB_PORT', '3306');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+
+    define('MEMCACHE_SERVER', 'localhost');
+    define('MEMCACHE_PORT', 11211);
+
+    //PAYPAL
+    define('PP_MODE', 'sandbox');
+    define('PP_USERNAME', 'shlangster_api1.gmail.com');
+    define('PP_PASSWORD', '1401215286');
+    define('PP_SIGNATURE', 'AFcWxV21C7fd0v3bYYYRCpSSRl31AcX9XbBprixPpQMHMmrwSWdZ7k7e');
+    define('PP_SECRET', 'EAjUiRCplSkoVWF8CE1ogrPbGWaglBUiUUVhZXuQUxrVYuYKjO2tKuS63hQz');
+    define('PP_CLIENTID', 'ATahFRD6akvyRS6U6jXSTf3tb_U2y5HABQoyiLiku5hb9DB5CwijEy15q2JG');
+    define('PP_APPID', 'APP-80W284485P519543T');
+    DEFINE('PP_CANCEL_URL', SITE_URL.'/api/v1/cancel_payment');
+    DEFINE('PP_RETURN_URL', SITE_URL.'/api/v1/success_payment');
+    DEFINE('PP_RECEIVER_ACC', 'shlangster@gmail.com');
+
+    error_reporting(E_ALL ^ E_NOTICE);
 }
 
 define('LOGIN_COOKIE_NAME','puppy-token');
