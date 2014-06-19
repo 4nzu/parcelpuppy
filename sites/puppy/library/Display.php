@@ -51,7 +51,7 @@ class Display extends Template {
             $this->set_template('home');
 		}
 		else {
-			$this->set_template('signin_login-form');
+			$this->set_template('signin_signin-form');
 		}
 	}
 

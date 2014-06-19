@@ -1,5 +1,5 @@
 <div class="content-body">
-    <div class="login-form row">
+    <div class="form-wrapper row">
         <div class="col-xs-6 col-xs-offset-3">
             <form role="form" action="/reset" method="POST" id="reset-pass">
                 <div class="form-group">
