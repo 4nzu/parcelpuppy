@@ -20,32 +20,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="logo-block">
-                    <a href='/'><img id="logo" src="img/parcelpuppy.png">
+                <div class="header-logo-block">
+                    <a href='/'><img id="header-logo" src="img/parcelpuppy.png">
                         <span id="company-name">Parcel Puppy</span></a>
                 </div>
             </div>
-                                    <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="parcel-puppy-navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-bar-link"><a href="#" class="nav-bar-link">Browse Requests</a></li>
-                    <li><a href="#">Discover</a></li>
-                    <li><a href="#">Make a Request</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <? if ($_SESSION['logged_in']) { ?>
-                            <?= $_SESSION['user']->first_name ?> <b class="caret"></b></a>
+                    <? if ($_SESSION['logged_in']) { ?>
+                        <li class="nav-bar-link"><a href="#" class="nav-bar-link">Browse Requests</a></li>
+                        <li><a href="#">Discover</a></li>
+                        <li><a href="#">Make a Request</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="header-account-link">
+                                <img src="img/placeholderAvatar.png" id="header-account-avatar"> <b class="caret"></b>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a href="/signout">Logout</a></li>
                             </ul>
-                        <? } else { ?>
-                            Account <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/signin">Log In</a></li>
-                                <li><a href="/signup">Sign Up</a></li>
-                            </ul>
-                        <? } ?>
-                    </li>
+                        </li>
+                    <? } else { ?>
+                        <li><a href="/how-it-works">How it Works</a></li>
+                        <li><a href="/become_a_puppy">Become a Parcel Puppy</a></li>
+                        <li><a href="/signin">Log In</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                    <? } ?>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

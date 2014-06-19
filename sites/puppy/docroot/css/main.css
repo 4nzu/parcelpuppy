@@ -66,16 +66,24 @@ ul.nav a:hover {
   min-width: 900px;
   background-color: #F1F1F1; }
 
-.logo-block {
+.header-logo-block {
   margin-top: 5px; }
 
-#logo {
+#header-logo {
   height: 40px; }
 
 #company-name {
   color: #4E2C1F;
   font-size: 22px;
   vertical-align: bottom; }
+
+#header-account-avatar {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #E1E1E1; }
+
+#header-account-link {
+  padding: 5px 15px; }
 
 .footer {
   padding: 10px 0px;
@@ -104,15 +112,16 @@ ul.nav a:hover {
   width: 100%;
   padding: 20px 0px; }
 
+.home-masthead {
+  padding: 165px 0px 70px 0px; }
+
 #masthead {
   background-color: black;
-  background-image: url("../img/masthead.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: #FFF;
   text-shadow: black 0.1em 0.1em 0.2em;
-  padding: 165px 0px 70px 0px;
   height: 500px; }
 
 .masthead-main-line {
@@ -200,3 +209,6 @@ ul.nav a:hover {
 
 .signup-step b {
   display: block; }
+
+.puppy-masthead {
+  padding: 250px 0px 0px 0px; }
