@@ -47,25 +47,25 @@ class API extends Template {
 	public function verify_login() {
     	$social = 'badlogin';
 
-		if (isset($_POST['email']) && isset($_POST['pass']) && !empty($_POST['email']) && !empty($_POST['pass'])) {
+		if (isset($_REQUEST['email']) && isset($_REQUEST['pass']) &&
+			!empty($_REQUEST['email']) && !empty($_REQUEST['pass'])) {
 
-			$_POST['email'] = substr($_POST['email'], 0, 256);
-			$_SESSION['last_attempt_email'] = $_POST['email'];
+			$_REQUEST['email'] = substr($_REQUEST['email'], 0, 256);
+			$_SESSION['last_attempt_email'] = $_REQUEST['email'];
 			
 			$u = new User();
-			$social = $u->social_only($_POST['email'], $_POST['new']);
+			$social = $u->social_only($_REQUEST['email'], $_REQUEST['new']);
 
 			if ($social === true) {
 				$this->json_out(array('request' => 'OK'));
 			}
 			else {
-				if ($u->getByEmailPassword($_POST['email'], $_POST['pass'])) {
+				if ($u->getByEmailPassword($_REQUEST['email'], $_REQUEST['pass'])) {
 					$this->json_out(array('request' => 'OK'));
 				}
 			}
 
-			if ($social == 'nologin' && strlen($_POST['pass']) < 5) $this->json_out(array('request' => 'ERROR', 'social' => 'nopass'));
-			else $this->json_out(array('request' => 'OK'));
+			if ($social == 'nologin' && strlen($_REQUEST['pass']) < 5) $this->json_out(array('request' => 'ERROR', 'social' => 'nopass'));
 		}
 		$this->json_out(array('request' => 'ERROR', 'social' => $social));
 	}
