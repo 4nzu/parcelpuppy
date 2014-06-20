@@ -97,17 +97,17 @@ class Display extends Template {
         $user = new User();
         if (isset($_POST['v']) && !empty($_POST['v']) &&
             isset($_POST['t']) && !empty($_POST['t']) &&
-            isset($_POST['password']) && !empty($_POST['password'])) {
+            isset($_POST['pass']) && !empty($_POST['pass'])) {
                 $id = $user->checkTokens(array('token' => $_POST['t'], 'verification_token' => $_POST['v']));
                 if (!empty($id)) {
-                    $user->resetPassword($_POST['password']);
+                    $user->resetPassword($_POST['pass']);
                 }
                 else {
                     header("Location: /");
                 }
 
                 $this->assign('reset_completed', 1);
-                $this->set_template('login_reset-completed');
+                $this->set_template('signin_reset-completed');
 
         }
         else {
@@ -266,5 +266,4 @@ class Display extends Template {
 		$this->assign('countries', $this->db->query($sql));
 		$this->set_template('signin_extras');
 	}
-
 }

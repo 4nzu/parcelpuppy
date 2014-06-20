@@ -24,7 +24,7 @@ jQuery(function () {
         return isValid;
     };
 
-    // It is assumed that both fields are part of the same group for showing errors
+    // It is assumed that the error should be set for field one
     ParcelPuppy.Validators.validateFormFieldsMatch = function (fieldOne, fieldTwo) {
         var isValid = fieldOne.val() === fieldTwo.val();
         ParcelPuppy.Utils.setErrorForField(isValid, fieldOne);

@@ -7,7 +7,11 @@
                 Your new password was saved successfully.<br>
                 <small>Now you can login in using your email and password.</small>
             </h3>
-            <? include_once(MODULES_PATH."signin-window.php"); ?>
+            <div class="form-wrapper row">
+                <div class="col-xs-6 col-xs-offset-3">
+                    <? include_once(MODULES_PATH."signin-window.php"); ?>
+                </div>
+            </div>
         <? } ?>
     </div>
 </div>
