@@ -63,6 +63,9 @@ class API extends Template {
 				if ($u->getByEmailPassword($_REQUEST['email'], $_REQUEST['pass'])) {
 					$this->json_out(array('request' => 'OK'));
 				}
+				else {
+					$this->json_out(array('request' => 'ERROR', 'social' => $social));
+				}
 			}
 
 			if ($social == 'nologin' && strlen($_REQUEST['pass']) < 5) $this->json_out(array('request' => 'ERROR', 'social' => 'nopass'));
