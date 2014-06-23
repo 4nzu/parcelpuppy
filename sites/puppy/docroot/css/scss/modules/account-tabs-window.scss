@@ -1,0 +1,33 @@
+.account-tabs {
+  border-bottom: 0px;
+  margin-bottom: 15px;
+}
+
+.account-tabs >li>a {
+  background-color: #F1F1F1;
+  border: 1px solid #AEAEAE;
+  border-bottom-color: #DDD;
+  margin-right: 0px;
+  color: #7E7E7E;
+  margin:-1px 0 0 -1px;
+  padding: 10px 25px 2px 25px;
+}
+
+.account-tabs >li>a:hover {
+  background-color: #FFF;
+  border: 1px solid #AEAEAE;
+  border-bottom-color: #DDD;
+  margin-right: 0px;
+}
+
+.account-tabs >li.active>a {
+  border: 1px solid #AEAEAE;
+  border-bottom: 1px solid #FFF;
+  color: #7E7E7E;
+}
+
+.account-tabs >li.active>a:hover {
+  border: 1px solid #AEAEAE;
+  border-bottom: 1px solid #FFF;
+  color: #7E7E7E;
+}
