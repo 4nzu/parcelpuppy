@@ -7,14 +7,11 @@ body {
 a:hover {
   text-decoration: none; }
 
-.page {
-  min-width: 900px; }
-
 .content-body {
-  max-width: 1000px;
+  width: 1024px;
   margin-left: auto;
   margin-right: auto;
-  padding: 25px 75px 50px 75px; }
+  padding: 25px 0px 50px 0px; }
 
 .content {
   background-color: #FFF;
@@ -113,7 +110,8 @@ button:focus {
   background-repeat: no-repeat;
   color: #FFF;
   text-shadow: black 0.1em 0.1em 0.2em;
-  height: 500px; }
+  height: 500px;
+  min-width: 1024px; }
 
 .masthead-main-line {
   font-size: 22px; }
@@ -220,16 +218,15 @@ button:focus {
   color: #7E7E7E; }
 
 .about-me-frame {
-  margin-top: 15px; }
+  padding-bottom: 15px; }
 
-.about-me-avatar {
-  width: 150px;
-  height: 150px;
+.about-me-image {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
   margin: 0px 15px 15px 0px;
-  vertical-align: top; }
-
-.about-me-body {
-  display: inline-block; }
+  vertical-align: top;
+  border: 1px solid #505050; }
 
 .about-me-title {
   margin-bottom: 5px; }
@@ -243,6 +240,39 @@ button:focus {
 .about-me-feedback {
   color: #1D5AAB;
   margin-bottom: 10px; }
+
+.feedback-row {
+  background-color: #F1F1F1;
+  margin-bottom: 5px;
+  padding: 5px;
+  height: 60px; }
+
+.feedback-row-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  border: 1px solid #505050;
+  float: left; }
+
+.feedback-row-body {
+  margin-left: 65px;
+  width: 949px;
+  padding-top: 5px; }
+
+.feedback-row-title-line span {
+  margin-right: 10px;
+  font-weight: bold; }
+
+.feedback-row-positive {
+  color: green; }
+
+.feedback-row-negative {
+  color: red; }
+
+.feedback-row-message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 .home-masthead {
   padding: 165px 0px 70px 0px;
@@ -272,6 +302,9 @@ button:focus {
 
 .signup-step b {
   display: block; }
+
+.account-tabs-content {
+  margin-top: 20px; }
 
 .puppy-masthead {
   padding: 250px 0px 0px 0px;

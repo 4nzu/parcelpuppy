@@ -1,16 +1,14 @@
 .about-me-frame {
-  margin-top: 15px;
+  padding-bottom: 15px;
 }
 
-.about-me-avatar {
-  width: 150px;
-  height: 150px;
+.about-me-image {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
   margin: 0px 15px 15px 0px;
   vertical-align: top;
-}
-
-.about-me-body {
-  display: inline-block;
+  border: 1px solid #505050;
 }
 
 .about-me-title {
