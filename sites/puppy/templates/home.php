@@ -1,4 +1,4 @@
-<div id='masthead' class="home-masthead" style="background-image: url('../img/masthead-home.jpg');">
+<div id='masthead' class="home-masthead">
         <div class="row-fluid">
             <div class="col-xs-10 col-xs-offset-1">
                 <span class="masthead-main-line">Request items from around the world, no matter where you live.</span>

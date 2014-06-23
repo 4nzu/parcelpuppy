@@ -1,7 +1,8 @@
 body {
   background-color: #EEE;
   padding-bottom: 20px;
-  color: #505050; }
+  color: #505050;
+  font-family: 'Lato', sans-serif; }
 
 a:hover {
   text-decoration: none; }
@@ -49,20 +50,14 @@ button:focus {
   border-right: 8px solid transparent;
   border-top: 8px solid; }
 
-.nav {
-  background-color: #F1F1F1; }
-
-ul.nav a:hover {
-  background-color: #E9E9E9 !important; }
-
-.navbar-default .navbar-nav > li > a:hover,
-.dropdown-menu > li > a:hover,
-.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+.navbar-nav > li > a.header-nav-bar-link:hover {
+  background-color: #E9E9E9 !important;
   color: #1D5AAB; }
 
 .header-nav-bar {
   margin-bottom: 0px;
   min-width: 900px;
+  background-color: #F1F1F1;
   background-color: #F1F1F1; }
 
 .header-logo-block {
@@ -110,9 +105,6 @@ ul.nav a:hover {
   font-size: 15px;
   width: 100%;
   padding: 20px 0px; }
-
-.home-masthead {
-  padding: 165px 0px 70px 0px; }
 
 #masthead {
   background-color: black;
@@ -198,6 +190,39 @@ ul.nav a:hover {
 .featured-puppy-quote {
   padding-top: 10px; }
 
+.account-tabs {
+  border-bottom: 0px;
+  margin-bottom: 15px; }
+
+.account-tabs > li > a {
+  background-color: #F1F1F1;
+  border: 1px solid #AEAEAE;
+  border-bottom-color: #DDD;
+  margin-right: 0px;
+  color: #7E7E7E;
+  margin: -1px 0 0 -1px;
+  padding: 10px 25px 2px 25px; }
+
+.account-tabs > li > a:hover {
+  background-color: #FFF;
+  border: 1px solid #AEAEAE;
+  border-bottom-color: #DDD;
+  margin-right: 0px; }
+
+.account-tabs > li.active > a {
+  border: 1px solid #AEAEAE;
+  border-bottom: 1px solid #FFF;
+  color: #7E7E7E; }
+
+.account-tabs > li.active > a:hover {
+  border: 1px solid #AEAEAE;
+  border-bottom: 1px solid #FFF;
+  color: #7E7E7E; }
+
+.home-masthead {
+  padding: 165px 0px 70px 0px;
+  background-image: url("../img/masthead-home.jpg"); }
+
 .section-header {
   font-size: 20px;
   margin-bottom: 10px; }
@@ -224,4 +249,5 @@ ul.nav a:hover {
   display: block; }
 
 .puppy-masthead {
-  padding: 250px 0px 0px 0px; }
+  padding: 250px 0px 0px 0px;
+  background-image: url("../img/masthead-puppy.jpg"); }

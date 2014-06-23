@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Parcel Puppy: Home</title>
 
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
 </head>

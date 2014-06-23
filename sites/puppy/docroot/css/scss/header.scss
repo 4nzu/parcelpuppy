@@ -1,22 +1,13 @@
-.nav {
-  background-color: #F1F1F1;
-}
-
-// Make navbar item background turn darker gray on mouse over
-ul.nav a:hover {
+// Make navbar item background turn darker gray and it's text blue on mouse over
+.navbar-nav>li>a.header-nav-bar-link:hover {
   background-color: #E9E9E9 !important;
-}
-
-// Make NavBar item text turn blue on mouse-over
-.navbar-default .navbar-nav>li>a:hover,
-.dropdown-menu>li>a:hover,
-.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
   color: #1D5AAB;
 }
 
 .header-nav-bar {
   margin-bottom: 0px;
   min-width: 900px;
+  background-color: #F1F1F1;
   background-color: #F1F1F1;
 }
 

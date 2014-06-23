@@ -1,4 +1,4 @@
-<div id="masthead" class="puppy-masthead" style="background-image: url('../img/masthead-puppy.jpg');">
+<div id="masthead" class="puppy-masthead">
     <div class="row-fluid">
         <div class="col-xs-10 col-xs-offset-1">
             <span class="masthead-main-line">
