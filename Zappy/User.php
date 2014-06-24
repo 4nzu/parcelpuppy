@@ -29,10 +29,13 @@ class User {
     public $bio = null;
     public $city = null;
     public $country = null;
+    public $zip_code = null;
+    public $address_1 = null;
+    public $address_2 = null;
     public $verified = null;
 
     function __construct($id = null) {
-        define('SELECT_HEAD', 'SELECT u.username, u.user_id, u.email, u.created, u.verification_token, u.gender, u.full_name, u.first_name, u.last_name, u.site_lang, u.profile_image, u.days_back, u.last_login, u.show_splash, u.people_cluster_id, u.optin, u.verified, u.city, u.country, u.last_papers_upload, u.invisible, u.affiliation, u.initials, u.mendeley_token, u.profile_url, u.affiliation_url, u.bio');
+        define('SELECT_HEAD', 'SELECT u.username, u.address_1, u.address_2, u.zip_code, u.user_id, u.email, u.created, u.verification_token, u.gender, u.full_name, u.first_name, u.last_name, u.site_lang, u.profile_image, u.days_back, u.last_login, u.show_splash, u.people_cluster_id, u.optin, u.verified, u.city, u.country, u.last_papers_upload, u.invisible, u.affiliation, u.initials, u.mendeley_token, u.profile_url, u.affiliation_url, u.bio');
 		
         $this->db = DB::instance();
 
@@ -76,6 +79,9 @@ class User {
                 $this->bio                 = $_SESSION['user']->bio;
                 $this->city                = $_SESSION['user']->city;
                 $this->country             = $_SESSION['user']->country;
+                $this->address_1           = $_SESSION['user']->address_1;
+                $this->address_2           = $_SESSION['user']->address_2;
+                $this->zip_code            = $_SESSION['user']->zip_code;
                 $this->verified            = $_SESSION['user']->verified;
             }
         }
@@ -124,9 +130,12 @@ class User {
             $this->city                = $res[0]['city'];
             $this->country             = $res[0]['country'];
             $this->verified            = $res[0]['verified'];
+            $this->address_1           = $res[0]['address_1'];
+            $this->address_2           = $res[0]['address_2'];
+            $this->zip_code            = $res[0]['zip_code'];
+
             if (isset($res[0]['device_type_id']))
                 $this->device_type_id = $res[0]['device_type_id'];
-            
 
 			$session_this = clone $this;
 			unset($session_this->db);
