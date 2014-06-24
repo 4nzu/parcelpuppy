@@ -321,7 +321,8 @@ class User {
             $query = 'INSERT INTO users(email, first_name, last_name, full_name, '.$source.'_id, auth_token,
                                         gender, verified, created, ip_address, profile_image, site_id, verification_token, last_login)
                       VALUES(?, ?, ?, ?, ?, ?, ?, ?, now(), ?, ?, ?, ?, now())';
-            $new_id = $this->db->insert($query, array($data['email'], $data['first_name'], $data['last_name'], $data['full_name'], $data['id'],
+            $new_id = $this->db->insert($query, array($data['email'], strip_tags($data['first_name']), strip_tags($data['last_name']),
+                                                     strip_tags($data['full_name']), $data['id'],
                                                      $data['token'], $data['gender'], 1, $_SERVER["REMOTE_ADDR"],
                                                      empty($data['profile_image']) ? $this->generate_profile_image() : $data['profile_image'], SITE_ID, $verification_token));
 

@@ -221,18 +221,17 @@ class API extends Template {
 				}
 
 				if (isset($_POST['optin']) && $_POST['optin'] == '1') $optin = 1; else $optin = 0;
-				if (isset($_POST['pic']) && substr($_POST['pic'], 0, 14) === '/img/avatars/0')
-					$profile_pic = $_POST['pic'];
-				elseif(isset($_POST['pic']) && strstr($_POST['pic'], 'https://s3.amazonaws.com/'.AVATAR_S3_BUCKET.'/'.$u->id.'_')) {
-					$profile_pic = $_POST['pic'];
+				if (isset($_POST['profile_image']) && substr($_POST['profile_image'], 0, 14) === '/img/avatars/0')
+					$profile_pic = $_POST['profile_image'];
+				elseif(isset($_POST['profile_image']) && strstr($_POST['profile_image'], 'https://s3.amazonaws.com/'.AVATAR_S3_BUCKET.'/'.$u->id.'_')) {
+					$profile_pic = $_POST['profile_image'];
 				}
 				else
 					$profile_pic = '/img/avatars/0'.rand(1, 30).'.png';
-				
 
-				$data = array('first_name' 			=> $_POST['first_name'],
-							  'last_name' 			=> $_POST['last_name'],
-							  'site_lang'           => $_POST['site_lang'],
+				$data = array('first_name' 			=> strip_tags($_POST['first_name']),
+							  'last_name' 			=> strip_tags($_POST['last_name']),
+							  'site_lang'           => strip_tags($_POST['site_lang']),
 							  'email'      			=> $_POST['email'],
 							  'profile_image'		=> $profile_pic);
 
