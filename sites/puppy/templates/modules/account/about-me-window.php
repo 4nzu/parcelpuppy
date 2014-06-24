@@ -7,12 +7,12 @@
         <div class="about-me-body">
             <div class="about-me-title">
                 <h3 class="about-me-full-name"><?= $about_me_user->full_name ?></h3>
-                <span class="glyphicon glyphicon-map-marker"></span>
+                <span class="glyphicon glyphicon-map-marker" id="about-me-map-marker"></span>
                 <span class="about-me-location">
                     <?= $about_me_user->city ?>, <?= $about_me_user->country ?>
                 </span>
                 <? if ($about_me_user->id === $_SESSION['user']->id) { ?>
-                    <a href="/edit-profile"><i>edit profile</i></a>
+                    <a href="/edit_account"><i>edit profile</i></a>
                 <? } ?>
             </div>
             <div class="about-me-feedback">

@@ -1,5 +1,5 @@
 <div class="content-body">
-    <div class="form-wrapper">
+    <div class="form-frame">
         <div class="panel panel-danger" style="display: none;" id="extras-error">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -12,15 +12,10 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-6">
-                <form role="form" id="extras-form">
-                    <? include_once(MODULES_PATH . "address-window.php"); ?>
-                </form>
-            </div>
-            <div class="col-xs-3 pull-right" style="padding-top:20px;">
-                <button id='extras-button' style="width: 100%">Done</button>
-            </div>
+            <form role="form" id="extras-form">
+                <? $address_form_include_name = true; include_once(MODULES_PATH . "account/address-form.php"); ?>
+                <button id='extras-button' class='form-fixed-button' style="width: 100%">Done</button>
+            </form>
         </div>
     </div>
 </div>

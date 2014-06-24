@@ -23,10 +23,16 @@
 
 .about-me-full-name {
   display: inline;
+  padding-right: 10px;
+}
+
+#about-me-map-marker {
+  font-size: 20px;
 }
 
 .about-me-location {
   font-style: italic;
+  padding-right: 10px;
 }
 
 .about-me-feedback {

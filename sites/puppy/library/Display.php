@@ -122,6 +122,12 @@ class Display extends Template {
         }
     }
 
+    public function edit_account() {
+        $sql = 'SELECT region_name AS country_name, country_code, region_id FROM regions';
+        $this->assign('countries', $this->db->query($sql));
+        $this->set_template('account_profile-form');
+    }
+
 	public function extras() {
 		if (!$_SESSION['logged_in']) {
 			if (isset($_POST['email']) && !empty($_POST['email']) &&

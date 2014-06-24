@@ -96,7 +96,9 @@ jQuery(function () {
     };
 
     ParcelPuppy.Extras.handleExtrasButtonClick = function (e) {
-        if (ParcelPuppy.Address.validateAddressFields()) {
+        e.preventDefault();
+
+        if (ParcelPuppy.AddressForm.validateFields()) {
             var postParams = ParcelPuppy.Utils.generatePostParamsForForm($('#extras-form'));
             $.post('/api/v1/update_extras', postParams, function (r) {
                 if (r.request === 'OK') {
@@ -165,6 +167,56 @@ jQuery(function () {
 });
 
 
+// Source: sites/puppy/docroot/js/templates/profile-form.js
+ParcelPuppy.ProfileForm = {};
+
+jQuery(function () {
+    ParcelPuppy.ProfileForm.setProfileFormButtonHandler = function () {
+        $('#profile-button').click(ParcelPuppy.ProfileForm.handleProfileFormButtonClick);
+    };
+
+    ParcelPuppy.ProfileForm.handleProfileFormButtonClick = function (e) {
+        e.preventDefault();
+
+        if (ParcelPuppy.ProfileForm.validateForm()) {
+            var postParams = ParcelPuppy.Utils.generatePostParamsForForm($('#profile-form'));
+            $.post('/api/v1/save_settings', postParams, function (r) {
+                if (r.request === 'OK') {
+                    window.location = '/account';
+                } else {
+                    $('#profile-form-error').show();
+                }
+            });
+        }
+    };
+
+    ParcelPuppy.ProfileForm.validateForm = function() {
+        var isValid = ParcelPuppy.AddressForm.validateFields();
+        isValid = ParcelPuppy.AboutMeForm.validateFields() && isValid;
+        return isValid;
+    }
+
+    // Execute setup functions
+    ParcelPuppy.ProfileForm.setProfileFormButtonHandler();
+});
+
+// Source: sites/puppy/docroot/js/modules/about-me-form.js
+ParcelPuppy.AboutMeForm = {};
+
+jQuery(function () {
+    ParcelPuppy.AboutMeForm.validateFields = function () {
+        var isValid = ParcelPuppy.AboutMeForm.validateNameFields();
+        return isValid;
+    };
+
+    ParcelPuppy.AboutMeForm.validateNameFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#about-me-form-first-name'), $('#about-me-form-last-name')]);
+    };
+});
+
+
+
+
 // Source: sites/puppy/docroot/js/modules/account-tabs-window.js
 ParcelPuppy.AccountTabs = {};
 
@@ -189,32 +241,35 @@ jQuery(function () {
 });
 
 
-// Source: sites/puppy/docroot/js/modules/address-window.js
-ParcelPuppy.Address = {};
+// Source: sites/puppy/docroot/js/modules/address-form.js
+ParcelPuppy.AddressForm = {};
 
 jQuery(function () {
-    ParcelPuppy.Address.validateAddressFields = function () {
-        var isValid = ParcelPuppy.Address.validateNameFields();
-        isValid = ParcelPuppy.Address.validateStreetAddressFields() && isValid;
-        isValid = ParcelPuppy.Address.validateStateField() && isValid;
-        isValid = ParcelPuppy.Address.validateCityZipFields() && isValid;
+    ParcelPuppy.AddressForm.validateFields = function () {
+        var isValid = ParcelPuppy.AddressForm.validateNameFields();
+        isValid = ParcelPuppy.AddressForm.validateStreetAddressFields() && isValid;
+        isValid = ParcelPuppy.AddressForm.validateStateField() && isValid;
+        isValid = ParcelPuppy.AddressForm.validateCityZipFields() && isValid;
         return isValid;
     };
 
-    ParcelPuppy.Address.validateNameFields = function () {
-        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-first-name'), $('#address-last-name')]);
+    ParcelPuppy.AddressForm.validateNameFields = function () {
+        if ($('#address-form-first-name').length && $('#address-form-last-name').length){
+            return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-form-first-name'), $('#address-form-last-name')]);
+        }
+        return true;
     };
 
-    ParcelPuppy.Address.validateStreetAddressFields = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-street-1'));
+    ParcelPuppy.AddressForm.validateStreetAddressFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-form-street-1'));
     };
 
-    ParcelPuppy.Address.validateStateField = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-state'));
+    ParcelPuppy.AddressForm.validateStateField = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-form-state'));
     };
 
-    ParcelPuppy.Address.validateCityZipFields = function () {
-        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-city'), $('#address-zip-code')]);
+    ParcelPuppy.AddressForm.validateCityZipFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-form-city'), $('#address-form-zip-code')]);
     };
 });
 

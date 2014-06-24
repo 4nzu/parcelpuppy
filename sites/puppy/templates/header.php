@@ -42,7 +42,7 @@
                                 <li><a href="/account#requests">REQUESTS</a></li>
                                 <li><a href="/account#messages">MESSAGES</a></li>
                                 <li><a href="/account#bids">MY BIDS</a></li>
-                                <li><a href="#">SETTINGS</a></li>
+                                <li><a href="/edit_account">SETTINGS</a></li>
                                 <li><a href="/signout">LOG OUT</a></li>
                             </ul>
                         </li>

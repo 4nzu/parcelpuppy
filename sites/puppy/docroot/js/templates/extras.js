@@ -7,7 +7,9 @@ jQuery(function () {
     };
 
     ParcelPuppy.Extras.handleExtrasButtonClick = function (e) {
-        if (ParcelPuppy.Address.validateAddressFields()) {
+        e.preventDefault();
+
+        if (ParcelPuppy.AddressForm.validateFields()) {
             var postParams = ParcelPuppy.Utils.generatePostParamsForForm($('#extras-form'));
             $.post('/api/v1/update_extras', postParams, function (r) {
                 if (r.request === 'OK') {
