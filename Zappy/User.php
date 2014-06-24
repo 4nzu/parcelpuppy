@@ -32,7 +32,10 @@ class User {
     public $verified = null;
 
     function __construct($id = null) {
-		$this->db = DB::instance();
+        define('SELECT_HEAD', 'SELECT u.username, u.user_id, u.email, u.created, u.verification_token, u.gender, u.full_name, u.first_name, u.last_name, u.site_lang, u.profile_image, u.days_back, u.last_login, u.show_splash, u.people_cluster_id, u.optin, u.verified, u.city, u.country, u.last_papers_upload, u.invisible, u.affiliation, u.initials, u.mendeley_token, u.profile_url, u.affiliation_url, u.bio');
+		
+        $this->db = DB::instance();
+
         if (!defined('PASSWORD_SALT_1')) define('PASSWORD_SALT_1', 'bEan');
         if (!defined('PASSWORD_SALT_2')) define('PASSWORD_SALT_2', 'saCk');
         if (!defined('TOKEN_SALT_1')) define('TOKEN_SALT_1', ';r$0');
@@ -71,6 +74,8 @@ class User {
                 $this->mendeley_token      = $_SESSION['user']->mendeley_token;
                 $this->affiliation_url     = $_SESSION['user']->affiliation_url;
                 $this->bio                 = $_SESSION['user']->bio;
+                $this->city                = $_SESSION['user']->city;
+                $this->country             = $_SESSION['user']->country;
                 $this->verified            = $_SESSION['user']->verified;
             }
         }
@@ -116,6 +121,8 @@ class User {
             $this->mendeley_token      = $res[0]['mendeley_token'];
             $this->affiliation_url     = $res[0]['affiliation_url'];
             $this->bio                 = $res[0]['bio'];
+            $this->city                = $res[0]['city'];
+            $this->country             = $res[0]['country'];
             $this->verified            = $res[0]['verified'];
             if (isset($res[0]['device_type_id']))
                 $this->device_type_id = $res[0]['device_type_id'];
@@ -158,15 +165,7 @@ class User {
     // Attempts to get User from the cookie
     public function getByCookie() {
         if (isset($_COOKIE[LOGIN_COOKIE_NAME])) {
-            $this->_set($this->db->query('SELECT username, user_id, email, created, verification_token, gender,
-                                        full_name, first_name, last_name, site_lang, profile_image,
-										days_back, last_login,
-										show_splash,
-										people_cluster_id,
-										optin, verified,
-										last_papers_upload,
-                                        invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
-										FROM users WHERE verified = 1 AND
+            $this->_set($this->db->query(SELECT_HEAD.' FROM users u WHERE u.verified = 1 AND
 										md5(concat(concat(\''.TOKEN_SALT_1.'\',user_id),\''.TOKEN_SALT_2.'\')) = ?',
 										array($_COOKIE[LOGIN_COOKIE_NAME]), false));
         }
@@ -180,16 +179,9 @@ class User {
 
     public function getByToken($token) {
         if (!empty($token)) {
-            $this->_set($this->db->query('SELECT username, user_id, email, created, verification_token, gender,
-                                        full_name, first_name, last_name, site_lang, profile_image,
-                                        days_back, last_login,
-                                        show_splash,
-                                        people_cluster_id,
-                                        optin, verified,
-                                        last_papers_upload,
-                                        invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
-                                        FROM users WHERE verified = 1
-                                        AND md5(concat(concat(\''.TOKEN_SALT_1.'\',user_id),\''.TOKEN_SALT_2.'\')) = ?', array($token), false));
+            $this->_set($this->db->query(SELECT_HEAD.' FROM users u WHERE u.verified = 1
+                                        AND md5(concat(concat(\''.TOKEN_SALT_1.'\',user_id),\''.TOKEN_SALT_2.'\')) = ?',
+                                        array($token), false));
         }
         if (is_null($this->id)) {
             return false;
@@ -202,15 +194,7 @@ class User {
     // Attempts to get User from the database
     public function getByUserID($id) {
         if (!empty($id)) {
-            $this->_set($this->db->query('SELECT username, user_id, email, created, verification_token, gender,
-                                        full_name, first_name, last_name, site_lang, profile_image,
-										days_back, last_login,
-                                        show_splash,
-										people_cluster_id,
-										optin, verified,
-										last_papers_upload,
-                                        invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
-										FROM users WHERE verified = 1 AND user_id = ?', array($id), false));
+            $this->_set($this->db->query(SELECT_HEAD.' FROM users u WHERE verified = 1 AND user_id = ?', array($id), false));
         }
         if (is_null($this->id)) {
             return false;
@@ -223,12 +207,9 @@ class User {
 	// Attempts to get User from the database by their device id
     public function getByDeviceID($id, $type_id = null) {
         if (!empty($id)) {
-            $sql = 'SELECT u.username, u.user_id, u.email, u.created, u.verification_token, u.gender, u.affiliation_url, u.bio, u.verified,
-                                         u.full_name, u.first_name, u.last_name, u.site_lang, u.profile_image, u.days_back, u.show_splash, u.people_cluster_id,
-                                         u.optin, u.last_papers_upload, u.invisible, d.device_type_id, u.affiliation, u.initials, u.mendeley_token, u.profile_url
-                                         FROM users u, devices d
-                                         WHERE d.device_id = ? AND d.user_id != 0 AND
-                                         d.user_id = u.user_id';
+            $sql = SELECT_HEAD.', d.device_type_id FROM users u, devices d
+                   WHERE d.device_id = ? AND d.user_id != 0 AND
+                   d.user_id = u.user_id';
             $this->_set($this->db->query($sql, array($id), false));
         }
         if (is_null($this->id)) {
@@ -262,15 +243,7 @@ class User {
 
     public function getByFacebookID($id) {
     	if (!empty($id)) {
-    	    $this->_set($this->db->query('SELECT username, user_id, email, created, verification_token, gender,
-                                        full_name, first_name, last_name, site_lang, profile_image,
-    									days_back,
-                                        show_splash,
-    									people_cluster_id,
-    									optin, verified,
-    									last_papers_upload,
-                                        invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
-    									FROM users WHERE verified = 1 AND facebook_id = ?', array($id), false));
+    	    $this->_set($this->db->query(SELECT_HEAD.' FROM users u WHERE verified = 1 AND facebook_id = ?', array($id), false));
     	}
     	if (is_null($this->id)) {
     	    return false;
@@ -281,15 +254,7 @@ class User {
 
     public function getByTokenAndID($token, $id, $oauth_provider) {
     	if (!empty($id)) {
-    		$this->_set($this->db->query('SELECT username, user_id, email, created, verification_token, gender,
-                                        full_name, first_name, last_name, site_lang, profile_image,
-                                        days_back,
-                                        show_splash,
-                                        people_cluster_id,
-                                        optin, verified,
-                                        last_papers_upload,
-                                        invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
-                                        FROM users WHERE '.$oauth_provider.'_id = ? and auth_token = ?', array($id, $token)));
+    		$this->_set($this->db->query(SELECT_HEAD.' FROM users u WHERE '.$oauth_provider.'_id = ? and auth_token = ?', array($id, $token)));
     	}
 	if (is_null($this->id)) {
 	    return false;
@@ -311,15 +276,7 @@ class User {
 
     public function getByEmail($email) {
         if (!empty($email)) {
-            $this->_set($this->db->query('SELECT username, user_id, email, created, verification_token, gender,
-                                        full_name, first_name, last_name, site_lang, profile_image,
-                                        days_back,
-                                        show_splash,
-                                        people_cluster_id,
-                                        optin, verified,
-                                        last_papers_upload,
-                                        invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
-										FROM users WHERE verified = 1 AND email = ?', array($email), false));
+            $this->_set($this->db->query(SELECT_HEAD.' FROM users u WHERE verified = 1 AND email = ?', array($email), false));
         }
         if (is_null($this->id)) {
             return false;
@@ -332,15 +289,7 @@ class User {
     public function getByEmailPassword($email, $pwd) {
 		// error_log('ID='.$this->id);
         if (!empty($email)) {
-			$data = $this->db->query('SELECT username, user_id, email, created, verification_token, gender,
-                                    full_name, first_name, last_name, site_lang, profile_image,
-									days_back, last_login,
-                                    show_splash,
-                                    people_cluster_id,
-                                    optin, verified,
-                                    last_papers_upload,
-                                    invisible, affiliation, initials, mendeley_token, profile_url, affiliation_url, bio
-                                    FROM users WHERE verified = 1 AND email = ? AND password = ?',
+			$data = $this->db->query(SELECT_HEAD.' FROM users u WHERE verified = 1 AND email = ? AND password = ?',
                                     array($email, $this->secureEncrypt($pwd)), false);
 			// error_log('RECORDS='.count($data).' FOR EMAIL='.$email.' PWD='.$this->secureEncrypt($pwd));
             $this->_set($data);

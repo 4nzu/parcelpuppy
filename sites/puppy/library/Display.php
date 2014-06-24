@@ -41,7 +41,8 @@ class Display extends Template {
 					exit;
 				}
 				else {
-					$this->set_template('home');
+					header('Location: /');
+					exit;
 				}
 			}
 			else {
@@ -171,13 +172,11 @@ class Display extends Template {
 					}
 				}
 				else {
-					header("Location: /");
+					header("Location: /account");
 					exit;
 				}
 			}
 			else {
-				$this->no_header = true;
-				$this->no_footer = true;
 				$this->set_template('home');
 			}
 		}
