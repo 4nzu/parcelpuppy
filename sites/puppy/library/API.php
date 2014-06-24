@@ -198,4 +198,68 @@ class API extends Template {
         }
 	}
 
+	public function save_settings() {
+		if (isset($_POST['email']) && !empty($_POST['email']) && $_SESSION['logged_in']) {
+			$u = new User();
+			
+			if (!$u->validateEmail($_POST['email'])) {
+				$this->json_out(array('request' => 'email'));
+			}
+
+			$email_exists = $u->checkVerifiedEmail($_POST['email']);
+
+			// check if this email already in use
+			if (strcasecmp($u->email, $_POST['email']) == 0 || ($email_exists[0] == 0 && $email_exists[1] == 0)) {
+				if (isset($_POST['newpass']) && !empty($_POST['newpass'])) {
+					if (isset($_POST['oldpass']) && !empty($_POST['oldpass']) && $u->checkPassword($_POST['oldpass'])) {
+						$u->updatePassword($_POST['newpass']);
+					}
+					else {
+						$this->json_out(array('request' => 'oldpass'));
+						exit;
+					}
+				}
+
+				if (isset($_POST['optin']) && $_POST['optin'] == '1') $optin = 1; else $optin = 0;
+				if (isset($_POST['pic']) && substr($_POST['pic'], 0, 14) === '/img/avatars/0')
+					$profile_pic = $_POST['pic'];
+				elseif(isset($_POST['pic']) && strstr($_POST['pic'], 'https://s3.amazonaws.com/'.AVATAR_S3_BUCKET.'/'.$u->id.'_')) {
+					$profile_pic = $_POST['pic'];
+				}
+				else
+					$profile_pic = '/img/avatars/0'.rand(1, 30).'.png';
+				
+
+				$data = array('first_name' 			=> $_POST['first_name'],
+							  'last_name' 			=> $_POST['last_name'],
+							  'site_lang'           => $_POST['site_lang'],
+							  'email'      			=> $_POST['email'],
+							  'profile_image'		=> $profile_pic);
+
+				$pomp=$u->updateUserInfo($data);
+				$this->json_out(array('request' => $pomp));
+				
+				if (isset($_POST['ini'])) {
+					$u->update_initials($_POST['ini']);
+				}
+				if (isset($_POST['aff'])) {
+					$u->update_affiliation($_POST['aff']);
+				}
+				if (isset($_POST['aff_url'])) {
+					$u->update_affiliation_url($_POST['aff_url']);
+				}
+				if (isset($_POST['bio'])) {
+					$u->update_bio($_POST['bio']);
+				}
+
+				$this->json_out(array('request' => 'OK'));
+			} else {
+				$this->json_out(array('request' => 'email'));
+			}
+		}
+		else {
+			$this->json_out(array('request' => 'email'));
+		}
+	}
+
 }

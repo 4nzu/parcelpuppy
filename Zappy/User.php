@@ -485,14 +485,12 @@ class User {
     public function updateUserInfo($data) {
         if (!empty($this->id)) {
 
-            $query = 'UPDATE users SET email=?, full_name=?, first_name=?, site_lang=?, last_name=?,
-                                       days_back=?, people_cluster_id=?,
-                                       profile_image=?, username=?
+            $query = 'UPDATE users SET email=?, first_name=?, site_lang=?, last_name=?, profile_image=?, username=?
 					  WHERE user_id=?';
-            $this->db->execute($query, array($data['email'], $data['full_name'], $data['first_name'],$data['site_lang'], 
-											$data['last_name'],$data['days_back'], $data['people_cluster_id'],
-											$data['profile_image'], $data['username'], $this->id));
+            $this->db->execute($query, array($data['email'], $data['first_name'], $data['site_lang'],
+                                            $data['last_name'], $data['profile_image'], $this->id));
             $this->getByUserID($this->id);
+
             return true;
         }
         return false;
