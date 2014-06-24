@@ -198,6 +198,27 @@ class API extends Template {
         }
 	}
 
+	public function update_password() {
+		if (!$_SESSION['logged_in']) $this->json_out(array('request' => 'ERROR: Not authorized'));
+		if (isset($_POST['newpass']) && !empty($_POST['newpass'])) {
+			if (isset($_POST['oldpass']) && !empty($_POST['oldpass'])) {
+				if ($u->checkPassword($_POST['oldpass'])) {
+					$u->updatePassword($_POST['newpass']);
+					$this->json_out(array('request' => 'OK'));
+				}
+				else {
+					$this->json_out(array('request' => 'ERROR oldpass did not match', 'var' => 'oldpass'));
+				}
+			}
+			else {
+				$this->json_out(array('request' => 'ERROR: missing oldpass', 'var' => 'oldpass'));
+			}
+		}
+		else {
+			$this->json_out(array('request' => 'ERROR: missing newpass', 'var' => 'newpass'));
+		}
+	}
+
 	public function save_settings() {
 		if (isset($_POST['email']) && !empty($_POST['email']) && $_SESSION['logged_in']) {
 			$u = new User();
@@ -210,15 +231,6 @@ class API extends Template {
 
 			// check if this email already in use
 			if (strcasecmp($u->email, $_POST['email']) == 0 || ($email_exists[0] == 0 && $email_exists[1] == 0)) {
-				if (isset($_POST['newpass']) && !empty($_POST['newpass'])) {
-					if (isset($_POST['oldpass']) && !empty($_POST['oldpass']) && $u->checkPassword($_POST['oldpass'])) {
-						$u->updatePassword($_POST['newpass']);
-					}
-					else {
-						$this->json_out(array('request' => 'oldpass'));
-						exit;
-					}
-				}
 
 				if (isset($_POST['optin']) && $_POST['optin'] == '1') $optin = 1; else $optin = 0;
 				if (isset($_POST['profile_image']) && substr($_POST['profile_image'], 0, 14) === '/img/avatars/0')
