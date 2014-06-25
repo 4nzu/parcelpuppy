@@ -53,7 +53,6 @@ button:focus {
 
 .header-nav-bar {
   margin-bottom: 0px;
-  background-color: #F1F1F1;
   background-color: #F1F1F1; }
 
 .header-logo-block {
@@ -74,6 +73,13 @@ button:focus {
 
 #header-account-link {
   padding: 5px 15px; }
+
+.header-account-menu {
+  background-color: #F1F1F1; }
+
+.header-account-menu li > a:hover {
+  background-color: #E9E9E9 !important;
+  color: #1D5AAB; }
 
 .footer {
   padding: 10px 0px;

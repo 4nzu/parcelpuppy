@@ -1,4 +1,5 @@
 <div class="content-body">
+    <br>
     <? include_once(MODULES_PATH."account/account-tabs-window.php"); ?>
 
     <div class="account-tabs-content tab-content">

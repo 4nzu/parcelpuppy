@@ -14,6 +14,12 @@
     </div>
 
     <div class="form-group">
+        <input type="text" placeholder="Email Address" class="form-control" name="email" id="about-me-form-email"
+               value="<?= $_SESSION['user']->email ?>">
+        <span class="help-block" style="display: none;">You must provide your email address</span>
+    </div>
+
+    <div class="form-group">
         <label class="control-label" for="about-me-form-bio">Tell us a bit about yourself (Optional)</label>
         <textarea placeholder="e.g. I am a history student who loves art museums, food, and travel."
                   class="form-control"

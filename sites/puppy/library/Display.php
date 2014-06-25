@@ -271,4 +271,8 @@ class Display extends Template {
 		$this->assign('countries', $this->db->query($sql));
 		$this->set_template('signin_extras');
 	}
+
+    public function request_form() {
+        $this->set_template('requests_request-form');
+    }
 }

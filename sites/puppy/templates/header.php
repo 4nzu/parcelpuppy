@@ -32,18 +32,19 @@
                     <? if ($_SESSION['logged_in']) { ?>
                         <li class="nav-bar-link"><a href="#" class="header-nav-bar-link">Browse Requests</a></li>
                         <li><a href="#" class="header-nav-bar-link">Discover</a></li>
-                        <li><a href="#" class="header-nav-bar-link">Make a Request</a></li>
+                        <li><a href="/request_form" class="header-nav-bar-link">Make a Request</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="header-account-link" class="header-nav-bar-link">
                                 <img src="img/placeholderAvatar.png" id="header-account-avatar"> <b class="caret"></b>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/account#profile">PROFILE</a></li>
-                                <li><a href="/account#requests">REQUESTS</a></li>
-                                <li><a href="/account#messages">MESSAGES</a></li>
-                                <li><a href="/account#bids">MY BIDS</a></li>
-                                <li><a href="/edit_account">SETTINGS</a></li>
-                                <li><a href="/signout">LOG OUT</a></li>
+                            <ul class="header-account-menu dropdown-menu">
+                                <li><a href="/account#profile">Profile</a></li>
+                                <li><a href="/account#requests">Requests</a></li>
+                                <li><a href="/account#messages">Messages</a></li>
+                                <li><a href="/account#bids">My Bids</a></li>
+                                <li><a href="/edit_account">Settings</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/signout">Log Out</a></li>
                             </ul>
                         </li>
                     <? } else { ?>
