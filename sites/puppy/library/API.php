@@ -73,37 +73,42 @@ class API extends Template {
 		$this->json_out(array('request' => 'ERROR', 'social' => $social));
 	}
 
-	public function create() {
+// 	description: string,
+// 	region_id: int,
+// 	shipping string (‘standard’ or ‘express’),
+// 	items: [
+// 		{
+// 			name: string,
+// 			brand: string,
+// 			quantity: integer,
+// 			details: string
+// 		}, …
+// }
+	public function new_reqeust() {
 		if ($_SESSION['logged_in']) {
 
-			$error_code = null;
-			if (empty($_REQUEST['pr_name'])) {
-				$error_code = '#pr_name';
+			if ($_REQUEST['shipping'] == '‘express’') $shipping = 1; else $shipping = 2;
+
+			$sql = 'INSERT INTO requests(region_id, description, shipping, user_id, created_on) VALUES(?, ?, ?, ?, now())';
+			$request_id = $this->db->insert($sql, array($_REQUEST['region_id'], $_REQUEST['description'], $shipping, $_SESSION['user']->id));
+
+			foreach($_REQUEST['items'] as $item) {
+
+				$sql = 'INSERT INTO products(name, brand, details) VALUES(?, ?, ?)';
+				$product_id = $this->db->insert($sql, array($item['name'], $item['brand'], $item['details']));
+
+				$sql = 'INSERT INTO requests_products(product_id, request_id, quantity) VALUES(?, ?, ?)';
+				$this->db->execute($sql, array($product_id, $request_id, $item['quantity']));
+
 			}
-			if (empty($_REQUEST['pr_city'])) {
-				if (empty($error_code)) $error_code = '#pr_city';
-				else $error_code .= ', #pr_city';
-			}
-
-			if (!is_null($error_code)) $this->json_out(array('request' => 'ERROR', 'error_code' => $error_code));
-
-			$sql = 'INSERT INTO products(name, price) VALUES(?, ?)';
-			$product_id = $this->db->insert($sql, array($_REQUEST['pr_name'], $_REQUEST['pr_price']));
-
-			$sql = 'INSERT INTO requests(puppy_fee, region_id, city, description, user_id, created_on) VALUES(?, ?, ?, ?, ?, now())';
-			$request_id = $this->db->insert($sql, array($_REQUEST['pr_fee'], $_REQUEST['pr_country'], $_REQUEST['pr_city'], $_REQUEST['pr_description'], $_SESSION['user']->id));
-
-			$sql = 'INSERT INTO requests_products(product_id, request_id) VALUES(?, ?)';
-			$this->db->execute($sql, array($product_id, $request_id));
-
-			$this->json_out(array('request' => 'OK'));
+			$this->json_out(array('request' => 'OK', 'request_id' => $request_id));
 		}
 		else {
 			$this->json_out(array('request' => 'ERROR: Not authorized'));
 		}
 	}
 
-    public function paypal_ipn(){
+    public function paypal_ipn() {
         $_p = new Paypal();
         $_p->IPNHandler($_POST);
     }
