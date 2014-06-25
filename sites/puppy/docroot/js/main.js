@@ -16,7 +16,7 @@ jQuery(function() {
             helpBlock = fieldGroup.find('.help-block');
 
         if (formField && fieldGroup && helpBlock) {
-            fieldGroup.attr('class', 'form-group has-error');
+            fieldGroup.addClass('has-error');
             helpBlock.show();
         }
     };
@@ -26,7 +26,7 @@ jQuery(function() {
             helpBlock = fieldGroup.find('.help-block');
 
         if (formField && fieldGroup && helpBlock) {
-            fieldGroup.attr('class', 'form-group');
+            fieldGroup.removeClass('has-error');
             helpBlock.hide();
         }
     };
@@ -77,6 +77,15 @@ jQuery(function () {
 
     ParcelPuppy.Validators.validateFormFieldIsFilledOut = function (formField) {
         var isValid = ParcelPuppy.Utils.isFilledOut(formField);
+        ParcelPuppy.Utils.setErrorForField(isValid, formField);
+        return isValid;
+    };
+
+    ParcelPuppy.Validators.validateIntegerFieldIsFilledOut = function (formField) {
+        var isFilledOut = ParcelPuppy.Utils.isFilledOut(formField),
+            value = formField.val(),
+            isInteger = (Math.floor(value) == value && $.isNumeric(value)),
+            isValid = isFilledOut && isInteger;
         ParcelPuppy.Utils.setErrorForField(isValid, formField);
         return isValid;
     };
@@ -213,6 +222,152 @@ jQuery(function () {
     ParcelPuppy.ProfileForm.setProfileFormButtonHandler();
 });
 
+// Source: sites/puppy/docroot/js/templates/request-form.js
+ParcelPuppy.RequestForm = {};
+
+jQuery(function () {
+
+    ParcelPuppy.RequestForm.setSubmitBtnClickHandler = function () {
+        $('#request-form-button').click(ParcelPuppy.RequestForm.handleSubmitBtnClick);
+    };
+
+    ParcelPuppy.RequestForm.handleSubmitBtnClick = function (e) {
+        e.preventDefault();
+
+        if (ParcelPuppy.RequestForm.validateForm()) {
+            var postParams = ParcelPuppy.RequestForm.generatePostParams();
+            $.post('/api/v1/new_request', postParams, function (r) {
+                if (r.request === 'OK') {
+                    window.location = '/account';
+                } else {
+                    $('#request-form-error').show();
+                }
+            });
+        }
+
+    };
+
+    ParcelPuppy.RequestForm.generatePostParams = function () {
+        var form = $('#request-form'),
+            postParams = {
+                description: $('#request-form').find('#request-general-form-description').val(),
+                region_id: $('#request-form').find('#request-general-form-region').val(),
+                shipping: $('#request-form').find('#request-general-form-shipping-group').find('.active').attr('value'),
+                items: []
+            };
+
+        $.each($('#request-form-items').children(), function (index, item) {
+            postParams.items.push({
+                name: $(item).find('input[name=name]').val(),
+                brand: $(item).find('input[name=brand]').val(),
+                quantity: $(item).find('input[name=quantity]').val(),
+                details: $(item).find('textarea[name=details]').val(),
+                image_url: null
+            });
+        });
+
+        return postParams;
+    };
+
+    // Validations
+    ParcelPuppy.RequestForm.validateForm = function () {
+        var isValid = ParcelPuppy.RequestGeneralForm.validateSubform();
+        isValid = ParcelPuppy.RequestForm.validateFormItems();
+        return isValid;
+    };
+
+    ParcelPuppy.RequestForm.validateFormItems = function () {
+        var isValid = true;
+        $.each($('#request-form-items').children(), function (index, itemFrame) {
+            isValid = ParcelPuppy.RequestItemForm.validateSubform($(itemFrame)) && isValid;
+        });
+        return isValid;
+    };
+
+    // Add button logic
+    ParcelPuppy.RequestForm.setAddItemBtnClickHandler = function () {
+        $('#request-form-add-item-btn').click(ParcelPuppy.RequestForm.handleAddItemBtnClick);
+    };
+
+    ParcelPuppy.RequestForm.handleAddItemBtnClick = function (e) {
+        e.preventDefault();
+
+        var newItem = $('#request-form-items').children().first().clone(true),
+            numberOfItems = $('#request-form-items > .request-item-form-frame').length;
+
+        ParcelPuppy.RequestItemForm.clearItemForm(newItem);
+        newItem.find('.item-number').html(numberOfItems + 1);
+        $('#request-form-items').append(newItem);
+
+        ParcelPuppy.RequestForm.updateItems();
+
+        if ((numberOfItems + 1) === 5) {
+            $('#request-form-add-item-btn').hide();
+        }
+    };
+
+    ParcelPuppy.RequestForm.numberOfItems = function () {
+        var totalVisible = 0;
+        for (var i = 0; i < 5; i++) {
+            if (($('#request-item-' + i).is(':visible'))) {
+                totalVisible++;
+            }
+        }
+
+        return totalVisible;
+    };
+
+    ParcelPuppy.RequestForm.updateItems = function () {
+        var itemsCount = $('#request-form-items').children().length;
+
+        $.each($('#request-form-items').children(), function (index, itemFrame) {
+            $(itemFrame).find('.item-number').html(index + 1);
+
+            if (itemsCount === 1) {
+                $(itemFrame).find('.request-item-form-delete-btn').hide();
+            } else {
+                $(itemFrame).find('.request-item-form-delete-btn').show();
+            }
+        });
+    };
+
+    // Execute setup functions
+    ParcelPuppy.RequestForm.setAddItemBtnClickHandler();
+    ParcelPuppy.RequestForm.setSubmitBtnClickHandler();
+    ParcelPuppy.RequestForm.updateItems();
+});
+
+
+// Source: sites/puppy/docroot/js/templates/request-item-form.js
+ParcelPuppy.RequestItemForm = {};
+
+jQuery(function () {
+    ParcelPuppy.RequestItemForm.setDeleteBtnClickHandler = function () {
+        $('.request-item-form-delete-btn').click(ParcelPuppy.RequestItemForm.handleDeleteItemBtnClick);
+    };
+
+    ParcelPuppy.RequestItemForm.handleDeleteItemBtnClick = function (e) {
+        e.preventDefault();
+
+        var itemFrame = $(this).closest('.request-item-form-frame');
+        itemFrame.remove();
+        ParcelPuppy.RequestForm.updateItems();
+        $('#request-form-add-item-btn').show();
+    };
+
+    ParcelPuppy.RequestItemForm.clearItemForm = function (formFrame) {
+        formFrame.find('input[name=name]').val('');
+        formFrame.find('input[name=brand]').val('');
+        formFrame.find('input[name=quantity]').val(1);
+        formFrame.find('input[name=details]').val('');
+    };
+
+    // Execute setup functions
+    ParcelPuppy.RequestItemForm.setDeleteBtnClickHandler();
+
+});
+
+
 // Source: sites/puppy/docroot/js/modules/about-me-form.js
 ParcelPuppy.AboutMeForm = {};
 
@@ -288,6 +443,61 @@ jQuery(function () {
 
     ParcelPuppy.AddressForm.validateCityZipFields = function () {
         return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-form-city'), $('#address-form-zip-code')]);
+    };
+});
+
+
+// Source: sites/puppy/docroot/js/modules/request-general-form.js
+ParcelPuppy.RequestGeneralForm = {};
+
+jQuery(function () {
+    ParcelPuppy.RequestGeneralForm.validateSubform = function () {
+        var isValid = ParcelPuppy.RequestGeneralForm.validateDescription();
+        return isValid;
+    };
+    
+    ParcelPuppy.RequestGeneralForm.validateDescription = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#request-general-form-description'));
+    };
+
+    ParcelPuppy.RequestGeneralForm.setShipping = function () {
+        var shippingGroup = $('#request-general-form-shipping-group'),
+            defaultSelection = shippingGroup.attr('data-default');
+
+        if (defaultSelection === 'express') {
+            $('#request-general-form-shipping-express').button('toggle');
+        } else {
+            $('#request-general-form-shipping-standard').button('toggle');
+        }
+    };
+
+    // Execute setup functions
+    ParcelPuppy.RequestGeneralForm.setShipping();
+});
+
+
+// Source: sites/puppy/docroot/js/modules/request-item-form.js
+ParcelPuppy.RequestItemForm = {};
+
+jQuery(function () {
+    ParcelPuppy.RequestItemForm.validateSubform = function (itemForm) {
+        var isValid = ParcelPuppy.RequestItemForm.validateDetails(itemForm);
+        isValid = ParcelPuppy.RequestItemForm.validateName(itemForm) && isValid;
+        isValid = ParcelPuppy.RequestItemForm.validateQuantity(itemForm) && isValid;
+        return isValid;
+    };
+
+
+    ParcelPuppy.RequestItemForm.validateName = function (itemForm) {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut(itemForm.find('input[name=name]'));
+    };
+
+    ParcelPuppy.RequestItemForm.validateDetails = function (itemForm) {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut(itemForm.find('textarea[name=details]'))
+    };
+
+    ParcelPuppy.RequestItemForm.validateQuantity = function (itemForm) {
+        return ParcelPuppy.Validators.validateIntegerFieldIsFilledOut(itemForm.find('input[name=quantity]'))
     };
 });
 

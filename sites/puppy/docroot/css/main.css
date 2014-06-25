@@ -356,7 +356,8 @@ button:focus {
   display: inline-block;
   border: 1px solid #DADADA;
   background-color: #F1F1F1;
-  margin-right: 5px; }
+  margin-right: 5px;
+  vertical-align: top; }
 
 .request-item-image-placeholder {
   text-align: center;
@@ -377,7 +378,8 @@ button:focus {
   display: inline-block; }
 
 .request-item-form-quantity-field {
-  width: 60px; }
+  width: 60px;
+  display: inline-block; }
 
 .request-item-form-quantity-label {
   padding-right: 5px; }
@@ -451,3 +453,6 @@ button:focus {
 #request-form-add-item-btn:hover {
   background-color: #D6D6D6;
   background: linear-gradient(#fafafa, #d6d6d6); }
+
+#request-form-button {
+  width: 200px; }

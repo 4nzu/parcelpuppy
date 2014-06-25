@@ -13,6 +13,15 @@ jQuery(function () {
         return isValid;
     };
 
+    ParcelPuppy.Validators.validateIntegerFieldIsFilledOut = function (formField) {
+        var isFilledOut = ParcelPuppy.Utils.isFilledOut(formField),
+            value = formField.val(),
+            isInteger = (Math.floor(value) == value && $.isNumeric(value)),
+            isValid = isFilledOut && isInteger;
+        ParcelPuppy.Utils.setErrorForField(isValid, formField);
+        return isValid;
+    };
+
     // It is assumed that all formFields are part of the same group
     ParcelPuppy.Validators.validateFormFieldsAreFilledOut = function (formFields) {
         var isValid = true;

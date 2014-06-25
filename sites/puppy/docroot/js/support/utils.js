@@ -11,7 +11,7 @@ jQuery(function() {
             helpBlock = fieldGroup.find('.help-block');
 
         if (formField && fieldGroup && helpBlock) {
-            fieldGroup.attr('class', 'form-group has-error');
+            fieldGroup.addClass('has-error');
             helpBlock.show();
         }
     };
@@ -21,7 +21,7 @@ jQuery(function() {
             helpBlock = fieldGroup.find('.help-block');
 
         if (formField && fieldGroup && helpBlock) {
-            fieldGroup.attr('class', 'form-group');
+            fieldGroup.removeClass('has-error');
             helpBlock.hide();
         }
     };

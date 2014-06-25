@@ -21,16 +21,14 @@
 
         <form role="form" id="request-form">
             <? include_once(MODULES_PATH . "requests/request-general-form.php"); ?>
-            <?
-            for ($i = 0; $i < 5; $i++) {
-                include(MODULES_PATH . "requests/request-item-form.php");
-            }
-            ?>
+            <div id="request-form-items">
+                <? include(MODULES_PATH . "requests/request-item-form.php"); ?>
+            </div>
             <button id="request-form-add-item-btn"><span class="glyphicon glyphicon-plus"></span> Add item to request</button>
         </form>
     </div>
     <span class="form-fixed-button affix-top">
-        <button id='extras-button'>Submit Request</button>
+        <button id='request-form-button'>Submit Request</button>
         <p class="form-button-subtitle">View requests in your Dashboard</p>
     </span>
 </div>

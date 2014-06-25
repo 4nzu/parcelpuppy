@@ -34,6 +34,7 @@
   border: 1px solid #DADADA;
   background-color: #F1F1F1;
   margin-right: 5px;
+  vertical-align: top;
 }
 
 .request-item-image-placeholder {
@@ -60,6 +61,7 @@
 
 .request-item-form-quantity-field {
   width: 60px;
+  display: inline-block;
 }
 
 .request-item-form-quantity-label {
