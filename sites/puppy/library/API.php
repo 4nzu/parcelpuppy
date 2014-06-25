@@ -84,12 +84,54 @@ class API extends Template {
 // 			details: string
 // 		}, …
 // }
-	public function new_reqeust() {
+
+	public function validate_request() {
 		if ($_SESSION['logged_in']) {
 
-			if ($_REQUEST['shipping'] == '‘express’') $shipping = 1; else $shipping = 2;
+			if (!isset($_REQUEST['description']))
+				$this->json_out(array('request' => 'ERROR: bad or missing \'description\'.'));
+			
+			if (!isset($_REQUEST['shipping']) || empty($_REQUEST['shipping']))
+				$this->json_out(array('request' => 'ERROR: bad or missing \'shipping\'.'));
+			
+			if (!isset($_REQUEST['region_id']) || !is_numeric($_REQUEST['region_id']))
+				$this->json_out(array('request' => 'ERROR: bad or missing \'region_id\'.'));
+			
 
-			$sql = 'INSERT INTO requests(region_id, description, shipping, user_id, created_on) VALUES(?, ?, ?, ?, now())';
+			if (!isset($_REQUEST['items']) || !is_array($_REQUEST['items']))
+				$this->json_out(array('request' => 'ERROR: bad or missing \'items\'.'));
+
+			$i = 0;
+			foreach($_REQUEST['items'] as $item) {
+
+				if (!isset($item['name']) || empty($item['name']))
+					$this->json_out(array('request' => 'ERROR: bad or missing \'name\' for item ['.$i.'].'));
+
+				if (!isset($item['brand']) || empty($item['brand']))
+					$this->json_out(array('request' => 'ERROR: bad or missing \'brand\' for item ['.$i.'].'));
+
+				if (!isset($item['details']) || empty($item['details']))
+					$this->json_out(array('request' => 'ERROR: bad or missing \'details\' for item ['.$i.'].'));
+
+				if (!isset($item['name']) || !is_numeric($item['quantity']) || empty($item['quantity']))
+					$this->json_out(array('request' => 'ERROR: bad or missing quantity for item ['.$i.'].'));
+
+				$i++;
+			}
+		}
+		else {
+			$this->json_out(array('request' => 'ERROR: Not authorized'));
+		}
+	}
+
+	public function new_request() {
+		if ($_SESSION['logged_in']) {
+
+			$this->validate_request();
+
+			if ($_REQUEST['shipping'] == 'express') $shipping = 2; else $shipping = 1;
+
+			$sql = 'INSERT INTO requests(region_id, description, shipping_type_id, user_id, created_on) VALUES(?, ?, ?, ?, now())';
 			$request_id = $this->db->insert($sql, array($_REQUEST['region_id'], $_REQUEST['description'], $shipping, $_SESSION['user']->id));
 
 			foreach($_REQUEST['items'] as $item) {
