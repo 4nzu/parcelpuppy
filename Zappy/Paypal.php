@@ -33,7 +33,7 @@ class Paypal {
 
     }
 
-    function StartPayment($payeeEmail, $amount, $commission_percent=5){
+    function StartPayment($receiverEmail, $amount, $commission_percent=5, $description){
 
 
         $commissionAmount = $amount * $commission_percent/100;
@@ -45,13 +45,15 @@ class Paypal {
 
         $receiver[1] = new Receiver();
         $receiver[1]->amount = $amount-$commissionAmount;
-        $receiver[1]->email = $payeeEmail;
+        $receiver[1]->email = $receiverEmail;
         $receiver[1]->primary = "false";
         $receiverList = new ReceiverList($receiver);
 
-        $payRequest = new PayRequest(new RequestEnvelope("en_US"), 'PAY_PRIMARY', PP_CANCEL_URL, 'USD', $receiverList, PP_RETURN_URL);
-
+        $envelope = new RequestEnvelope("en_US");
+        $payRequest = new PayRequest($envelope, 'PAY_PRIMARY', PP_CANCEL_URL, 'USD', $receiverList, PP_RETURN_URL);
+        $payRequest->memo = $description;
         $payRequest->feesPayer = 'PRIMARYRECEIVER';
+        $payRequest->trackingId = $this->generateTrackingId();
         $this->pay($payRequest);
 
     }
@@ -63,9 +65,12 @@ class Paypal {
         $request->payKey=$pay_key;
         $envelope = new RequestEnvelope();
         $envelope->errorLanguage = "en_US";
+
         $request->requestEnvelope = $envelope;
+
         $response = $service->ExecutePayment($request);
-        var_dump($response);
+        $response->payKey = $pay_key;
+        //var_dump($response);
         if(strtoupper($response->responseEnvelope->ack) == 'SUCCESS') {
             $this->save_data($response);
         }
@@ -136,7 +141,6 @@ class Paypal {
             else{
                 //change to live paypal URL
                 header("Location: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=".$response->payKey);
-
             }
             exit;
         }else{
@@ -144,21 +148,31 @@ class Paypal {
         }
     }
 
+    private function generateTrackingId() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+        for ($i = 0; $i < 10; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $randomString;
+    }
+
     private function save_data($response)
     {
-        $sql = 'REPLACE INTO payments set correlation_id = ? , pay_key = ?, timestamp = ?, status = ? ';
+        $sql = 'REPLACE INTO payments set pay_key = ?, timestamp = ?, status = ? ';
         $this->db->execute($sql,
-            array($response->responseEnvelope->correlationId,
+            array(
                 $response->payKey,
                 $response->responseEnvelope->timestamp,
                 $response->paymentExecStatus));
     }
 
-    private function get_payment_details($pay_key)
+    private function get_payment_details($pay_key, $tracking_id)
     {
         $service = new AdaptivePaymentsService($this->sdkConfig);
         $request = new PaymentDetailsRequest();
         $request->payKey=$pay_key;
+        $request->trackingId = $tracking_id;
         $envelope = new RequestEnvelope();
         $envelope->errorLanguage = "en_US";
         $request->requestEnvelope = $envelope;

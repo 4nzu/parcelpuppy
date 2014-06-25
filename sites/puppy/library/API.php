@@ -111,22 +111,12 @@ class API extends Template {
     public function pay() {
 
         $_p = new Paypal();
-        $_p->StartPayment("parcelpuppy-developer@gmail.com", 10);
+        $_p->StartPayment("parcelpuppy-developer@gmail.com", 10, "Parcelpuppy item");
     }
 
     public function pay_commit() {
         $_p = new Paypal();
         $_p->CompletePayment($_GET['paykey']);
-    }
-
-    public function cancel_payment() {
-        echo "Payment cancelled";
-    }
-
-    public function success_payment() {
-//        $_p = new Paypal();
-
-        //$_p->StartPayment("parcelpuppy-developer@gmail.com", 10);
     }
 
     public function fb_login() {
