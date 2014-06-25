@@ -27,10 +27,10 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label" for="about-me-form-bio">What do you think people will want to buy from your area?
+        <label class="control-label" for="about-me-form-more-info">What do you think people will want to buy from your area?
             (Optional)</label>
         <textarea placeholder="e.g. There is a local woodworker who makes wonderful wooden bowls."
                   class="form-control"
-                  name="bio" id="about-me-form-bio"></textarea>
+                  name="more_info" id="about-me-form-more-info"></textarea>
     </div>
 </div>
