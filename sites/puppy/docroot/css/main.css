@@ -88,7 +88,8 @@ button:focus {
 .form-frame {
   width: 600px;
   margin-left: 100px;
-  display: inline-block; }
+  display: inline-block;
+  margin-right: 50px; }
 
 .form-section-frame {
   padding-bottom: 15px; }
@@ -126,6 +127,22 @@ button:focus {
 
 .form-fixed-button {
   margin-left: 20px; }
+
+.form-button-subtitle {
+  font-size: 12px;
+  text-align: center; }
+
+.form-hint {
+  color: #FFF;
+  font-size: 12px;
+  background-color: #77D6FD;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 15px; }
 
 #masthead {
   background-color: black;
@@ -300,6 +317,76 @@ button:focus {
   overflow: hidden;
   text-overflow: ellipsis; }
 
+.shipping-btn {
+  border-radius: 0px;
+  margin-right: 15px;
+  background-color: #F1F1F1;
+  color: #969696;
+  border: 0px;
+  padding: 6px 20px; }
+
+.request-item-form-frame {
+  border: 1px solid #DADADA;
+  width: 600px;
+  margin-bottom: 5px; }
+
+.request-item-form-header {
+  background-color: #F8F8F8;
+  width: 100%;
+  padding: 5px 0px 5px 15px;
+  font-weight: bold; }
+
+.request-item-form-delete-btn {
+  background: #797979;
+  color: #FFF;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  font-size: 13px;
+  text-align: center;
+  padding: 0px;
+  margin-right: 15px; }
+
+.request-item-form-body {
+  padding: 10px; }
+
+.request-item-form-image {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  border: 1px solid #DADADA;
+  background-color: #F1F1F1;
+  margin-right: 5px; }
+
+.request-item-image-placeholder {
+  text-align: center;
+  padding-top: 30px;
+  color: #767676;
+  font-size: 12px; }
+
+.request-item-form-fields {
+  display: inline-block;
+  width: 470px; }
+
+.request-item-form-brand-frame {
+  width: 330px;
+  display: inline-block; }
+
+.request-item-form-quantity-frame,
+.request-item-form-quantity-field-frame {
+  display: inline-block; }
+
+.request-item-form-quantity-field {
+  width: 60px; }
+
+.request-item-form-quantity-label {
+  padding-right: 5px; }
+
+.request-item-form-details {
+  max-width: 470px;
+  min-height: 100px !important;
+  font-size: 14px; }
+
 .home-masthead {
   padding: 165px 0px 70px 0px;
   background-image: url("../img/masthead-home.jpg"); }
@@ -342,3 +429,25 @@ button:focus {
 
 #extras-button {
   width: 200px; }
+
+#request-form-title {
+  font-weight: bold;
+  padding: 0px 15px 15px 0px;
+  display: inline-block; }
+
+#request-form-subtitle {
+  color: #77D6FD;
+  font-size: 12px;
+  padding-right: 5px; }
+
+#request-form-add-item-btn {
+  width: 600px;
+  background-color: #E6E6E6;
+  background: linear-gradient(#fafafa, #e6e6e6);
+  color: #7A7A7A;
+  font-weight: normal;
+  font-size: 15px; }
+
+#request-form-add-item-btn:hover {
+  background-color: #D6D6D6;
+  background: linear-gradient(#fafafa, #d6d6d6); }

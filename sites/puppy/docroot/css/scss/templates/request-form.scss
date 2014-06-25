@@ -1,0 +1,25 @@
+#request-form-title {
+  font-weight: bold;
+  padding: 0px 15px 15px 0px;
+  display: inline-block;
+}
+
+#request-form-subtitle {
+  color: #77D6FD;
+  font-size: 12px;
+  padding-right: 5px;
+}
+
+#request-form-add-item-btn {
+  width: 600px;
+  background-color: #E6E6E6;
+  background: linear-gradient(#FAFAFA, #E6E6E6);
+  color: #7A7A7A;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+#request-form-add-item-btn:hover {
+  background-color: #D6D6D6;
+  background: linear-gradient(#FAFAFA, #D6D6D6);
+}

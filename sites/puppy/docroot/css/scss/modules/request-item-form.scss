@@ -1,0 +1,73 @@
+.request-item-form-frame {
+  border: 1px solid #DADADA;
+  width: 600px;
+  margin-bottom: 5px;
+}
+
+.request-item-form-header {
+  background-color: #F8F8F8;
+  width: 100%;
+  padding: 5px 0px 5px 15px;
+  font-weight: bold;
+}
+
+.request-item-form-delete-btn {
+  background: #797979;
+  color: #FFF;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  font-size: 13px;
+  text-align: center;
+  padding: 0px;
+  margin-right: 15px;
+}
+
+.request-item-form-body {
+  padding: 10px;
+}
+
+.request-item-form-image {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  border: 1px solid #DADADA;
+  background-color: #F1F1F1;
+  margin-right: 5px;
+}
+
+.request-item-image-placeholder {
+  text-align: center;
+  padding-top: 30px;
+  color: #767676;
+  font-size: 12px;
+}
+
+.request-item-form-fields {
+  display: inline-block;
+  width: 470px;
+}
+
+.request-item-form-brand-frame {
+  width: 330px;
+  display: inline-block;
+}
+
+.request-item-form-quantity-frame,
+.request-item-form-quantity-field-frame {
+  display: inline-block;
+}
+
+.request-item-form-quantity-field {
+  width: 60px;
+}
+
+.request-item-form-quantity-label {
+  padding-right: 5px;
+}
+
+.request-item-form-details {
+  max-width: 470px;
+  min-height: 100px !important;
+  font-size: 14px;
+}

@@ -273,6 +273,8 @@ class Display extends Template {
 	}
 
     public function request_form() {
+        $sql = 'SELECT region_name AS country_name, country_code, region_id FROM regions';
+        $this->assign('countries', $this->db->query($sql));
         $this->set_template('requests_request-form');
     }
 }

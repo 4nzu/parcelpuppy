@@ -1,13 +1,36 @@
 <div class="content-body">
     <div class="form-frame">
-        <h3>Make Request</h3>
-    </div>
 
-    <form role="form" id="request-form">
-        <div class="form-group">
-            <input type="text" placeholder="Description of Request (i.e. pet treats and toys)" class="form-control" name="description"
-                   id="request-form-description" value="<?= $request->description ?>">
-            <span class="help-block" style="display: none;">Description cannot be blank</span>
+        <div>
+            <h4 id="request-form-title">Make a Request</h4>
+            <span id="request-form-subtitle">Guidelines</span>
+
+            <div class="form-hint">?</div>
         </div>
-    </form>
+        <div class="panel panel-danger" style="display: none;" id="request-error">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Sorry, an error occurred while making your request
+                </h3>
+            </div>
+            <div class="panel-body">
+                Please try again. If this issue continue to occur please contact <a href="/contactus">Parcel Puppy</a>
+                and we will help resolve it as quickly as possible.
+            </div>
+        </div>
+
+        <form role="form" id="request-form">
+            <? include_once(MODULES_PATH . "requests/request-general-form.php"); ?>
+            <?
+            for ($i = 0; $i < 5; $i++) {
+                include(MODULES_PATH . "requests/request-item-form.php");
+            }
+            ?>
+            <button id="request-form-add-item-btn"><span class="glyphicon glyphicon-plus"></span> Add item to request</button>
+        </form>
+    </div>
+    <span class="form-fixed-button affix-top">
+        <button id='extras-button'>Submit Request</button>
+        <p class="form-button-subtitle">View requests in your Dashboard</p>
+    </span>
 </div>
