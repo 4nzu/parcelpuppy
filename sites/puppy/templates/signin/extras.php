@@ -12,10 +12,10 @@
             </div>
         </div>
 
-            <form role="form" id="extras-form">
-                <? $address_form_include_name = true; include_once(MODULES_PATH . "account/address-form.php"); ?>
-                <button id='extras-button' class='form-fixed-button' style="width: 100%">Done</button>
-            </form>
-        </div>
+        <form role="form" id="extras-form">
+            <? $address_form_include_name = true;
+            include_once(MODULES_PATH . "account/address-form.php"); ?>
+        </form>
     </div>
+    <button id='extras-button' class="form-fixed-button affix-top">Done</button>
 </div>

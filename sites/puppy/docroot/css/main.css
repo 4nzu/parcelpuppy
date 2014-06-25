@@ -87,8 +87,8 @@ button:focus {
 
 .form-frame {
   width: 600px;
-  margin-left: auto;
-  margin-right: auto; }
+  margin-left: 100px;
+  display: inline-block; }
 
 .form-section-frame {
   padding-bottom: 15px; }
@@ -123,6 +123,9 @@ button:focus {
   font-size: 15px;
   width: 100%;
   padding: 20px 0px; }
+
+.form-fixed-button {
+  margin-left: 20px; }
 
 #masthead {
   background-color: black;
@@ -334,4 +337,8 @@ button:focus {
   background-image: url("../img/masthead-puppy.jpg"); }
 
 #profile-button {
-  width: 100%; }
+  width: 200px;
+  margin-top: 20px; }
+
+#extras-button {
+  width: 200px; }

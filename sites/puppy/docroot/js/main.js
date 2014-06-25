@@ -50,6 +50,19 @@ jQuery(function() {
 
         return postParams;
     };
+
+    ParcelPuppy.Utils.enableAffixFormButtons = function () {
+        $('.form-fixed-button').affix({
+            offset: {
+                bottom: function () {
+                    return (this.bottom = $('.footer').outerHeight(true))
+                }
+            }
+        });
+    };
+
+    // Execute setup functions
+    ParcelPuppy.Utils.enableAffixFormButtons();
 });
 
 

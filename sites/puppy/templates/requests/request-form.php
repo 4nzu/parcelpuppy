@@ -5,9 +5,9 @@
 
     <form role="form" id="request-form">
         <div class="form-group">
-            <input type="text" placeholder="Address Line 1" class="address-field form-control" name="address_1"
-                   id="address-form-street-1" value="<?= $_SESSION['user']->address_1 ?>">
-            <span class="help-block" style="display: none;">Address cannot be blank</span>
+            <input type="text" placeholder="Description of Request (i.e. pet treats and toys)" class="form-control" name="description"
+                   id="request-form-description" value="<?= $request->description ?>">
+            <span class="help-block" style="display: none;">Description cannot be blank</span>
         </div>
     </form>
 </div>

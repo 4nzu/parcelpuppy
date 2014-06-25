@@ -20,7 +20,7 @@
             <? include_once(MODULES_PATH . "account/about-me-form.php"); ?>
             <? $address_form_include_name = false;
             include_once(MODULES_PATH . "account/address-form.php"); ?>
-            <button id='profile-button' class="form-fixed-button">Save and Finish</button>
         </form>
     </div>
+    <button id='profile-button' class="form-fixed-button affix-top">Save and Finish</button>
 </div>
