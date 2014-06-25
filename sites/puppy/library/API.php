@@ -89,32 +89,32 @@ class API extends Template {
 		if ($_SESSION['logged_in']) {
 
 			if (!isset($_REQUEST['description']))
-				$this->json_out(array('request' => 'ERROR: bad or missing \'description\'.'));
+				$this->json_out(array('request' => 'ERROR: bad or missing \'description\'.', 'var' => 'description'));
 			
 			if (!isset($_REQUEST['shipping']) || empty($_REQUEST['shipping']))
-				$this->json_out(array('request' => 'ERROR: bad or missing \'shipping\'.'));
+				$this->json_out(array('request' => 'ERROR: bad or missing \'shipping\'.', 'var' => 'shipping'));
 			
 			if (!isset($_REQUEST['region_id']) || !is_numeric($_REQUEST['region_id']))
-				$this->json_out(array('request' => 'ERROR: bad or missing \'region_id\'.'));
+				$this->json_out(array('request' => 'ERROR: bad or missing \'region_id\'.', 'var' => 'region_id'));
 			
 
 			if (!isset($_REQUEST['items']) || !is_array($_REQUEST['items']))
-				$this->json_out(array('request' => 'ERROR: bad or missing \'items\'.'));
+				$this->json_out(array('request' => 'ERROR: bad or missing \'items\'.', 'var' => 'items'));
 
 			$i = 0;
 			foreach($_REQUEST['items'] as $item) {
 
 				if (!isset($item['name']) || empty($item['name']))
-					$this->json_out(array('request' => 'ERROR: bad or missing \'name\' for item ['.$i.'].'));
+					$this->json_out(array('request' => 'ERROR: bad or missing \'name\' for item ['.$i.'].', 'var' => 'items', 'key' => 'name', 'i' => $i));
 
 				if (!isset($item['brand']) || empty($item['brand']))
-					$this->json_out(array('request' => 'ERROR: bad or missing \'brand\' for item ['.$i.'].'));
+					$this->json_out(array('request' => 'ERROR: bad or missing \'brand\' for item ['.$i.'].', 'var' => 'items', 'key' => 'brand', 'i' => $i));
 
 				if (!isset($item['details']) || empty($item['details']))
-					$this->json_out(array('request' => 'ERROR: bad or missing \'details\' for item ['.$i.'].'));
+					$this->json_out(array('request' => 'ERROR: bad or missing \'details\' for item ['.$i.'].', 'var' => 'items', 'key' => 'details', 'i' => $i));
 
 				if (!isset($item['name']) || !is_numeric($item['quantity']) || empty($item['quantity']))
-					$this->json_out(array('request' => 'ERROR: bad or missing quantity for item ['.$i.'].'));
+					$this->json_out(array('request' => 'ERROR: bad or missing quantity for item ['.$i.'].', 'var' => 'items', 'key' => 'quantity', 'i' => $i));
 
 				$i++;
 			}
