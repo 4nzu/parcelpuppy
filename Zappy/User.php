@@ -17,9 +17,7 @@ class User {
     public $profile_url = null;
     public $days_back = null;
 	public $show_splash = null;
-	public $people_cluster_id = null;
 	public $optin = null;
-	public $last_papers_upload = null;
     public $device_type_id = 0;
     public $invisible = null;
     public $affiliation = null;
@@ -27,15 +25,17 @@ class User {
     public $mendeley_token = null;
     public $affiliation_url = null;
     public $bio = null;
+    public $more_info = null;
     public $city = null;
     public $country = null;
+    public $state = null;
     public $zip_code = null;
     public $address_1 = null;
     public $address_2 = null;
     public $verified = null;
 
     function __construct($id = null) {
-        define('SELECT_HEAD', 'SELECT u.username, u.address_1, u.address_2, u.zip_code, u.user_id, u.email, u.created, u.verification_token, u.gender, u.full_name, u.first_name, u.last_name, u.site_lang, u.profile_image, u.days_back, u.last_login, u.show_splash, u.people_cluster_id, u.optin, u.verified, u.city, u.country, u.last_papers_upload, u.invisible, u.affiliation, u.initials, u.mendeley_token, u.profile_url, u.affiliation_url, u.bio');
+        define('SELECT_HEAD', 'SELECT u.username, u.address_1, u.address_2, u.state, u.zip_code, u.user_id, u.email, u.created, u.verification_token, u.gender, u.full_name, u.first_name, u.last_name, u.site_lang, u.profile_image, u.days_back, u.last_login, u.show_splash, u.optin, u.verified, u.city, u.country, u.invisible, u.affiliation, u.initials, u.profile_url, u.affiliation_url, u.bio, u.more_info');
 		
         $this->db = DB::instance();
 
@@ -67,17 +67,16 @@ class User {
                 $this->verification_token  = $_SESSION['user']->verification_token;
                 $this->days_back           = $_SESSION['user']->days_back;
                 $this->show_splash         = $_SESSION['user']->show_splash;
-                $this->people_cluster_id   = $_SESSION['user']->people_cluster_id;
 				$this->optin               = $_SESSION['user']->optin;
-				$this->last_papers_upload  = $_SESSION['user']->last_papers_upload;
                 $this->device_type_id      = $_SESSION['user']->device_type_id;
                 $this->invisible           = $_SESSION['user']->invisible;
                 $this->affiliation         = $_SESSION['user']->affiliation;
                 $this->initials            = $_SESSION['user']->initials;
-                $this->mendeley_token      = $_SESSION['user']->mendeley_token;
                 $this->affiliation_url     = $_SESSION['user']->affiliation_url;
                 $this->bio                 = $_SESSION['user']->bio;
+                $this->more_info           = $_SESSION['user']->more_info;
                 $this->city                = $_SESSION['user']->city;
+                $this->state               = $_SESSION['user']->state;
                 $this->country             = $_SESSION['user']->country;
                 $this->address_1           = $_SESSION['user']->address_1;
                 $this->address_2           = $_SESSION['user']->address_2;
@@ -118,16 +117,15 @@ class User {
             $this->verification_token  = $res[0]['verification_token'];
 			$this->days_back           = $res[0]['days_back'];
 			$this->show_splash         = $res[0]['show_splash'];
-			$this->people_cluster_id   = $res[0]['people_cluster_id'];
 			$this->optin               = $res[0]['optin'];
-			$this->last_papers_upload  = $res[0]['last_papers_upload'];
             $this->invisible           = $res[0]['invisible'];
             $this->affiliation         = $res[0]['affiliation'];
             $this->initials            = $res[0]['initials'];
-            $this->mendeley_token      = $res[0]['mendeley_token'];
             $this->affiliation_url     = $res[0]['affiliation_url'];
             $this->bio                 = $res[0]['bio'];
+            $this->more_info           = $res[0]['more_info'];
             $this->city                = $res[0]['city'];
+            $this->state               = $res[0]['state'];
             $this->country             = $res[0]['country'];
             $this->verified            = $res[0]['verified'];
             $this->address_1           = $res[0]['address_1'];
@@ -236,11 +234,11 @@ class User {
 			$res = $this->db->query($sql, array($device_id));
 
 			if (count($res) == 0 && $this->id > 0) {
-				$sql = "REPLACE INTO devices(user_id, device_id, device_type_id, people_cluster_id) values(?, ?, ?, 4)";
+				$sql = "REPLACE INTO devices(user_id, device_id, device_type_id) values(?, ?, ?)";
 				$this->db->execute($sql, array($this->id, $device_id, $device_type_id));
 			}
 			else {
-				$sql = "UPDATE devices SET user_id = ?, people_cluster_id = 4, device_type_id = ? WHERE device_id = ?";
+				$sql = "UPDATE devices SET user_id = ?, device_type_id = ? WHERE device_id = ?";
 				$this->db->execute($sql, array($this->id, $device_type_id, $device_id));
 			}
             return true;
@@ -486,10 +484,8 @@ class User {
     public function updateUserInfo($data) {
         if (!empty($this->id)) {
 
-            $query = 'UPDATE users SET email=?, first_name=?, site_lang=?, last_name=?, profile_image=?, username=?
-					  WHERE user_id=?';
-            $this->db->execute($query, array($data['email'], $data['first_name'], $data['site_lang'],
-                                            $data['last_name'], $data['profile_image'], $this->id));
+            $query = 'UPDATE users SET email=?, first_name=?, last_name=?, profile_image=? WHERE user_id=?';
+            $this->db->execute($query, array($data['email'], $data['first_name'], $data['last_name'], $data['profile_image'], $this->id));
             $this->getByUserID($this->id);
 
             return true;
@@ -653,14 +649,6 @@ class User {
         }
     }
 
-    public function updateMobileSettings($days_back, $people_cluster_id) {
-        if ($this->id && is_numeric($days_back) && is_numeric($people_cluster_id)) {
-            $this->db->execute('UPDATE users SET days_back=?, people_cluster_id=? where user_id=?', array($days_back, $people_cluster_id, $this->id));
-            $this->days_back = $days_back;
-            $this->people_cluster_id = $people_cluster_id;
-        }
-    }
-
     public function hide_library_splash() {
         $sql = 'UPDATE users set show_splash = 0 WHERE user_id = ?';
         $this->db->execute($sql, array($this->id));
@@ -750,6 +738,14 @@ class User {
             return false;
     }
 
+    public function update_state($state=null) {
+        if ($this->id) {
+            return $this->update_single_field('state', $state);
+        }
+        else
+            return false;
+    }
+
     public function update_address_1($address_1=null) {
         if ($this->id) {
             return $this->update_single_field('address_1', $address_1);
@@ -777,6 +773,14 @@ class User {
     public function update_site_lang($site_lang=null) {
         if (!empty($site_lang) && $this->id) {
             return $this->update_single_field('site_lang', $site_lang);
+        }
+        else
+            return false;
+    }
+
+    public function update_more_info($more_info=null) {
+        if ($this->id) {
+            return $this->update_single_field('more_info', $more_info);
         }
         else
             return false;
@@ -853,18 +857,6 @@ class User {
         if ($this->id) {
             $sql = 'UPDATE users SET profile_image = ? WHERE user_id = ?';
             $this->db->execute($sql, array($profile_image, $this->id));
-            $this->getByUserID($this->id);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
-    public function update_mendeley_token($token) {
-        if ($this->id) {
-            $sql = 'UPDATE users SET mendeley_token = ? WHERE user_id = ?';
-            $this->db->execute($sql, array($token, $this->id));
             $this->getByUserID($this->id);
             return true;
         }

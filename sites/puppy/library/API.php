@@ -224,7 +224,7 @@ class API extends Template {
 			$u = new User();
 			
 			if (!$u->validateEmail($_POST['email'])) {
-				$this->json_out(array('request' => 'email'));
+				$this->json_out(array('request' => 'ERROR', 'var' => 'email'));
 			}
 
 			$email_exists = $u->checkVerifiedEmail($_POST['email']);
@@ -239,37 +239,41 @@ class API extends Template {
 					$profile_pic = $_POST['profile_image'];
 				}
 				else
-					$profile_pic = '/img/avatars/0'.rand(1, 30).'.png';
+					$profile_pic = '/img/avatars/0'.rand(10, 30).'.png';
 
 				$data = array('first_name' 			=> strip_tags($_POST['first_name']),
 							  'last_name' 			=> strip_tags($_POST['last_name']),
-							  'site_lang'           => strip_tags($_POST['site_lang']),
-							  'email'      			=> $_POST['email'],
-							  'profile_image'		=> $profile_pic);
+							  'email'      			=> $_POST['email']);
 
-				$pomp=$u->updateUserInfo($data);
-				$this->json_out(array('request' => $pomp));
+				$u->updateUserInfo($data);
 				
-				if (isset($_POST['ini'])) {
-					$u->update_initials($_POST['ini']);
+				if (isset($_POST['address_1'])) {
+					$u->update_address_1($_POST['address_1']);
 				}
-				if (isset($_POST['aff'])) {
-					$u->update_affiliation($_POST['aff']);
+				if (isset($_POST['address_2'])) {
+					$u->update_address_2($_POST['address_2']);
 				}
-				if (isset($_POST['aff_url'])) {
-					$u->update_affiliation_url($_POST['aff_url']);
+				if (isset($_POST['zip_code'])) {
+					$u->update_zip_code($_POST['zip_code']);
+				}
+				if (isset($_POST['state'])) {
+					$u->update_state($_POST['state']);
 				}
 				if (isset($_POST['bio'])) {
 					$u->update_bio($_POST['bio']);
 				}
+				if (isset($_POST['more_info'])) {
+					$u->update_more_info($_POST['more_info']);
+				}
+				
 
 				$this->json_out(array('request' => 'OK'));
 			} else {
-				$this->json_out(array('request' => 'email'));
+				$this->json_out(array('request' => 'ERROR', 'var' => 'email'));
 			}
 		}
 		else {
-			$this->json_out(array('request' => 'email'));
+			$this->json_out(array('request' => 'ERROR', 'var' => 'email'));
 		}
 	}
 
