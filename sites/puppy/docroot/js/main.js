@@ -494,7 +494,7 @@ jQuery(function () {
             var postParams = ParcelPuppy.RequestForm.generatePostParams();
             $.post('/api/v1/new_request', postParams, function (r) {
                 if (r.request === 'OK') {
-                    window.location = '/account';
+                    window.location = '/requests/' + r.request_id;
                 } else {
                     $('#request-form-error').show();
                 }

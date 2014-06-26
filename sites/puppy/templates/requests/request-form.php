@@ -1,16 +1,16 @@
 <div class="content-body">
     <div class="form-frame">
-
         <div>
             <h4 id="request-form-title">Make a Request</h4>
             <span id="request-form-subtitle">Guidelines</span>
 
             <div class="form-hint">?</div>
         </div>
-        <div class="panel panel-danger" style="display: none;" id="request-error">
+
+        <div class="panel panel-danger" style="display: none;" id="request-form-error">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    Sorry, an error occurred while making your request
+                    Sorry, an error occurred while <?= (empty($request)) ? 'making' : 'updating' ?> your request
                 </h3>
             </div>
             <div class="panel-body">
