@@ -25,7 +25,7 @@ jQuery(function () {
         var isValid = ParcelPuppy.AddressForm.validateFields();
         isValid = ParcelPuppy.AboutMeForm.validateFields() && isValid;
         return isValid;
-    }
+    };
 
     // Execute setup functions
     ParcelPuppy.ProfileForm.setProfileFormButtonHandler();

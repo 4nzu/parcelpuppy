@@ -19,6 +19,6 @@ jQuery(function () {
     };
 
     ParcelPuppy.RequestItemForm.validateQuantity = function (itemForm) {
-        return ParcelPuppy.Validators.validateIntegerFieldIsFilledOut(itemForm.find('input[name=quantity]'))
+        return ParcelPuppy.Validators.validateIntegerFieldIsFilledOutAndPositive(itemForm.find('input[name=quantity]'))
     };
 });

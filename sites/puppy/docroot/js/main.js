@@ -132,7 +132,7 @@ jQuery(function () {
     };
 
     ParcelPuppy.RequestItemForm.validateQuantity = function (itemForm) {
-        return ParcelPuppy.Validators.validateIntegerFieldIsFilledOut(itemForm.find('input[name=quantity]'))
+        return ParcelPuppy.Validators.validateIntegerFieldIsFilledOutAndPositive(itemForm.find('input[name=quantity]'))
     };
 });
 
@@ -335,11 +335,12 @@ jQuery(function () {
         return isValid;
     };
 
-    ParcelPuppy.Validators.validateIntegerFieldIsFilledOut = function (formField) {
+    ParcelPuppy.Validators.validateIntegerFieldIsFilledOutAndPositive = function (formField) {
         var isFilledOut = ParcelPuppy.Utils.isFilledOut(formField),
             value = formField.val(),
             isInteger = (Math.floor(value) == value && $.isNumeric(value)),
-            isValid = isFilledOut && isInteger;
+            isPositive = value > 0,
+            isValid = isFilledOut && isInteger && isPositive;
         ParcelPuppy.Utils.setErrorForField(isValid, formField);
         return isValid;
     };
@@ -362,6 +363,7 @@ jQuery(function () {
         return isValid;
     };
 });
+
 
 // Source: sites/puppy/docroot/js/templates/extras.js
 ParcelPuppy.Extras = {};
@@ -470,7 +472,7 @@ jQuery(function () {
         var isValid = ParcelPuppy.AddressForm.validateFields();
         isValid = ParcelPuppy.AboutMeForm.validateFields() && isValid;
         return isValid;
-    }
+    };
 
     // Execute setup functions
     ParcelPuppy.ProfileForm.setProfileFormButtonHandler();
