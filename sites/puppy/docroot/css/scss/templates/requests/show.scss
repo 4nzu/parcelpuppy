@@ -1,0 +1,29 @@
+#request-show-frame {
+  display: inline-block;
+  width: 700px;
+  padding-right: 50px;
+  margin-left: 100px;
+}
+
+#request-show-side-bar {
+  display: inline-block;
+  width: 150px;
+}
+
+.request-show-description,
+.request-show-region {
+  display: inline-block;
+  padding-right: 15px;
+}
+
+.request-show-subtitle-line span {
+  padding-right: 15px;
+}
+
+.request-show-subtitle-line {
+  padding-bottom: 30px;
+}
+
+#request-show-bids-button {
+  width: 150px;
+}

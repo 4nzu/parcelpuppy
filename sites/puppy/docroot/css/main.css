@@ -389,6 +389,30 @@ button:focus {
   min-height: 100px !important;
   font-size: 14px; }
 
+.request-items-table-header {
+  border-bottom: 1px solid #505050; }
+
+.request-items-table-header {
+  padding: 0px 15px;
+  color: #A6A6A6; }
+
+.request-items-table-quantity-col {
+  width: 40px;
+  text-align: center; }
+
+.item-row-frame {
+  cursor: pointer; }
+
+.item-row-header {
+  border-bottom: 1px dotted #D6D6D6;
+  padding: 5px; }
+
+.item-row-details {
+  background-color: #EEEEEE;
+  width: 100%;
+  padding: 5px 15px;
+  border-bottom: 1px dotted #D6D6D6; }
+
 .home-masthead {
   padding: 165px 0px 70px 0px;
   background-image: url("../img/masthead-home.jpg"); }
@@ -456,3 +480,27 @@ button:focus {
 
 #request-form-button {
   width: 200px; }
+
+#request-show-frame {
+  display: inline-block;
+  width: 700px;
+  padding-right: 50px;
+  margin-left: 100px; }
+
+#request-show-side-bar {
+  display: inline-block;
+  width: 150px; }
+
+.request-show-description,
+.request-show-region {
+  display: inline-block;
+  padding-right: 15px; }
+
+.request-show-subtitle-line span {
+  padding-right: 15px; }
+
+.request-show-subtitle-line {
+  padding-bottom: 30px; }
+
+#request-show-bids-button {
+  width: 150px; }

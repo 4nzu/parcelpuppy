@@ -3,6 +3,260 @@
 var ParcelPuppy = {};
 
 
+// Source: sites/puppy/docroot/js/modules/about-me-form.js
+ParcelPuppy.AboutMeForm = {};
+
+jQuery(function () {
+    ParcelPuppy.AboutMeForm.validateFields = function () {
+        var isValid = ParcelPuppy.AboutMeForm.validateNameFields();
+        isValid = ParcelPuppy.AboutMeForm.validateEmailField() && isValid;
+        return isValid;
+    };
+
+    ParcelPuppy.AboutMeForm.validateNameFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#about-me-form-first-name'), $('#about-me-form-last-name')]);
+    };
+
+    ParcelPuppy.AboutMeForm.validateEmailField = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#about-me-form-email'));
+    };
+});
+
+
+
+
+// Source: sites/puppy/docroot/js/modules/account-tabs-window.js
+ParcelPuppy.AccountTabs = {};
+
+jQuery(function () {
+    ParcelPuppy.AccountTabs.setTab = function () {
+        if ($('#account-tabs').length) {
+            // Defaults to profile tab
+            var hash = document.location.hash || '#profile';
+            $('#account-tabs a[href='+hash+']').tab('show');
+        }
+    };
+
+    ParcelPuppy.AccountTabs.setHashChangeHandler = function () {
+        if ($("#account-tabs").length) {
+            $(window).on('hashchange', ParcelPuppy.AccountTabs.setTab);
+        }
+    };
+
+    // Execute setup functions
+    ParcelPuppy.AccountTabs.setTab();
+    ParcelPuppy.AccountTabs.setHashChangeHandler();
+});
+
+
+// Source: sites/puppy/docroot/js/modules/address-form.js
+ParcelPuppy.AddressForm = {};
+
+jQuery(function () {
+    ParcelPuppy.AddressForm.validateFields = function () {
+        var isValid = ParcelPuppy.AddressForm.validateNameFields();
+        isValid = ParcelPuppy.AddressForm.validateStreetAddressFields() && isValid;
+        isValid = ParcelPuppy.AddressForm.validateStateField() && isValid;
+        isValid = ParcelPuppy.AddressForm.validateCityZipFields() && isValid;
+        return isValid;
+    };
+
+    ParcelPuppy.AddressForm.validateNameFields = function () {
+        if ($('#address-form-first-name').length && $('#address-form-last-name').length){
+            return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-form-first-name'), $('#address-form-last-name')]);
+        }
+        return true;
+    };
+
+    ParcelPuppy.AddressForm.validateStreetAddressFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-form-street-1'));
+    };
+
+    ParcelPuppy.AddressForm.validateStateField = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-form-state'));
+    };
+
+    ParcelPuppy.AddressForm.validateCityZipFields = function () {
+        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-form-city'), $('#address-form-zip-code')]);
+    };
+});
+
+
+// Source: sites/puppy/docroot/js/modules/request-general-form.js
+ParcelPuppy.RequestGeneralForm = {};
+
+jQuery(function () {
+    ParcelPuppy.RequestGeneralForm.validateSubform = function () {
+        var isValid = ParcelPuppy.RequestGeneralForm.validateDescription();
+        return isValid;
+    };
+    
+    ParcelPuppy.RequestGeneralForm.validateDescription = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#request-general-form-description'));
+    };
+
+    ParcelPuppy.RequestGeneralForm.setShipping = function () {
+        var shippingGroup = $('#request-general-form-shipping-group'),
+            defaultSelection = shippingGroup.attr('data-default');
+
+        if (defaultSelection === 'express') {
+            $('#request-general-form-shipping-express').button('toggle');
+        } else {
+            $('#request-general-form-shipping-standard').button('toggle');
+        }
+    };
+
+    // Execute setup functions
+    ParcelPuppy.RequestGeneralForm.setShipping();
+});
+
+
+// Source: sites/puppy/docroot/js/modules/request-item-form.js
+ParcelPuppy.RequestItemForm = {};
+
+jQuery(function () {
+    ParcelPuppy.RequestItemForm.validateSubform = function (itemForm) {
+        var isValid = ParcelPuppy.RequestItemForm.validateDetails(itemForm);
+        isValid = ParcelPuppy.RequestItemForm.validateName(itemForm) && isValid;
+        isValid = ParcelPuppy.RequestItemForm.validateQuantity(itemForm) && isValid;
+        return isValid;
+    };
+
+
+    ParcelPuppy.RequestItemForm.validateName = function (itemForm) {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut(itemForm.find('input[name=name]'));
+    };
+
+    ParcelPuppy.RequestItemForm.validateDetails = function (itemForm) {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut(itemForm.find('textarea[name=details]'))
+    };
+
+    ParcelPuppy.RequestItemForm.validateQuantity = function (itemForm) {
+        return ParcelPuppy.Validators.validateIntegerFieldIsFilledOut(itemForm.find('input[name=quantity]'))
+    };
+});
+
+
+// Source: sites/puppy/docroot/js/modules/requests/item-row.js
+ParcelPuppy.RequestItemRow = {};
+
+jQuery(function () {
+    ParcelPuppy.RequestItemRow.setClickHandler = function () {
+        $('.item-row-frame').click(ParcelPuppy.RequestItemRow.handleClick);
+    };
+
+    ParcelPuppy.RequestItemRow.handleClick = function (e) {
+        e.preventDefault();
+
+        $(this).find('.item-row-details').slideToggle();
+    };
+
+    // Execute setup functions
+    ParcelPuppy.RequestItemRow.setClickHandler();
+});
+
+
+// Source: sites/puppy/docroot/js/modules/signin-window.js
+ParcelPuppy.Signup = {};
+
+jQuery(function () {
+    ParcelPuppy.Signup.validateLoginFields = function () {
+        return ParcelPuppy.Validators.validateEmailAddress($('#signin-email')) && ParcelPuppy.Utils.isFilledOut($('#signin-pass'));
+    };
+
+    ParcelPuppy.Signup.handleSigninClick = function (e) {
+        e.preventDefault();
+
+        if (ParcelPuppy.Signup.validateLoginFields()) {
+            $.post('/api/v1/verify_login', {'email' : $('#signin-email').val(), 'pass' : $('#signin-pass').val()}, function(r) {
+                if (r.request !== 'OK') {
+                    ParcelPuppy.Signup.showLoginError();
+                }
+                else {
+                    $('#signin-form').submit();
+                }
+            });
+        } else {
+            ParcelPuppy.Signup.showLoginError();
+        }
+    };
+
+    ParcelPuppy.Signup.showLoginError = function () {
+        $('#signin-error').show();
+    };
+
+    ParcelPuppy.Signup.setSigninClickHandler = function () {
+        $('#signin-button').click(ParcelPuppy.Signup.handleSigninClick);
+    };
+
+
+    // Execute setup functions
+    ParcelPuppy.Signup.setSigninClickHandler();
+});
+
+// Source: sites/puppy/docroot/js/modules/signup-window.js
+ParcelPuppy.Signup = {};
+
+jQuery(function () {
+    ParcelPuppy.Signup.setSignupClickHandler = function () {
+        $('#signup-button').click(ParcelPuppy.Signup.handleSignupClick);
+    };
+
+    ParcelPuppy.Signup.handleSignupClick = function (e) {
+        e.preventDefault();
+
+        if (ParcelPuppy.Signup.validateSignupForm()) {
+            $('#signup-form').submit();
+        }
+    };
+
+    ParcelPuppy.Signup.validateSignupForm = function () {
+        var isValid = ParcelPuppy.Signup.validateEmailAddress();
+        isValid = ParcelPuppy.Signup.validatePassword() && isValid;
+        isValid = ParcelPuppy.Signup.confirmPassword() && isValid;
+        return isValid;
+    };
+
+    ParcelPuppy.Signup.validateEmailAddress = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-email'));
+    };
+
+    ParcelPuppy.Signup.validatePassword = function () {
+        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-pass'));
+    };
+
+    ParcelPuppy.Signup.confirmPassword = function () {
+        return ParcelPuppy.Validators.validateFormFieldsMatch($('#signup-pass'), $('#signup-pass-conf'));
+    };
+
+    ParcelPuppy.Signup.setEmailChangeHandler = function () {
+        $('#signup-email').change(ParcelPuppy.Signup.validateEmailAddress);
+    };
+
+    ParcelPuppy.Signup.setPasswordChangeHandler = function () {
+        $('#signup-pass').change(ParcelPuppy.Signup.handlePasswordChanged);
+    };
+
+    ParcelPuppy.Signup.setPasswordConfirmationCheck = function () {
+        $('#signup-pass-conf').change(ParcelPuppy.Signup.confirmPassword);
+    };
+
+    ParcelPuppy.Signup.handlePasswordChanged = function (e) {
+        ParcelPuppy.Signup.validatePassword();
+
+        if ($('#signup-pass-conf').val().length > 0) {
+            ParcelPuppy.Signup.confirmPassword();
+        }
+    };
+
+    // Execute setup function
+    ParcelPuppy.Signup.setSignupClickHandler();
+    ParcelPuppy.Signup.setEmailChangeHandler();
+    ParcelPuppy.Signup.setPasswordChangeHandler();
+    ParcelPuppy.Signup.setPasswordConfirmationCheck();
+
+});
+
 // Source: sites/puppy/docroot/js/support/utils.js
 ParcelPuppy.Utils = {};
 
@@ -364,241 +618,5 @@ jQuery(function () {
 
     // Execute setup functions
     ParcelPuppy.RequestItemForm.setDeleteBtnClickHandler();
-
-});
-
-
-// Source: sites/puppy/docroot/js/modules/about-me-form.js
-ParcelPuppy.AboutMeForm = {};
-
-jQuery(function () {
-    ParcelPuppy.AboutMeForm.validateFields = function () {
-        var isValid = ParcelPuppy.AboutMeForm.validateNameFields();
-        isValid = ParcelPuppy.AboutMeForm.validateEmailField() && isValid;
-        return isValid;
-    };
-
-    ParcelPuppy.AboutMeForm.validateNameFields = function () {
-        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#about-me-form-first-name'), $('#about-me-form-last-name')]);
-    };
-
-    ParcelPuppy.AboutMeForm.validateEmailField = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#about-me-form-email'));
-    };
-});
-
-
-
-
-// Source: sites/puppy/docroot/js/modules/account-tabs-window.js
-ParcelPuppy.AccountTabs = {};
-
-jQuery(function () {
-    ParcelPuppy.AccountTabs.setTab = function () {
-        if ($('#account-tabs').length) {
-            // Defaults to profile tab
-            var hash = document.location.hash || '#profile';
-            $('#account-tabs a[href='+hash+']').tab('show');
-        }
-    };
-
-    ParcelPuppy.AccountTabs.setHashChangeHandler = function () {
-        if ($("#account-tabs").length) {
-            $(window).on('hashchange', ParcelPuppy.AccountTabs.setTab);
-        }
-    };
-
-    // Execute setup functions
-    ParcelPuppy.AccountTabs.setTab();
-    ParcelPuppy.AccountTabs.setHashChangeHandler();
-});
-
-
-// Source: sites/puppy/docroot/js/modules/address-form.js
-ParcelPuppy.AddressForm = {};
-
-jQuery(function () {
-    ParcelPuppy.AddressForm.validateFields = function () {
-        var isValid = ParcelPuppy.AddressForm.validateNameFields();
-        isValid = ParcelPuppy.AddressForm.validateStreetAddressFields() && isValid;
-        isValid = ParcelPuppy.AddressForm.validateStateField() && isValid;
-        isValid = ParcelPuppy.AddressForm.validateCityZipFields() && isValid;
-        return isValid;
-    };
-
-    ParcelPuppy.AddressForm.validateNameFields = function () {
-        if ($('#address-form-first-name').length && $('#address-form-last-name').length){
-            return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-form-first-name'), $('#address-form-last-name')]);
-        }
-        return true;
-    };
-
-    ParcelPuppy.AddressForm.validateStreetAddressFields = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-form-street-1'));
-    };
-
-    ParcelPuppy.AddressForm.validateStateField = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#address-form-state'));
-    };
-
-    ParcelPuppy.AddressForm.validateCityZipFields = function () {
-        return ParcelPuppy.Validators.validateFormFieldsAreFilledOut([$('#address-form-city'), $('#address-form-zip-code')]);
-    };
-});
-
-
-// Source: sites/puppy/docroot/js/modules/request-general-form.js
-ParcelPuppy.RequestGeneralForm = {};
-
-jQuery(function () {
-    ParcelPuppy.RequestGeneralForm.validateSubform = function () {
-        var isValid = ParcelPuppy.RequestGeneralForm.validateDescription();
-        return isValid;
-    };
-    
-    ParcelPuppy.RequestGeneralForm.validateDescription = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#request-general-form-description'));
-    };
-
-    ParcelPuppy.RequestGeneralForm.setShipping = function () {
-        var shippingGroup = $('#request-general-form-shipping-group'),
-            defaultSelection = shippingGroup.attr('data-default');
-
-        if (defaultSelection === 'express') {
-            $('#request-general-form-shipping-express').button('toggle');
-        } else {
-            $('#request-general-form-shipping-standard').button('toggle');
-        }
-    };
-
-    // Execute setup functions
-    ParcelPuppy.RequestGeneralForm.setShipping();
-});
-
-
-// Source: sites/puppy/docroot/js/modules/request-item-form.js
-ParcelPuppy.RequestItemForm = {};
-
-jQuery(function () {
-    ParcelPuppy.RequestItemForm.validateSubform = function (itemForm) {
-        var isValid = ParcelPuppy.RequestItemForm.validateDetails(itemForm);
-        isValid = ParcelPuppy.RequestItemForm.validateName(itemForm) && isValid;
-        isValid = ParcelPuppy.RequestItemForm.validateQuantity(itemForm) && isValid;
-        return isValid;
-    };
-
-
-    ParcelPuppy.RequestItemForm.validateName = function (itemForm) {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut(itemForm.find('input[name=name]'));
-    };
-
-    ParcelPuppy.RequestItemForm.validateDetails = function (itemForm) {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut(itemForm.find('textarea[name=details]'))
-    };
-
-    ParcelPuppy.RequestItemForm.validateQuantity = function (itemForm) {
-        return ParcelPuppy.Validators.validateIntegerFieldIsFilledOut(itemForm.find('input[name=quantity]'))
-    };
-});
-
-
-// Source: sites/puppy/docroot/js/modules/signin-window.js
-ParcelPuppy.Signup = {};
-
-jQuery(function () {
-    ParcelPuppy.Signup.validateLoginFields = function () {
-        return ParcelPuppy.Validators.validateEmailAddress($('#signin-email')) && ParcelPuppy.Utils.isFilledOut($('#signin-pass'));
-    };
-
-    ParcelPuppy.Signup.handleSigninClick = function (e) {
-        e.preventDefault();
-
-        if (ParcelPuppy.Signup.validateLoginFields()) {
-            $.post('/api/v1/verify_login', {'email' : $('#signin-email').val(), 'pass' : $('#signin-pass').val()}, function(r) {
-                if (r.request !== 'OK') {
-                    ParcelPuppy.Signup.showLoginError();
-                }
-                else {
-                    $('#signin-form').submit();
-                }
-            });
-        } else {
-            ParcelPuppy.Signup.showLoginError();
-        }
-    };
-
-    ParcelPuppy.Signup.showLoginError = function () {
-        $('#signin-error').show();
-    };
-
-    ParcelPuppy.Signup.setSigninClickHandler = function () {
-        $('#signin-button').click(ParcelPuppy.Signup.handleSigninClick);
-    };
-
-
-    // Execute setup functions
-    ParcelPuppy.Signup.setSigninClickHandler();
-});
-
-// Source: sites/puppy/docroot/js/modules/signup-window.js
-ParcelPuppy.Signup = {};
-
-jQuery(function () {
-    ParcelPuppy.Signup.setSignupClickHandler = function () {
-        $('#signup-button').click(ParcelPuppy.Signup.handleSignupClick);
-    };
-
-    ParcelPuppy.Signup.handleSignupClick = function (e) {
-        e.preventDefault();
-
-        if (ParcelPuppy.Signup.validateSignupForm()) {
-            $('#signup-form').submit();
-        }
-    };
-
-    ParcelPuppy.Signup.validateSignupForm = function () {
-        var isValid = ParcelPuppy.Signup.validateEmailAddress();
-        isValid = ParcelPuppy.Signup.validatePassword() && isValid;
-        isValid = ParcelPuppy.Signup.confirmPassword() && isValid;
-        return isValid;
-    };
-
-    ParcelPuppy.Signup.validateEmailAddress = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-email'));
-    };
-
-    ParcelPuppy.Signup.validatePassword = function () {
-        return ParcelPuppy.Validators.validateFormFieldIsFilledOut($('#signup-pass'));
-    };
-
-    ParcelPuppy.Signup.confirmPassword = function () {
-        return ParcelPuppy.Validators.validateFormFieldsMatch($('#signup-pass'), $('#signup-pass-conf'));
-    };
-
-    ParcelPuppy.Signup.setEmailChangeHandler = function () {
-        $('#signup-email').change(ParcelPuppy.Signup.validateEmailAddress);
-    };
-
-    ParcelPuppy.Signup.setPasswordChangeHandler = function () {
-        $('#signup-pass').change(ParcelPuppy.Signup.handlePasswordChanged);
-    };
-
-    ParcelPuppy.Signup.setPasswordConfirmationCheck = function () {
-        $('#signup-pass-conf').change(ParcelPuppy.Signup.confirmPassword);
-    };
-
-    ParcelPuppy.Signup.handlePasswordChanged = function (e) {
-        ParcelPuppy.Signup.validatePassword();
-
-        if ($('#signup-pass-conf').val().length > 0) {
-            ParcelPuppy.Signup.confirmPassword();
-        }
-    };
-
-    // Execute setup function
-    ParcelPuppy.Signup.setSignupClickHandler();
-    ParcelPuppy.Signup.setEmailChangeHandler();
-    ParcelPuppy.Signup.setPasswordChangeHandler();
-    ParcelPuppy.Signup.setPasswordConfirmationCheck();
 
 });
