@@ -484,8 +484,8 @@ class User {
     public function updateUserInfo($data) {
         if (!empty($this->id)) {
 
-            $query = 'UPDATE users SET email=?, first_name=?, last_name=?, profile_image=? WHERE user_id=?';
-            $this->db->execute($query, array($data['email'], $data['first_name'], $data['last_name'], $data['profile_image'], $this->id));
+            $query = 'UPDATE users SET email=?, first_name=?, last_name=? WHERE user_id=?';
+            $this->db->execute($query, array($data['email'], $data['first_name'], $data['last_name'], $this->id));
             $this->getByUserID($this->id);
 
             return true;

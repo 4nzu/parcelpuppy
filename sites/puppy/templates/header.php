@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="header-logo-block">
-                    <a href='/'><img id="header-logo" src="img/parcelpuppy.png">
+                    <a href='/'><img id="header-logo" src="/img/parcelpuppy.png">
                         <span id="company-name">Parcel Puppy</span></a>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <li><a href="/request_form" class="header-nav-bar-link">Make a Request</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="header-account-link" class="header-nav-bar-link">
-                                <img src="img/placeholderAvatar.png" id="header-account-avatar"> <b class="caret"></b>
+                                <img src="<?= $_SESSION['user']->profile_image ?>" id="header-account-avatar"> <b class="caret"></b>
                             </a>
                             <ul class="header-account-menu dropdown-menu">
                                 <li><a href="/account#profile">Profile</a></li>

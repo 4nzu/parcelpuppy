@@ -270,13 +270,13 @@ class API extends Template {
 			if (strcasecmp($u->email, $_POST['email']) == 0 || ($email_exists[0] == 0 && $email_exists[1] == 0)) {
 
 				if (isset($_POST['optin']) && $_POST['optin'] == '1') $optin = 1; else $optin = 0;
-				if (isset($_POST['profile_image']) && substr($_POST['profile_image'], 0, 14) === '/img/avatars/0')
-					$profile_pic = $_POST['profile_image'];
-				elseif(isset($_POST['profile_image']) && strstr($_POST['profile_image'], 'https://s3.amazonaws.com/'.AVATAR_S3_BUCKET.'/'.$u->id.'_')) {
-					$profile_pic = $_POST['profile_image'];
-				}
-				else
-					$profile_pic = '/img/avatars/0'.rand(10, 30).'.png';
+				// if (isset($_POST['profile_image']) && substr($_POST['profile_image'], 0, 14) === '/img/avatars/0')
+				// 	$profile_pic = $_POST['profile_image'];
+				// elseif(isset($_POST['profile_image']) && strstr($_POST['profile_image'], 'https://s3.amazonaws.com/'.AVATAR_S3_BUCKET.'/'.$u->id.'_')) {
+				// 	$profile_pic = $_POST['profile_image'];
+				// }
+				// else
+				// 	$profile_pic = '/img/avatars/0'.rand(10, 30).'.png';
 
 				$data = array('first_name' 			=> strip_tags($_POST['first_name']),
 							  'last_name' 			=> strip_tags($_POST['last_name']),

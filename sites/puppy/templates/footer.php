@@ -24,11 +24,11 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/libs/jquery-1.11.1.min.js"></script>
+    <script src="/js/libs/jquery-1.11.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
     <!--Include concatenated js -->
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
 
     </body>
 </html>
