@@ -152,7 +152,7 @@ class API extends Template {
 
     public function paypal_ipn() {
         $_p = new Paypal();
-        $_p->IPNHandler($_POST);
+        $_p->IPNHandler();
     }
 
     public function pay_embedded(){

@@ -97,19 +97,17 @@ class Paypal {
 
     }
 
-    function IPNHandler($data){
+    function IPNHandler(){
 
         // first param takes ipn data to be validated. if null, raw POST data is read from input stream
         $ipnMessage = new PPIPNMessage(null, Configuration::getConfig());
         $data = $ipnMessage->getRawData();
-        foreach($ipnMessage->getRawData() as $key => $value) {
+        foreach($data as $key => $value) {
             error_log("IPN: $key => $value");
         }
 
         if($ipnMessage->validate()) {
             error_log("Success: Got valid IPN data");
-            $sql = "INSERT INTO paypal_messages SET message = ?";
-            $this->db->query($sql, array(json_encode($data)));
             $this->update_payment_details($data['trackingId']);
 
         } else {
