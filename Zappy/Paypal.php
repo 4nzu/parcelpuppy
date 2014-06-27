@@ -12,6 +12,7 @@ use PayPal\Types\AP\Receiver;
 use PayPal\Types\AP\ReceiverList;
 use PayPal\Types\AP\PayRequest;
 use PayPal\Types\AP\PaymentDetailsRequest;
+use PayPal\IPN\PPIPNMessage;
 require('vendor/autoload.php');
 
 
@@ -33,7 +34,7 @@ class Paypal {
 
     }
 
-    function StartPayment($receiverEmail, $amount, $commission_percent=5, $description){
+    function StartPayment($embedded,$receiverEmail, $amount, $commission_percent, $description){
 
 
         $commissionAmount = $amount * $commission_percent/100;
@@ -54,7 +55,23 @@ class Paypal {
         $payRequest->memo = $description;
         $payRequest->feesPayer = 'PRIMARYRECEIVER';
         $payRequest->trackingId = $this->generateTrackingId();
-        $this->pay($payRequest);
+        $payRequest->ipnNotificationUrl = PP_IPN_URL;
+        $payKey = $this->pay($payRequest);
+        if(!$embedded){
+            if(PP_MODE=='sandbox'){
+                //var_dump($response);
+                header("Location: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=".$payKey);
+
+            }
+            else{
+                //change to live paypal URL
+                header("Location: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=".$payKey);
+            }
+            exit;
+        }
+        else{
+            return $payKey;
+        }
 
     }
 
@@ -72,79 +89,47 @@ class Paypal {
         $response->payKey = $pay_key;
         //var_dump($response);
         if(strtoupper($response->responseEnvelope->ack) == 'SUCCESS') {
-            $this->save_data($response);
+            return true;
         }
         else{
-            //error
+            return false;
         }
-        //$this->get_payment_details($pay_key);
+
     }
 
     function IPNHandler($data){
-        header('HTTP/1.1 200 OK');
-        $item_name        = $data['item_name'];
-        $item_number      = $data['item_number'];
-        $payment_status   = $data['payment_status'];
-        $payment_amount   = $data['mc_gross'];
-        $payment_currency = $data['mc_currency'];
-        $txn_id           = $data['txn_id'];
-        $receiver_email   = $data['receiver_email'];
-        $payer_email      = $data['payer_email'];
-        // Build the required acknowledgement message out of the notification just received
-        $req = 'cmd=_notify-validate';               // Add 'cmd=_notify-validate' to beginning of the acknowledgement
 
-        foreach ($data as $key => $value) {         // Loop through the notification NV pairs
-            $value = urlencode(stripslashes($value));  // Encode these values
-            $req  .= "&$key=$value";                   // Add the NV pairs to the acknowledgement
+        // first param takes ipn data to be validated. if null, raw POST data is read from input stream
+        $ipnMessage = new PPIPNMessage(null, Configuration::getConfig());
+        $data = $ipnMessage->getRawData();
+        foreach($ipnMessage->getRawData() as $key => $value) {
+            error_log("IPN: $key => $value");
         }
 
-        // Set up the acknowledgement request headers
-        $header  = "POST /cgi-bin/webscr HTTP/1.1\r\n";                    // HTTP POST request
-        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
+        if($ipnMessage->validate()) {
+            error_log("Success: Got valid IPN data");
+            $sql = "INSERT INTO paypal_messages SET message = ?";
+            $this->db->query($sql, array(json_encode($data)));
+            $this->update_payment_details($data['trackingId']);
 
-        // Open a socket for the acknowledgement request
-        if(PP_MODE=='sandbox'){
-            $fp = fsockopen('ssl://www.sandbox.paypal.com', 443, $errno, $errstr, 30);
+        } else {
+            error_log("Error: Got invalid IPN data");
         }
-        else{
-            $fp = fsockopen('ssl://www.paypal.com', 443, $errno, $errstr, 30);
-        }
-        // Send the HTTP POST request back to PayPal for validation
-        fputs($fp, $header . $req);
-        while (!feof($fp)) {                     // While not EOF
-            $res = fgets($fp, 1024);               // Get the acknowledgement response
-            if (strcmp ($res, "VERIFIED") == 0) {  // Response contains VERIFIED - process notification
 
-                $sql = "INSERT INTO paypal_messages SET message = ?";
-                $this->db->query($sql, array(json_encode($data)));
-            }
-            else if (strcmp ($res, "INVALID") == 0) {
-                //Notify
 
-            }
-        }
-        fclose($fp);  // Close the file
     }
 
     private function pay($request)
     {
         $service = new AdaptivePaymentsService($this->sdkConfig);
+        $this->save_data($request);
         $response = $service->Pay($request);
         if(strtoupper($response->responseEnvelope->ack) == 'SUCCESS') {
+            $response->trackingId = $request->trackingId;
             $this->save_data($response);
-            if(PP_MODE=='sandbox'){
-                //var_dump($response);
-                header("Location: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=".$response->payKey);
-
-            }
-            else{
-                //change to live paypal URL
-                header("Location: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=".$response->payKey);
-            }
-            exit;
+            return $response->payKey;
         }else{
-//            var_dump($response);
+            return false;
         }
     }
 
@@ -157,21 +142,27 @@ class Paypal {
         return $randomString;
     }
 
-    private function save_data($response)
+    private function save_data($data)
     {
-        $sql = 'REPLACE INTO payments set pay_key = ?, timestamp = ?, status = ? ';
+       // var_dump($data);
+        $sql = 'REPLACE INTO payments set pay_key = ?, tracking_id = ?, timestamp = ?, status = ? ';
+        if($data->responseEnvelope->timestamp)
+            $timestamp = $data->responseEnvelope->timestamp;
+        else
+            $timestamp = date("Y-m-d H:i:s");
         $this->db->execute($sql,
             array(
-                $response->payKey,
-                $response->responseEnvelope->timestamp,
-                $response->paymentExecStatus));
+                $data->payKey,
+                $data->trackingId,
+                $timestamp,
+                $data->paymentExecStatus));
     }
 
-    private function get_payment_details($pay_key, $tracking_id)
+    private function update_payment_details($tracking_id)
     {
         $service = new AdaptivePaymentsService($this->sdkConfig);
         $request = new PaymentDetailsRequest();
-        $request->payKey=$pay_key;
+        //$request->payKey=$pay_key;
         $request->trackingId = $tracking_id;
         $envelope = new RequestEnvelope();
         $envelope->errorLanguage = "en_US";

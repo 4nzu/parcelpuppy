@@ -86,7 +86,7 @@ elseif ($_SERVER["DOCUMENT_ROOT"] == "/Users/haydengomes/Work/repos/parcelpuppy/
     define('PP_APPID', 'APP-80W284485P519543T');
     DEFINE('PP_CANCEL_URL', SITE_URL.'/api/v1/cancel_payment');
     DEFINE('PP_RETURN_URL', SITE_URL.'/api/v1/success_payment');
-    DEFINE('PP_RECEIVER_ACC', 'shlangster@gmail.com');
+    DEFINE('PP_RECEIVER_ACC', 'parcelpuppy-developer@gmail.com');
 
     error_reporting(E_ALL ^ E_NOTICE);
 }elseif ($_SERVER["DOCUMENT_ROOT"] == "G:/xampp/htdocs/projects/parcelpuppy/sites/puppy/docroot") { // Alex desktop
@@ -118,8 +118,8 @@ elseif ($_SERVER["DOCUMENT_ROOT"] == "/Users/haydengomes/Work/repos/parcelpuppy/
     define('PP_APPID', 'APP-80W284485P519543T');
     DEFINE('PP_CANCEL_URL', SITE_URL.'/api/v1/cancel_payment');
     DEFINE('PP_RETURN_URL', SITE_URL.'/api/v1/success_payment');
-    DEFINE('PP_RECEIVER_ACC', 'shlangster@gmail.com');
-
+    DEFINE('PP_RECEIVER_ACC', 'parcelpuppy-developer@gmail.com');
+    DEFINE('PP_IPN_URL', SITE_URL.'/api/v1/paypal_ipn');
     error_reporting(E_ALL ^ E_NOTICE);
 }
 

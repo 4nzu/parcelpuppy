@@ -155,15 +155,41 @@ class API extends Template {
         $_p->IPNHandler($_POST);
     }
 
+    public function pay_embedded(){
+        $_p = new Paypal();
+        $payKey = $_p->StartPayment(true,"pers2@test.com", 10, 5, "Parcelpuppy item");
+        echo "<html>
+<head>
+<script src=\"https://www.paypalobjects.com/js/external/dg.js\" type=\"text/javascript\"></script>
+</head>
+
+<body>
+<form action=\"https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay\" target=\"PPDGFrame\" class=\"standard\">
+<label for=\"buy\">Buy Now:</label>
+<input type=\"image\" id=\"submitBtn\" value=\"Pay with PayPal\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif\">
+<input id=\"type\" type=\"hidden\" name=\"expType\" value=\"light\">
+<input id=\"paykey\" type=\"hidden\" name=\"paykey\" value=\"".$payKey."\">
+</form>
+
+<script type=\"text/javascript\" charset=\"utf-8\">
+var embeddedPPFlow = new PAYPAL.apps.DGFlow({trigger: 'submitBtn'});
+</script>
+</body>
+
+</html>";
+    }
+
+
     public function pay() {
 
         $_p = new Paypal();
-        $_p->StartPayment("parcelpuppy-developer@gmail.com", 10, "Parcelpuppy item");
+        $_p->StartPayment(false,"pers2@test.com", 10, 5, "Parcelpuppy item");
     }
 
     public function pay_commit() {
         $_p = new Paypal();
         $_p->CompletePayment($_GET['paykey']);
+
     }
 
     public function fb_login() {
