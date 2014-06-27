@@ -425,6 +425,9 @@ button:focus {
   padding: 5px 15px;
   border-bottom: 1px dotted #D6D6D6; }
 
+.request-questions-table-container {
+  padding-bottom: 30px; }
+
 .request-questions-table-header {
   font-size: 16px;
   padding-left: 15px;
@@ -449,6 +452,98 @@ button:focus {
   height: 20px;
   font-size: 14px;
   width: 60px; }
+
+.bid-window-frame {
+  display: inline-block;
+  background-color: #F1F1F1;
+  border-radius: 5px;
+  border: 1px solid #919191;
+  width: 300px;
+  height: 400px;
+  margin: 15px; }
+
+.bid-window-title {
+  border-bottom: 1px solid #919191;
+  text-align: center;
+  padding: 5px;
+  font-size: 16px;
+  color: #999999; }
+
+.bid-window-bidder {
+  color: #79D7FD; }
+
+.bid-window-header {
+  padding: 5px 15px; }
+
+.bid-window-image-frame {
+  display: inline-block;
+  padding-right: 20px; }
+
+.bid-window-image {
+  width: 50px;
+  height: 50px; }
+
+.bid-window-button {
+  padding: 5px 25px; }
+
+.bid-window-messages {
+  padding: 15px 0px;
+  overflow-y: scroll;
+  height: 300px;
+  width: 100%;
+  overflow-x: hidden; }
+
+.bid-window-message {
+  position: relative;
+  border: 1px solid #919191;
+  padding: 5px 15px;
+  border-radius: 3px;
+  width: 200px;
+  margin-bottom: 15px; }
+
+.bid-window-received-message {
+  background-color: #FFF;
+  box-shadow: 2px 2px 5px #888888;
+  margin-left: 20px; }
+
+.bid-window-message:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 10px solid; }
+
+.bid-window-message:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 8px solid; }
+
+.bid-window-received-message:before {
+  left: -20px;
+  top: 5px;
+  border-color: transparent #919191 transparent transparent; }
+
+.bid-window-received-message:after {
+  left: -16px;
+  top: 7px;
+  border-color: transparent #FFF transparent transparent; }
+
+.bid-window-sent-message {
+  background-color: #CCFFFF;
+  box-shadow: -2px 2px 5px #888888;
+  margin-left: 75px; }
+
+.bid-window-sent-message:before {
+  right: -20px;
+  top: 6px;
+  border-color: transparent transparent transparent #919191; }
+
+.bid-window-sent-message:after {
+  right: -16px;
+  top: 8px;
+  border-color: transparent transparent transparent #CCFFFF; }
 
 .home-masthead {
   padding: 165px 0px 70px 0px;
@@ -545,4 +640,5 @@ button:focus {
 
 #request-show-view-bids-button,
 #request-show-make-bid-button {
-  width: 150px; }
+  width: 150px;
+  vertical-align: top; }

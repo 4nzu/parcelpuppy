@@ -23,9 +23,14 @@
 
         <!--    @TODO fix logic to actually check if they're the owner    -->
         <? if ($_SESSION['user']->id === $request['owner']->id || true) { ?>
-            <button id='request-show-view-bids-button' class="form-fixed-button affix-top">View Bids</button>
+            <a  href="#bid-window"><button id='request-show-view-bids-button'>View Bids</button></a>
         <? } elseif ($_SESSION['user']->isPuppy) { ?>
-            <button id='request-show-make-bid-button' class="form-fixed-button affix-top">Make Bids</button>
+            <button id='request-show-make-bid-button'>Make Bids</button>
+        <? } ?>
+
+        <!--    @TODO fix logic to actually check if they're the owner    -->
+        <? if ($_SESSION['user']->id === $request['owner']->id || true) { ?>
+            <? include_once(MODULES_PATH . "requests/bids-grid.php"); ?>
         <? } ?>
     <? } else { ?>
         <div class="panel panel-danger" id="request-show-error">

@@ -156,6 +156,13 @@ jQuery(function () {
 });
 
 
+// Source: sites/puppy/docroot/js/modules/requests/show.js
+ParcelPuppy.RequestsShow = {};
+
+jQuery(function() {
+
+});
+
 // Source: sites/puppy/docroot/js/modules/signin-window.js
 ParcelPuppy.Signup = {};
 
