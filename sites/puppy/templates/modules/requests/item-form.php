@@ -22,7 +22,7 @@
                 <span class="help-block" style="display: none;">Item name cannot be blank</span>
             </div>
             <div class="request-item-form-brand-frame form-group">
-                <input type="text" placeholder="Brand Name" class="form-control"
+                <input type="text" placeholder="Brand Name (Optional)" class="form-control"
                        name="brand" value="<?= $request_item->brand ?>">
             </div>
             <div class="request-item-form-quantity-frame pull-right">
