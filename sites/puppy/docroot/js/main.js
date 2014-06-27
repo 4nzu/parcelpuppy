@@ -82,7 +82,7 @@ jQuery(function () {
 });
 
 
-// Source: sites/puppy/docroot/js/modules/request-general-form.js
+// Source: sites/puppy/docroot/js/modules/requests/general-form.js
 ParcelPuppy.RequestGeneralForm = {};
 
 jQuery(function () {
@@ -111,7 +111,7 @@ jQuery(function () {
 });
 
 
-// Source: sites/puppy/docroot/js/modules/request-item-form.js
+// Source: sites/puppy/docroot/js/modules/requests/item-form.js
 ParcelPuppy.RequestItemForm = {};
 
 jQuery(function () {
@@ -134,6 +134,29 @@ jQuery(function () {
     ParcelPuppy.RequestItemForm.validateQuantity = function (itemForm) {
         return ParcelPuppy.Validators.validateIntegerFieldIsFilledOutAndPositive(itemForm.find('input[name=quantity]'))
     };
+
+    ParcelPuppy.RequestItemForm.setDeleteBtnClickHandler = function () {
+        $('.request-item-form-delete-btn').click(ParcelPuppy.RequestItemForm.handleDeleteItemBtnClick);
+    };
+
+    ParcelPuppy.RequestItemForm.handleDeleteItemBtnClick = function (e) {
+        e.preventDefault();
+
+        var itemFrame = $(this).closest('.request-item-form-frame');
+        itemFrame.remove();
+        ParcelPuppy.RequestForm.updateItems();
+        $('#request-form-add-item-btn').show();
+    };
+
+    ParcelPuppy.RequestItemForm.clearItemForm = function (formFrame) {
+        formFrame.find('input[name=name]').val('');
+        formFrame.find('input[name=brand]').val('');
+        formFrame.find('input[name=quantity]').val(1);
+        formFrame.find('input[name=details]').val('');
+    };
+
+    // Execute setup functions
+    ParcelPuppy.RequestItemForm.setDeleteBtnClickHandler();
 });
 
 
@@ -587,9 +610,9 @@ jQuery(function () {
             $(itemFrame).find('.item-number').html(index + 1);
 
             if (itemsCount === 1) {
-                $(itemFrame).find('.request-item-form-delete-btn').hide();
+                $(itemFrame).find('.request-item-form-delete-btn').hide().attr("disabled", "disabled");;
             } else {
-                $(itemFrame).find('.request-item-form-delete-btn').show();
+                $(itemFrame).find('.request-item-form-delete-btn').show().removeAttr('disabled');
             }
         });
     };
@@ -603,34 +626,4 @@ jQuery(function () {
     ParcelPuppy.RequestForm.setSubmitBtnClickHandler();
     ParcelPuppy.RequestForm.setupTooltips();
     ParcelPuppy.RequestForm.updateItems();
-});
-
-
-// Source: sites/puppy/docroot/js/templates/request-item-form.js
-ParcelPuppy.RequestItemForm = {};
-
-jQuery(function () {
-    ParcelPuppy.RequestItemForm.setDeleteBtnClickHandler = function () {
-        $('.request-item-form-delete-btn').click(ParcelPuppy.RequestItemForm.handleDeleteItemBtnClick);
-    };
-
-    ParcelPuppy.RequestItemForm.handleDeleteItemBtnClick = function (e) {
-        e.preventDefault();
-
-        var itemFrame = $(this).closest('.request-item-form-frame');
-        itemFrame.remove();
-        ParcelPuppy.RequestForm.updateItems();
-        $('#request-form-add-item-btn').show();
-    };
-
-    ParcelPuppy.RequestItemForm.clearItemForm = function (formFrame) {
-        formFrame.find('input[name=name]').val('');
-        formFrame.find('input[name=brand]').val('');
-        formFrame.find('input[name=quantity]').val(1);
-        formFrame.find('input[name=details]').val('');
-    };
-
-    // Execute setup functions
-    ParcelPuppy.RequestItemForm.setDeleteBtnClickHandler();
-
 });

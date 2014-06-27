@@ -100,9 +100,9 @@ jQuery(function () {
             $(itemFrame).find('.item-number').html(index + 1);
 
             if (itemsCount === 1) {
-                $(itemFrame).find('.request-item-form-delete-btn').hide();
+                $(itemFrame).find('.request-item-form-delete-btn').hide().attr("disabled", "disabled");;
             } else {
-                $(itemFrame).find('.request-item-form-delete-btn').show();
+                $(itemFrame).find('.request-item-form-delete-btn').show().removeAttr('disabled');
             }
         });
     };

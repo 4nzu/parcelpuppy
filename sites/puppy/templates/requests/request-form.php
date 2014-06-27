@@ -27,7 +27,7 @@
             <div id="request-form-items">
                 <? include(MODULES_PATH . "requests/item-form.php"); ?>
             </div>
-            <button id="request-form-add-item-btn"><span class="glyphicon glyphicon-plus"></span> Add item to request</button>
+            <div id="request-form-add-item-btn"><span class="glyphicon glyphicon-plus"></span> Add item to request</div>
         </form>
     </div>
     <span class="form-fixed-button affix-top">

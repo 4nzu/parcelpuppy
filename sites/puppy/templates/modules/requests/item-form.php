@@ -5,7 +5,7 @@
     >
     <div class="request-item-form-header">
         Details about item <span class='item-number'><?= $i + 1 ?></span>:
-        <button class="request-item-form-delete-btn glyphicon glyphicon-remove pull-right"></button>
+        <div class="request-item-form-delete-btn glyphicon glyphicon-remove pull-right"></div>
     </div>
     <div class="request-item-form-body">
         <div class="request-item-form-image">
@@ -31,7 +31,7 @@
 
 
                     <input type="number" class="request-item-form-quantity-field form-control"
-                           name="quantity"
+                           name="quantity" min="1"
                            value="<?= empty($request_item->quantity) ? 1 : $request_item->quantity ?>">
                 </div>
             </div>
