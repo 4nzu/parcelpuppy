@@ -2,22 +2,31 @@
     <? if (!empty($request)) { ?>
         <div id="request-show-frame">
             <div class="request-show-title-line">
-                <h3 class="request-show-description"><?= $request['description'] ?></h3>
+                <h4 class="request-show-description"><?= $request['description'] ?></h4>
                 <span class="request-show-region">From <?= $request['region_name'] ?></span>
+                <!--    @TODO fix logic to actually check if they're the owner    -->
                 <? if ($_SESSION['user']->id === $request['owner']->id || true) { ?>
                     <a href="/requests/<?= $request['request_id'] ?>/edit">Edit request</a>
                 <? } ?>
             </div>
             <div class="request-show-subtitle-line">
+                <!--    @TODO fix to show actual date once provided by backend    -->
                 <span><b>Requested on:</b> <?= 'Jan 3rd, 2014' ?></span>
                 <span><b>Shipped to:</b> <?= $request['region_name'] ?> (City, Zip)</span>
                 <span><?= ucfirst($request['shipping']) ?> shipping</span>
             </div>
 
             <? include_once(MODULES_PATH . "requests/items-table.php"); ?>
+
+            <? include_once(MODULES_PATH . "requests/questions-table.php"); ?>
         </div>
 
-        <button id='request-show-bids-button' class="form-fixed-button affix-top">View Bids</button>
+        <!--    @TODO fix logic to actually check if they're the owner    -->
+        <? if ($_SESSION['user']->id === $request['owner']->id || true) { ?>
+            <button id='request-show-view-bids-button' class="form-fixed-button affix-top">View Bids</button>
+        <? } elseif ($_SESSION['user']->isPuppy) { ?>
+            <button id='request-show-make-bid-button' class="form-fixed-button affix-top">Make Bids</button>
+        <? } ?>
     <? } else { ?>
         <div class="panel panel-danger" id="request-show-error">
             <div class="panel-heading">

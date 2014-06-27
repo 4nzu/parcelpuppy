@@ -11,10 +11,12 @@
 @import 'modules/account/account-tabs-window';
 @import 'modules/account/about-me-window';
 @import 'modules/account/feedback-row';
-@import 'modules/requests/request-general-form';
-@import 'modules/requests/request-item-form';
+@import 'modules/requests/general-form';
+@import 'modules/requests/item-form';
 @import 'modules/requests/items-table';
 @import 'modules/requests/item-row';
+@import 'modules/requests/questions-table';
+@import 'modules/requests/question-row';
 
 // Pages
 @import 'templates/home';

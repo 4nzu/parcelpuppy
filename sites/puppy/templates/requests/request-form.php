@@ -20,9 +20,9 @@
         </div>
 
         <form role="form" id="request-form">
-            <? include_once(MODULES_PATH . "requests/request-general-form.php"); ?>
+            <? include_once(MODULES_PATH . "requests/general-form.php"); ?>
             <div id="request-form-items">
-                <? include(MODULES_PATH . "requests/request-item-form.php"); ?>
+                <? include(MODULES_PATH . "requests/item-form.php"); ?>
             </div>
             <button id="request-form-add-item-btn"><span class="glyphicon glyphicon-plus"></span> Add item to request</button>
         </form>

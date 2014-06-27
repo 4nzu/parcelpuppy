@@ -10,13 +10,17 @@
   width: 150px;
 }
 
-.request-show-description,
-.request-show-region {
+.request-show-description {
   display: inline-block;
+  padding-right: 15px;
+  max-width: 400px;
+}
+.request-show-region {
   padding-right: 15px;
 }
 
 .request-show-subtitle-line span {
+  font-size: 13px;
   padding-right: 15px;
 }
 
@@ -24,6 +28,7 @@
   padding-bottom: 30px;
 }
 
-#request-show-bids-button {
+#request-show-view-bids-button,
+#request-show-make-bid-button {
   width: 150px;
 }

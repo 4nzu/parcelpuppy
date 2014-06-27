@@ -42,6 +42,15 @@ button:focus {
   background-color: #8E8E8E;
   background: linear-gradient(#8e8e8e, #7e7e7e); }
 
+.blue-button {
+  background: none;
+  background-color: #79D7FD;
+  border-radius: 2px; }
+
+.blue-button:hover {
+  background: none;
+  background-color: #29D7FD; }
+
 .down-arrow {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
@@ -389,6 +398,9 @@ button:focus {
   min-height: 100px !important;
   font-size: 14px; }
 
+.request-items-table-container {
+  margin-bottom: 15px; }
+
 .request-items-table-header {
   border-bottom: 1px solid #505050; }
 
@@ -412,6 +424,31 @@ button:focus {
   width: 100%;
   padding: 5px 15px;
   border-bottom: 1px dotted #D6D6D6; }
+
+.request-questions-table-header {
+  font-size: 16px;
+  padding-left: 15px;
+  border-bottom: 1px solid #505050; }
+
+.request-questions-table-header span {
+  color: #909090; }
+
+.question-row-frame {
+  border-bottom: 1px dotted #D6D6D6; }
+
+.question-row-question {
+  padding: 2px 0px 0px 5px; }
+
+.question-row-answer {
+  font-style: italic;
+  color: #909090;
+  padding: 0px 15px 5px 25px; }
+
+.question-row-reply {
+  padding: 0px;
+  height: 20px;
+  font-size: 14px;
+  width: 60px; }
 
 .home-masthead {
   padding: 165px 0px 70px 0px;
@@ -491,16 +528,21 @@ button:focus {
   display: inline-block;
   width: 150px; }
 
-.request-show-description,
-.request-show-region {
+.request-show-description {
   display: inline-block;
+  padding-right: 15px;
+  max-width: 400px; }
+
+.request-show-region {
   padding-right: 15px; }
 
 .request-show-subtitle-line span {
+  font-size: 13px;
   padding-right: 15px; }
 
 .request-show-subtitle-line {
   padding-bottom: 30px; }
 
-#request-show-bids-button {
+#request-show-view-bids-button,
+#request-show-make-bid-button {
   width: 150px; }

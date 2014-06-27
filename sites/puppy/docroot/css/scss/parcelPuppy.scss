@@ -53,6 +53,17 @@ button:focus {
   background: linear-gradient(#8E8E8E, #7E7E7E);
 }
 
+.blue-button {
+  background: none;
+  background-color: #79D7FD;
+  border-radius: 2px;
+}
+
+.blue-button:hover {
+  background: none;
+  background-color: #29D7FD;
+}
+
 .down-arrow {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
