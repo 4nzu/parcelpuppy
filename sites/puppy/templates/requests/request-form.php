@@ -2,9 +2,12 @@
     <div class="form-frame">
         <div>
             <h4 id="request-form-title">Make a Request</h4>
-            <span id="request-form-subtitle">Guidelines</span>
-
-            <div class="form-hint">?</div>
+            <div class='request-form-tooltip' data-toggle="tooltip" data-placement="right"
+                 title="Please review if there are import restrictions for your requested items in your country (e.g. alcohol, cigarettes, prescription drugs, raw food, etc.).">
+                <span id="request-form-subtitle">
+                Restricted item policy </span>
+                <div class="form-hint">?</div>
+            </div>
         </div>
 
         <div class="panel panel-danger" style="display: none;" id="request-form-error">

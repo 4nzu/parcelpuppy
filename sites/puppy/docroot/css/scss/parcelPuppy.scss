@@ -69,3 +69,17 @@ button:focus {
   border-right: 8px solid transparent;
   border-top: 8px solid;
 }
+
+.tooltip-inner
+{
+  background-color: #79D7FD;
+  color: #FFF;
+}
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: #79D7FD;
+}
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #79D7FD;
+}

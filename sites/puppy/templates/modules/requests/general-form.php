@@ -20,7 +20,10 @@
     <label class="request-form-shipping-label control-label" for="request-form-shipping">Shipping and handling
         timeframe:</label>
 
-    <div class="form-hint">?</div>
+    <div class='form-hint request-form-tooltip' data-toggle="tooltip" data-placement="bottom"
+         title="Standard shipping between the US and Europe approximately takes 6-15 business days. Rates for a 2kg/4lbs box start from 20-25 USD.
+Express shipping approximately takes 3-5 business days. Higher fees apply. Check with your preferred shipment provider for exact details.">
+    ?</div>
     <div class="btn-group" data-toggle="buttons" id="request-general-form-shipping-group" data-default="<?= $request->shipping ?>">
         <label class="shipping-btn btn btn-primary" id="request-general-form-shipping-standard" value="standard">
             <input type="radio" name="shipping">STANDARD

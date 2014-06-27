@@ -594,9 +594,14 @@ jQuery(function () {
         });
     };
 
+    ParcelPuppy.RequestForm.setupTooltips = function () {
+        $('.request-form-tooltip').tooltip()
+    };
+
     // Execute setup functions
     ParcelPuppy.RequestForm.setAddItemBtnClickHandler();
     ParcelPuppy.RequestForm.setSubmitBtnClickHandler();
+    ParcelPuppy.RequestForm.setupTooltips();
     ParcelPuppy.RequestForm.updateItems();
 });
 
