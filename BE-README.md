@@ -33,4 +33,4 @@ To make data available for a template, call $this->assign('nameOfTemplateVariabl
 
 API controller
 --------------
-API controller is implementing end points for asynch api calls. Like in case of Display.php controller, an end point is a function with the same name. It can be accessed by calling the following URL: http://sitename/api/v1/endpoint
+API controller is implementing end points for asynch api calls. Like in case of Display.php controller, an end point is a function with the same name. It can be accessed by calling the following URL: http://sitename/api/v1/endpoint where "v1" is the API version, can be any arbitrary name, just modify the check in the API.php constructor accordingly.
