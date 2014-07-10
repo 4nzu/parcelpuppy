@@ -26,7 +26,7 @@ Page Controller / sending data to templates
 
 Each function inside a controller class (Display.php) will be a page on the site with the name of this function. With the exception of the root "/" page which is rendered with function display_home().
 
-To load a template, call $this->set_template('nameOfTheTemplatePHPFileWithOut[.php]Extention'); Use "_" in the name of the template to separate directory path, for example to load a template from /templates/signin/thankyou.php call $this->assign('signin_thankyou');
+To load a template, call $this->set_template('nameOfTheTemplatePHPFileWithOut[.php]extension'); Use "_" in the name of the template to separate directory path, for example to load a template from /templates/signin/thankyou.php call $this->assign('signin_thankyou');
 
 To make data available for a template, call $this->assign('nameOfTemplateVariable', $nameOfLocalVariable); then $nameOfTemplateVariable will become available inside the loaded template.
 
