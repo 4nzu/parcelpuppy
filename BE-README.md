@@ -2,7 +2,9 @@ Zappy Framework, quick overview
 ===============================
 
 /Frameworks - external frameworks, usually can be setup as git modules. Examples: aws.phar, google-api-php, facebook-php, etc.
+
 /sites - websites source. Sites each live in a separate directory with the same structure inside (see more below)
+
 /Zappy - framework code includes classes that can serve all sites, with pretty obvious names like: User.php, DB.php, Cache.php, Template.php etc.
 
 
