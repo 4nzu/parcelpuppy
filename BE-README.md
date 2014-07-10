@@ -16,7 +16,7 @@ Zappy site structure (for example /sites/puppy)
 
 /docroot - contains css, images (img), js and .htaccess with rewrite rules. Also contains files that load the framework: init.php, index.php
 
-/library - contains Controller and Model classes specific to this site. Controllers must have the word "Display" in their name, for example: Display.php is the controller for the site's root "/" page, requestsDisplay.php is a controller for the "/requests/" page (note closing "/"). API.php is a special controller for facilitating asynchronous calls (see more below)
+/library - contains Controller and Model classes specific to this site. Controllers must have the word "Display" in their name, for example: Display.php is the controller for the site's root "/" pages, requestsDisplay.php is a controller for the "/requests/" pages (note closing "/"). API.php is a special controller for facilitating asynchronous calls (see more below)
 
 /templates - templates and template modules for rendering html pages
 
